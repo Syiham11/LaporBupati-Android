@@ -95,7 +95,6 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .thumbnail(0.5f)
                     .crossFade()
                     .error(R.drawable.no_image)
-                    .override(300, 150)
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holderDataOpd.foto);

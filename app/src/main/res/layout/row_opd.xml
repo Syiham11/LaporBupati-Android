@@ -16,6 +16,7 @@
             android:adjustViewBounds="true"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:scaleType="fitCenter"
             android:background="#e2e2e2"
             android:src="@drawable/no_image"/>
 

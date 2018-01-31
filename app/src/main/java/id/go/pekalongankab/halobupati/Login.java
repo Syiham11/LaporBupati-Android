@@ -152,12 +152,30 @@ public class Login extends Activity {
                         // user berhasil login
                         String id_user = data.getString("id_user");
                         String nama_user = data.getString("nama_user");
+                        String no_ktp = data.getString("no_ktp");
+                        String jk = data.getString("jk");
+                        String tmp_lahir = data.getString("tmp_lahir");
+                        String tgl_lahir = data.getString("tgl_lahir");
+                        String password = data.getString("password");
+                        String no_telepon = data.getString("no_telepon");
+                        String alamat = data.getString("alamat");
+                        String bio = data.getString("bio");
+                        String dibuat = data.getString("dibuat");
                         String email = data.getString("email");
                         String foto = data.getString("foto");
 
                         // buat session user yang sudah login yang menyimpan nama,apikey,alamat dan email
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("id_user", id_user);
+                        editor.putString("no_ktp",no_ktp);
+                        editor.putString("jk",jk);
+                        editor.putString("tmp_lahir",tmp_lahir);
+                        editor.putString("tgl",tgl_lahir);
+                        editor.putString("password",password);
+                        editor.putString("no_telepon",no_telepon);
+                        editor.putString("alamat",alamat);
+                        editor.putString("bio",bio);
+                        editor.putString("dibuat",dibuat);
                         editor.putString("nama",nama_user);
                         editor.putString("email",email);
                         editor.putString("foto",foto);

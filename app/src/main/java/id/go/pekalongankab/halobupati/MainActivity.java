@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity
         txemail.setText(email);
         Glide.with(getApplicationContext()).load(url_foto)
                 .thumbnail(0.5f)
-                .override(150, 150)
                 .centerCrop()
                 .crossFade()
                 .error(R.drawable.ic_no_image_male_white)
@@ -166,7 +165,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             new AlertDialog.Builder(this)
                     .setTitle("Keluar?")
-                    .setMessage("Anda yakin inginkeluar?")
+                    .setMessage("Anda yakin ingin keluar?")
                     .setCancelable(false)
                     .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -188,10 +187,20 @@ public class MainActivity extends AppCompatActivity
     public void logoutUser() {
         SharedPreferences pref = getSharedPreferences("data", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("id_user","");
-        editor.putString("nama_user","");
+        editor.putString("id_user", "");
+        editor.putString("no_ktp","");
+        editor.putString("jk","");
+        editor.putString("tmp_lahir","");
+        editor.putString("tgl","");
+        editor.putString("password","");
+        editor.putString("no_telepon","");
+        editor.putString("alamat","");
+        editor.putString("bio","");
+        editor.putString("dibuat","");
+        editor.putString("nama","");
         editor.putString("email","");
-        editor.putInt("login",0);
+        editor.putString("foto","");
+        editor.putInt("login", 0);
         editor.clear();
         editor.commit();
         // pergi ke login activity
