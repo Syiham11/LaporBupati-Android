@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:foreground="?android:attr/selectableItemBackground"
+    android:background="@color/white"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/foto"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#e2e2e2"
+            android:src="@drawable/no_image"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:id="@+id/id_opd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:text="singkatan"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/singkatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:text="singkatan"/>
+
+
+            <TextView
+                android:id="@+id/opd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/singkatan"
+                android:layout_marginTop="5dp"
+                android:paddingTop="4dp"
+                android:textAllCaps="true"
+                android:text="Nama OPD"/>
+
+            <View android:layout_width="match_parent"
+                android:id="@+id/hr"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="2dp"
+                android:background="#d7d7d7"
+                android:layout_below="@id/opd"/>
+            <ImageView
+                android:id="@+id/ic_kategori"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_menu_send"
+                android:layout_below="@id/hr"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/alamat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/ic_kategori"
+                android:layout_below="@id/hr"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                android:text="Alamat"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/hr"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_menu_share"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>
