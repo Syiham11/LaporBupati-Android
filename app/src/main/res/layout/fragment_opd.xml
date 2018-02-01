@@ -1,23 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="id.go.pekalongankab.halobupati.Opd">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swLayout"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="id.go.pekalongankab.halobupati.Opd">
+
+        <!-- TODO: Update blank fragment layout -->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleOpd"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp">
+            android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-</FrameLayout>
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

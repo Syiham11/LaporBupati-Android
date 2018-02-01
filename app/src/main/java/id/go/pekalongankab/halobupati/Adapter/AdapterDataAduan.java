@@ -1,9 +1,7 @@
 package id.go.pekalongankab.halobupati.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,27 +17,28 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import id.go.pekalongankab.halobupati.DetailOpd;
+import id.go.pekalongankab.halobupati.Model.ModelDataAduan;
 import id.go.pekalongankab.halobupati.Model.ModelDataOpd;
 import id.go.pekalongankab.halobupati.OnLoadMoreListener;
 import id.go.pekalongankab.halobupati.R;
 import id.go.pekalongankab.halobupati.Util.ServerAPI;
 
 /**
- * Created by server02 on 12/12/2017.
+ * Created by ERIK on 01-Feb-18.
  */
 
-public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private boolean isLoading;
     private Context context;
-    private List<ModelDataOpd> mItems;
+    private List<ModelDataAduan> mItems;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
 
-    public AdapterDataOpd(RecyclerView recyclerView, List<ModelDataOpd> mItems, Context context) {
+    public AdapterDataAduan(RecyclerView recyclerView, List<ModelDataAduan> mItems, Context context) {
         this.mItems = mItems;
         this.context = context;
 
@@ -72,33 +71,40 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_ITEM) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_opd, parent, false);
-            return new HolderDataOpd(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_aduan, parent, false);
+            return new AdapterDataAduan.HolderDataAduan(view);
         } else if (viewType == VIEW_TYPE_LOADING) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
-            return new LoadingViewHolder(view);
+            return new AdapterDataAduan.HolderDataAduan(view);
         }
         return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof HolderDataOpd) {
-            ModelDataOpd md = mItems.get(position);
-            HolderDataOpd holderDataOpd = (HolderDataOpd) holder;
-            holderDataOpd.id_opd.setText(md.getId_opd());
-            holderDataOpd.opd.setText(md.getOpd());
-            holderDataOpd.singkatan.setText(md.getSingkatan());
-            holderDataOpd.alamat.setText(md.getAlamat());
-            Glide.with(context).load(ServerAPI.URL_FOTO_OPD+md.getFoto())
+        if (holder instanceof AdapterDataAduan.HolderDataAduan) {
+            ModelDataAduan md = mItems.get(position);
+            AdapterDataAduan.HolderDataAduan holderDataAduan = (AdapterDataAduan.HolderDataAduan) holder;
+            holderDataAduan.nama_user.setText(md.getNama_user());
+            holderDataAduan.tanggal.setText(md.getTanggal());
+            holderDataAduan.aduan.setText(md.getAduan());
+            holderDataAduan.kategori.setText(md.getKategori());
+            Glide.with(context).load(ServerAPI.URL_FOTO_USER+md.getFoto_user())
                     .thumbnail(0.5f)
                     .crossFade()
                     .error(R.drawable.no_image)
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(holderDataOpd.foto);
-        } else if (holder instanceof LoadingViewHolder) {
-            LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
+                    .into(holderDataAduan.foto_user);
+            Glide.with(context).load(ServerAPI.URL_FOTO_ADUAN+md.getFoto_aduan())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .error(R.drawable.no_image)
+                    .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderDataAduan.foto_aduan);
+        } else if (holder instanceof AdapterDataAduan.LoadingViewHolder) {
+            AdapterDataAduan.LoadingViewHolder loadingViewHolder = (AdapterDataAduan.LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
         }
     }
@@ -121,18 +127,19 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    private class HolderDataOpd extends RecyclerView.ViewHolder {
-        ModelDataOpd md;
-        public TextView id_opd, opd, singkatan, alamat;
-        public ImageView foto;
+    private class HolderDataAduan extends RecyclerView.ViewHolder {
+        ModelDataAduan md;
+        public TextView nama_user, tanggal, aduan, kategori;
+        public ImageView foto_user, foto_aduan;
 
-        public HolderDataOpd(View view) {
+        public HolderDataAduan(View view) {
             super(view);
-            id_opd = (TextView) view.findViewById(R.id.id_opd);
-            opd = (TextView) view.findViewById(R.id.opd);
-            singkatan = (TextView) view.findViewById(R.id.singkatan);
-            alamat = (TextView) view.findViewById(R.id.alamat);
-            foto = (ImageView) view.findViewById(R.id.foto);
+            nama_user = (TextView) view.findViewById(R.id.pengirim);
+            tanggal = (TextView) view.findViewById(R.id.tanggal);
+            aduan = (TextView) view.findViewById(R.id.isi_aduan);
+            kategori = (TextView) view.findViewById(R.id.kategori);
+            foto_aduan = (ImageView) view.findViewById(R.id.foto_aduan);
+            foto_user = (ImageView) view.findViewById(R.id.foto_user);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,4 +150,5 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
         }
     }
+
 }

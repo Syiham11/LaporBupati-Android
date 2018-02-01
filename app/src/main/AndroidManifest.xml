@@ -25,7 +25,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Login" />
         <activity android:name=".DetailOpd" />
-        <activity android:name=".Profil"></activity>
+        <activity android:name=".Profil" />
+        <activity android:name=".TulisAduan"></activity>
     </application>
 
 </manifest>

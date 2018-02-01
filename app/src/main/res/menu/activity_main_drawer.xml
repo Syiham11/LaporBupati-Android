@@ -3,8 +3,13 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_tulis_aduan"
+            android:icon="@drawable/ic_tulis_aduan_black"
+            android:title="Buat Aduan" />
+        <item
             android:id="@+id/nav_aduan"
             android:icon="@drawable/ic_aduan"
+            android:checked="true"
             android:title="Aduan" />
         <item
             android:id="@+id/nav_aduan_saya"
@@ -20,8 +25,12 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/nav_masukan"
+                    android:icon="@drawable/ic_action_bugreport"
+                    android:title="Laporkan Kesalahan" />
+                <item
                     android:id="@+id/nav_update"
-                    android:icon="@drawable/ic_refresh"
+                    android:icon="@drawable/ic_action_update"
                     android:title="Periksa Pembaruan" />
                 <item
                     android:id="@+id/nav_logout"

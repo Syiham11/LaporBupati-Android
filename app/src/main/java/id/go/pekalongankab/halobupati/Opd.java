@@ -45,6 +45,8 @@ public class Opd extends Fragment {
     RecyclerView mRecycleopd;
     ProgressDialog pd;
     SwipeRefreshLayout swLayout;
+    int jml;
+    int perLoad;
 
     public Opd() {
         // Required empty public constructor
@@ -62,6 +64,8 @@ public class Opd extends Fragment {
         RecyclerView.LayoutManager mManager;
         pd = new ProgressDialog(getActivity());
 
+        perLoad = 3;
+
         loadOpd();
 
         mManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -77,7 +81,8 @@ public class Opd extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //mItems.clear();
+                        mItems.clear();
+                        loadOpd();
                         swLayout.setRefreshing(false);
                     }
                 }, 1000);
@@ -99,7 +104,7 @@ public class Opd extends Fragment {
                     public void onResponse(JSONArray response) {
                         pd.cancel();
                         Log.d("volley", "response : "+response.toString());
-                        for (int i = 0; i<3; i++){
+                        for (int i = 0; i<perLoad; i++){
                             try {
                                 JSONObject data = response.getJSONObject(i);
                                 ModelDataOpd md = new ModelDataOpd();
@@ -131,22 +136,22 @@ public class Opd extends Fragment {
         mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                if (mItems.size() <= 3) {
-                    mItems.add(null);
-                    mAdapter.notifyItemInserted(mItems.size() - 1);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mItems.remove(mItems.size() - 1);
-                            mAdapter.notifyItemRemoved(mItems.size());
-                            JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_OPD, null,
-                                    new Response.Listener<JSONArray>() {
-                                        @Override
-                                        public void onResponse(JSONArray response) {
-                                            pd.cancel();
-                                            Log.d("volley", "response : "+response.toString());
+                mItems.add(null);
+                mAdapter.notifyItemInserted(mItems.size() - 1);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mItems.remove(mItems.size() - 1);
+                        mAdapter.notifyItemRemoved(mItems.size());
+                        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_OPD, null,
+                                new Response.Listener<JSONArray>() {
+                                    @Override
+                                    public void onResponse(JSONArray response) {
+                                        pd.cancel();
+                                        Log.d("volley", "response : "+response.toString());
+                                        if (response.length() > perLoad){
                                             int index = mItems.size();
-                                            int end = index + 3;
+                                            int end = index + perLoad;
                                             for (int i = index; i<end; i++){
                                                 try {
                                                     JSONObject data = response.getJSONObject(i);
@@ -164,21 +169,19 @@ public class Opd extends Fragment {
                                             mAdapter.notifyDataSetChanged();
                                             mAdapter.setLoaded();
                                         }
-                                    },
-                                    new Response.ErrorListener() {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            pd.cancel();
-                                            snackBar("Tidak ada koneksi internet!", R.color.Error);
-                                            Log.d("volley", "error : "+error.getMessage());
-                                        }
-                                    });
-                            AppController.getInstance().addToRequestQueue(requestData);
-                        }
-                    }, 1000);
-                } else {
-                    snackBar("Anda mencapai bagian terbawah halaman", R.color.Info);
-                }
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        pd.cancel();
+                                        snackBar("Tidak ada koneksi internet!", R.color.Error);
+                                        Log.d("volley", "error : "+error.getMessage());
+                                    }
+                                });
+                        AppController.getInstance().addToRequestQueue(requestData);
+                    }
+                }, 3000);
             }
         });
 

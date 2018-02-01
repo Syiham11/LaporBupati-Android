@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -73,15 +76,15 @@ public class Profil extends AppCompatActivity {
         txalamat.setText(alamat);
         txemail.setText(email);
 
-        String url_foto = "http://"+ ServerAPI.IP+"/halobupati/files/user/source/"+foto;
-
-        Glide.with(getApplicationContext()).load(url_foto)
+        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER+foto)
                 .thumbnail(0.5f)
                 .centerCrop()
                 .crossFade()
                 .error(R.drawable.ic_no_image_male_white)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgprofil);
+
+        changeStatusBarColor();
     }
 
     @Override
@@ -125,5 +128,17 @@ public class Profil extends AppCompatActivity {
     public boolean onSupportNavigateUp(){
         finish();
         return true;
+    }
+
+    public void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+        // Making notification bar transparent
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
     }
 }
