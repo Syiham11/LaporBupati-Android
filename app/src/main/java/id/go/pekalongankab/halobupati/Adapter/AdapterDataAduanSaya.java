@@ -1,9 +1,7 @@
 package id.go.pekalongankab.halobupati.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,28 +17,26 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import id.go.pekalongankab.halobupati.DetailOpd;
-import id.go.pekalongankab.halobupati.Model.ModelDataAduan;
-import id.go.pekalongankab.halobupati.Model.ModelDataOpd;
+import id.go.pekalongankab.halobupati.Model.ModelDataAduanSaya;
 import id.go.pekalongankab.halobupati.OnLoadMoreListener;
 import id.go.pekalongankab.halobupati.R;
 import id.go.pekalongankab.halobupati.Util.ServerAPI;
 
 /**
- * Created by server02 on 12/12/2017.
+ * Created by ERIK on 02-Feb-18.
  */
 
-public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class AdapterDataAduanSaya extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private boolean isLoading;
     private Context context;
-    private List<ModelDataAduan> mItems;
+    private List<ModelDataAduanSaya> mItems;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
 
-    public AdapterDataAduan(RecyclerView recyclerView, List<ModelDataAduan> mItems, Context context) {
+    public AdapterDataAduanSaya(RecyclerView recyclerView, List<ModelDataAduanSaya> mItems, Context context) {
         this.mItems = mItems;
         this.context = context;
 
@@ -73,7 +69,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_ITEM) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_aduan, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_aduan_saya, parent, false);
             return new HolderDataAduan(view);
         } else if (viewType == VIEW_TYPE_LOADING) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
@@ -85,7 +81,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HolderDataAduan) {
-            ModelDataAduan md = mItems.get(position);
+            ModelDataAduanSaya md = mItems.get(position);
             HolderDataAduan holderDataAduan = (HolderDataAduan) holder;
             holderDataAduan.nama_user.setText(md.getNama_user());
             holderDataAduan.tanggal.setText(md.getTanggal());
@@ -104,12 +100,13 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holderDataAduan.foto_user);
             Glide.with(context).load(ServerAPI.URL_FOTO_ADUAN+md.getFoto_aduan())
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .error(R.drawable.no_image)
-                    .fitCenter()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(holderDataAduan.foto_aduan);
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .error(R.drawable.no_image)
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(holderDataAduan.foto_aduan);
+
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
@@ -135,7 +132,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private class HolderDataAduan extends RecyclerView.ViewHolder {
-        ModelDataAduan md;
+        ModelDataAduanSaya md;
         public TextView nama_user, tanggal, aduan, kategori;
         public ImageView foto_user, foto_aduan;
 

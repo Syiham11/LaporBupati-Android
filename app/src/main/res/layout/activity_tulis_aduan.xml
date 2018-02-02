@@ -1,9 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="id.go.pekalongankab.halobupati.TulisAduan">
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        tools:context="id.go.pekalongankab.halobupati.TulisAduan">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/foto_pengirim"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_no_image_male_white" />
+
+        <EditText
+            android:id="@+id/isi_aduan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/foto_pengirim"
+            android:background="@drawable/bg_aduan"
+            android:gravity="top|left"
+            android:hint="Apa yang sedang terjadi di sekitar anda?"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:padding="10dp"
+            android:scrollHorizontally="false"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spnkategori"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/isi_aduan"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_aduan"
+            android:entries="@array/kategori"
+            android:padding="10dp"></Spinner>
+
+        <ImageButton
+            android:id="@+id/foto_aduan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spnkategori"
+            android:layout_marginLeft="40dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_aduan"
+            android:src="@drawable/no_image" />
+
+    </RelativeLayout>
+</ScrollView>

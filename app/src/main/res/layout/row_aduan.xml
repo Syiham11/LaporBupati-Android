@@ -4,6 +4,7 @@
     android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -16,9 +17,8 @@
             android:id="@+id/foto_aduan"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:background="#e2e2e2"
-            android:scaleType="fitCenter"
             android:src="@drawable/no_image" />
 
         <RelativeLayout
@@ -33,9 +33,7 @@
                 android:id="@+id/foto_user"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_no_image_male_white"
-                app:civ_border_width="0.5dp"
-                app:civ_border_color="@color/colorPrimary"/>
+                android:src="@drawable/ic_no_image_male_white"/>
 
             <TextView
                 android:id="@+id/pengirim"

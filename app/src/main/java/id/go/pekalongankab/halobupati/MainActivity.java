@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
         /*MenuItem item = menu.findItem(R.id.menuSearch);
         SearchView searchView = (SearchView)item.getActionView();
         searchView.setQueryHint("Query Hint");
@@ -148,7 +148,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menuKirim) {
+        if (id == R.id.menuEdit) {
+            Intent i = new Intent(MainActivity.this, TulisAduan.class);
+            startActivity(i);
             return true;
         }
 

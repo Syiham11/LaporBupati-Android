@@ -18,8 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 
@@ -45,7 +48,6 @@ public class Opd extends Fragment {
     RecyclerView mRecycleopd;
     ProgressDialog pd;
     SwipeRefreshLayout swLayout;
-    int jml;
     int perLoad;
 
     public Opd() {
@@ -65,6 +67,7 @@ public class Opd extends Fragment {
         pd = new ProgressDialog(getActivity());
 
         perLoad = 3;
+        mItems.clear();
 
         loadOpd();
 
@@ -124,9 +127,11 @@ public class Opd extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        pd.cancel();
-                        snackBar("Tidak ada koneksi internet!", R.color.Error);
                         Log.d("volley", "error : "+error.getMessage());
+                        pd.cancel();
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                        }
                     }
                 });
         AppController.getInstance().addToRequestQueue(requestData);
@@ -174,9 +179,11 @@ public class Opd extends Fragment {
                                 new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        pd.cancel();
-                                        snackBar("Tidak ada koneksi internet!", R.color.Error);
                                         Log.d("volley", "error : "+error.getMessage());
+                                        pd.cancel();
+                                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                                        }
                                     }
                                 });
                         AppController.getInstance().addToRequestQueue(requestData);

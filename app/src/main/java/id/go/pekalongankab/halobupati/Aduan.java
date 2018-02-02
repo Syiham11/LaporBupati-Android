@@ -15,8 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 
@@ -45,6 +48,7 @@ public class Aduan extends Fragment {
     RecyclerView mRecycleaduan;
     ProgressDialog pd;
     SwipeRefreshLayout swLayout;
+    int perLoad;
 
 
     public Aduan() {
@@ -63,6 +67,9 @@ public class Aduan extends Fragment {
         mItems = new ArrayList<>();
         RecyclerView.LayoutManager mManager;
         pd = new ProgressDialog(getActivity());
+        mItems.clear();
+
+        perLoad = 5;
 
         loadAduan();
 
@@ -79,12 +86,15 @@ public class Aduan extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //mItems.clear();
+                        mItems.clear();
+                        loadAduan();
                         swLayout.setRefreshing(false);
                     }
                 }, 1000);
             }
         });
+
+        loadMoreAduan();
 
         return  view_aduan;
     }
@@ -99,7 +109,7 @@ public class Aduan extends Fragment {
                     public void onResponse(JSONArray response) {
                         pd.cancel();
                         Log.d("volley", "response : "+response.toString());
-                        for (int i = 0; i< response.length(); i++){
+                        for (int i = 0; i< perLoad; i++){
                             try {
                                 JSONObject data = response.getJSONObject(i);
                                 ModelDataAduan md = new ModelDataAduan();
@@ -122,12 +132,74 @@ public class Aduan extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        pd.cancel();
-                        snackBar("Tidak ada koneksi internet!", R.color.Error);
                         Log.d("volley", "error : "+error.getMessage());
+                        pd.cancel();
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                        }
                     }
                 });
         AppController.getInstance().addToRequestQueue(requestData);
+    }
+
+    private void loadMoreAduan(){
+        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                mItems.add(null);
+                mAdapter.notifyItemInserted(mItems.size() - 1);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mItems.remove(mItems.size() - 1);
+                        mAdapter.notifyItemRemoved(mItems.size());
+                        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN, null,
+                                new Response.Listener<JSONArray>() {
+                                    @Override
+                                    public void onResponse(JSONArray response) {
+                                        pd.cancel();
+                                        Log.d("volley", "response : "+response.toString());
+                                        if (response.length() > perLoad){
+                                            int index = mItems.size();
+                                            int end = index + perLoad;
+                                            for (int i = index; i<end; i++){
+                                                try {
+                                                    JSONObject data = response.getJSONObject(i);
+                                                    ModelDataAduan md = new ModelDataAduan();
+                                                    md.setNama_user(data.getString("nama_user"));
+                                                    md.setTanggal(data.getString("tanggal"));
+                                                    md.setAduan(data.getString("aduan"));
+                                                    md.setKategori(data.getString("kategori"));
+                                                    md.setStatus(data.getString("status"));
+                                                    md.setFoto_aduan(data.getString("lampiran"));
+                                                    md.setFoto_user(data.getString("foto"));
+                                                    md.setStatus(data.getString("status"));
+                                                    mItems.add(md);
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                            mAdapter.notifyDataSetChanged();
+                                            mAdapter.setLoaded();
+                                        }
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d("volley", "error : "+error.getMessage());
+                                        pd.cancel();
+                                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                                        }
+                                    }
+                                });
+                        AppController.getInstance().addToRequestQueue(requestData);
+                    }
+                }, 3000);
+            }
+        });
+
     }
 
     public void snackBar(String pesan, int color){
