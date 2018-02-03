@@ -66,7 +66,7 @@ public class Opd extends Fragment {
         RecyclerView.LayoutManager mManager;
         pd = new ProgressDialog(getActivity());
 
-        perLoad = 3;
+        perLoad = 5;
         mItems.clear();
 
         loadOpd();

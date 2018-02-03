@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -60,7 +61,7 @@ public class Aduan extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ((MainActivity) getActivity()).setActionBarTitle("Data Aduan");
+        ((MainActivity) getActivity()).setActionBarTitle("Halo Bupati");
         View view_aduan = inflater.inflate(R.layout.fragment_aduan, container, false);
 
         mRecycleaduan = (RecyclerView) view_aduan.findViewById(R.id.recycleAduan);

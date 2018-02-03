@@ -89,7 +89,7 @@ public class AdapterDataAduanSaya extends RecyclerView.Adapter<RecyclerView.View
                 holderDataAduan.aduan.setText(md.getAduan());
             }else{
                 String aduanp = md.getAduan().substring(0, 200);
-                holderDataAduan.aduan.setText(aduanp+" ... ");
+                holderDataAduan.aduan.setText(aduanp+" ... Selengkapnya");
             }
             holderDataAduan.kategori.setText(md.getKategori());
             Glide.with(context).load(ServerAPI.URL_FOTO_USER+md.getFoto_user())
@@ -99,13 +99,18 @@ public class AdapterDataAduanSaya extends RecyclerView.Adapter<RecyclerView.View
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holderDataAduan.foto_user);
-            Glide.with(context).load(ServerAPI.URL_FOTO_ADUAN+md.getFoto_aduan())
+            if (md.getFoto_aduan().isEmpty()){
+                ((HolderDataAduan) holder).foto_aduan.setVisibility(View.GONE);
+            }else{
+                ((HolderDataAduan) holder).foto_aduan.setVisibility(View.VISIBLE);
+                Glide.with(context).load(ServerAPI.URL_FOTO_ADUAN+md.getFoto_aduan())
                         .thumbnail(0.5f)
                         .crossFade()
                         .error(R.drawable.no_image)
                         .fitCenter()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(holderDataAduan.foto_aduan);
+            }
 
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;

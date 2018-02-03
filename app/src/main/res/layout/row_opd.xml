@@ -4,6 +4,7 @@
     android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -68,7 +69,7 @@
                 android:id="@+id/ic_kategori"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_menu_send"
+                android:src="@drawable/ic_alamat"
                 android:layout_below="@id/hr"
                 android:layout_marginTop="4dp"/>
 
@@ -82,16 +83,9 @@
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="5dp"
                 android:text="Alamat"/>
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/hr"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_menu_share"/>
 
         </RelativeLayout>
 

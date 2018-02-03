@@ -45,7 +45,7 @@
                 android:layout_toRightOf="@+id/foto_user"
                 android:text="Nama Pengirim"
                 android:textAllCaps="true"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="Tanggal"
-                android:textSize="10sp"/>
+                android:textSize="12sp"/>
 
 
             <TextView
@@ -64,6 +64,7 @@
                 android:layout_below="@id/pengirim"
                 android:layout_marginTop="5dp"
                 android:paddingTop="4dp"
+                android:textSize="14sp"
                 android:text="Isi aduan" />
 
             <View

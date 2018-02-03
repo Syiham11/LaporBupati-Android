@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="20dp"
         android:layout_margin="10dp"
         tools:context="id.go.pekalongankab.halobupati.TulisAduan">
 
@@ -27,29 +28,40 @@
             android:gravity="top|left"
             android:hint="Apa yang sedang terjadi di sekitar anda?"
             android:inputType="textMultiLine"
-            android:lines="8"
+            android:lines="10"
             android:padding="10dp"
-            android:scrollHorizontally="false"
             android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/tambah_foto"
+            android:src="@drawable/ic_add_foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_aduan"
+            android:layout_marginLeft="10dp"
+            android:padding="4dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/isi_aduan"/>
 
         <Spinner
             android:id="@+id/spnkategori"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/isi_aduan"
+            android:layout_toLeftOf="@id/tambah_foto"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_aduan"
             android:entries="@array/kategori"
             android:padding="10dp"></Spinner>
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/foto_aduan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/spnkategori"
             android:layout_marginLeft="40dp"
-            android:scaleType="centerCrop"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_aduan"
             android:src="@drawable/no_image" />

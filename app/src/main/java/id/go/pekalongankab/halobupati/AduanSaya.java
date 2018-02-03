@@ -112,21 +112,25 @@ public class AduanSaya extends Fragment {
                     public void onResponse(JSONArray response) {
                         pd.cancel();
                         Log.d("volley", "response : "+response.toString());
-                        for (int i = 0; i< perLoad; i++){
-                            try {
-                                JSONObject data = response.getJSONObject(i);
-                                ModelDataAduanSaya md = new ModelDataAduanSaya();
-                                md.setNama_user(data.getString("nama_user"));
-                                md.setTanggal(data.getString("tanggal"));
-                                md.setAduan(data.getString("aduan"));
-                                md.setKategori(data.getString("kategori"));
-                                md.setStatus(data.getString("status"));
-                                md.setFoto_aduan(data.getString("lampiran"));
-                                md.setFoto_user(data.getString("foto"));
-                                md.setStatus(data.getString("status"));
-                                mItems.add(md);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                        if(response.length() < 0){
+                            snackBar("Anda tidak memiliki aduan yang diterima oleh admin", R.color.Info);
+                        }else{
+                            for (int i = 0; i< perLoad; i++){
+                                try {
+                                    JSONObject data = response.getJSONObject(i);
+                                    ModelDataAduanSaya md = new ModelDataAduanSaya();
+                                    md.setNama_user(data.getString("nama_user"));
+                                    md.setTanggal(data.getString("tanggal"));
+                                    md.setAduan(data.getString("aduan"));
+                                    md.setKategori(data.getString("kategori"));
+                                    md.setStatus(data.getString("status"));
+                                    md.setFoto_aduan(data.getString("lampiran"));
+                                    md.setFoto_user(data.getString("foto"));
+                                    md.setStatus(data.getString("status"));
+                                    mItems.add(md);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                         mAdapter.notifyDataSetChanged();
