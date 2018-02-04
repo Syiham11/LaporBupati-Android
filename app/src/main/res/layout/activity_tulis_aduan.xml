@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@drawable/bg_aduan">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/foto_pengirim"
-            android:background="@drawable/bg_aduan"
+            android:background="@color/white"
             android:gravity="top|left"
             android:hint="Apa yang sedang terjadi di sekitar anda?"
             android:inputType="textMultiLine"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_aduan"
+            android:background="@color/white"
             android:layout_marginLeft="10dp"
             android:padding="4dp"
             android:layout_alignParentRight="true"
@@ -51,6 +51,7 @@
             android:layout_below="@+id/isi_aduan"
             android:layout_toLeftOf="@id/tambah_foto"
             android:layout_marginLeft="40dp"
+            android:background="@color/white"
             android:layout_marginTop="10dp"
             android:entries="@array/kategori"
             android:padding="10dp"></Spinner>
@@ -63,8 +64,21 @@
             android:layout_below="@+id/spnkategori"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_aduan"
+            android:background="@color/white"
             android:src="@drawable/no_image" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:visibility="gone"
+            android:id="@+id/btnHapusfoto"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="2dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_close"
+            android:layout_marginTop="10dp"
+            android:layerType="software"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tambah_foto"/>
 
     </RelativeLayout>
 </ScrollView>

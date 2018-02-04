@@ -153,8 +153,8 @@ public class AdapterDataAduanSaya extends RecyclerView.Adapter<RecyclerView.View
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(context, DetailOpd.class);
-                    context.startActivity(i);
+                    //Intent i = new Intent(context, DetailOpd.class);
+                    //context.startActivity(i);
                 }
             });
         }

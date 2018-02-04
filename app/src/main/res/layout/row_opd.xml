@@ -2,10 +2,13 @@
 <android.support.v7.widget.CardView android:foreground="?android:attr/selectableItemBackground"
     android:background="@color/white"
     android:clickable="true"
+    android:id="@+id/cardOpd"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:cardElevation="0dp"
+    app:cardCornerRadius="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:background="#e2e2e2"
-            android:src="@drawable/no_image"/>
+            android:src="@drawable/no_image"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -57,20 +62,12 @@
                 android:paddingTop="4dp"
                 android:textAllCaps="true"
                 android:text="Nama OPD"/>
-
-            <View android:layout_width="match_parent"
-                android:id="@+id/hr"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="2dp"
-                android:background="#d7d7d7"
-                android:layout_below="@id/opd"/>
             <ImageView
                 android:id="@+id/ic_kategori"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_alamat"
-                android:layout_below="@id/hr"
+                android:layout_below="@id/opd"
                 android:layout_marginTop="4dp"/>
 
             <TextView
@@ -78,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/ic_kategori"
-                android:layout_below="@id/hr"
+                android:layout_below="@id/opd"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
@@ -88,6 +85,13 @@
 
 
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="-1dp"
+            android:background="#e1e1e1"/>
 
     </LinearLayout>
 

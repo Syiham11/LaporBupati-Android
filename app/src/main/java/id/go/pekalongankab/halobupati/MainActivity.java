@@ -130,9 +130,9 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                pindahKeCari(query);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
@@ -229,5 +229,11 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);
         finish();
+    }
+
+    private void pindahKeCari(String query){
+        Intent i = new Intent(MainActivity.this, CariAduan.class);
+        i.putExtra("query", query);
+        startActivity(i);
     }
 }

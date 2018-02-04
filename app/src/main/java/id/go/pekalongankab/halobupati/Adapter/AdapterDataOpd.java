@@ -3,7 +3,9 @@ package id.go.pekalongankab.halobupati.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -84,7 +86,7 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HolderDataOpd) {
-            ModelDataOpd md = mItems.get(position);
+            final ModelDataOpd md = mItems.get(position);
             HolderDataOpd holderDataOpd = (HolderDataOpd) holder;
             holderDataOpd.id_opd.setText(md.getId_opd());
             holderDataOpd.opd.setText(md.getOpd());
@@ -97,6 +99,25 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holderDataOpd.foto);
+            holderDataOpd.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("opd", md.getOpd());
+                    bundle.putString("singkatan", md.getSingkatan());
+                    bundle.putString("alamat", md.getAlamat());
+                    bundle.putString("nama_kepala", md.getNamaKepala());
+                    bundle.putString("deskripsi", md.getDeskripsi());
+                    bundle.putString("no_telp", md.getNoTelp());
+                    bundle.putString("email", md.getEmail());
+                    bundle.putString("fax", md.getFax());
+                    bundle.putString("website", md.getWebsite());
+                    bundle.putString("foto", md.getFoto());
+                    Intent i = new Intent(context, DetailOpd.class);
+                    i.putExtras(bundle);
+                    context.startActivity(i);
+                }
+            });
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
@@ -125,6 +146,7 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ModelDataOpd md;
         public TextView id_opd, opd, singkatan, alamat;
         public ImageView foto;
+        public CardView cardView;
 
         public HolderDataOpd(View view) {
             super(view);
@@ -133,14 +155,14 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
             singkatan = (TextView) view.findViewById(R.id.singkatan);
             alamat = (TextView) view.findViewById(R.id.alamat);
             foto = (ImageView) view.findViewById(R.id.foto);
+            cardView = (CardView) view.findViewById(R.id.cardOpd);
 
-            view.setOnClickListener(new View.OnClickListener() {
+            /*view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(context, DetailOpd.class);
-                    context.startActivity(i);
+
                 }
-            });
+            });*/
         }
     }
 }

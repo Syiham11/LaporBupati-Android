@@ -116,6 +116,12 @@ public class Opd extends Fragment {
                                 md.setSingkatan(data.getString("singkatan"));
                                 md.setAlamat(data.getString("alamat"));
                                 md.setFoto(data.getString("foto"));
+                                md.setNamaKepala(data.getString("nama_kepala"));
+                                md.setNoTelp(data.getString("no_telp"));
+                                md.setEmail(data.getString("email"));
+                                md.setFax(data.getString("fax"));
+                                md.setWebsite(data.getString("website"));
+                                md.setDeskripsi(data.getString("deskripsi"));
                                 mItems.add(md);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -166,6 +172,12 @@ public class Opd extends Fragment {
                                                     md.setSingkatan(data.getString("singkatan"));
                                                     md.setAlamat(data.getString("alamat"));
                                                     md.setFoto(data.getString("foto"));
+                                                    md.setNamaKepala(data.getString("nama_kepala"));
+                                                    md.setNoTelp(data.getString("no_telp"));
+                                                    md.setEmail(data.getString("email"));
+                                                    md.setFax(data.getString("fax"));
+                                                    md.setWebsite(data.getString("website"));
+                                                    md.setDeskripsi(data.getString("deskripsi"));
                                                     mItems.add(md);
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();

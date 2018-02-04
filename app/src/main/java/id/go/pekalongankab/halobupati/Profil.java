@@ -20,9 +20,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import id.go.pekalongankab.halobupati.Util.ServerAPI;
 
+import static android.R.id.list;
+
 public class Profil extends AppCompatActivity {
 
-    ImageView imgprofil;
+    ImageView imgprofil, bg;
     TextView txno_ktp, txjk, txtmp_lahir, txno_telp, txalamat, txbio, txdibuat, txnama, txemail ;
 
     @Override
@@ -45,6 +47,7 @@ public class Profil extends AppCompatActivity {
         txbio = (TextView)findViewById(R.id.tvbio);
         txnama = (TextView)findViewById(R.id.tvnamaUser);
         txemail = (TextView)findViewById(R.id.tvEmail);
+        bg = (ImageView) findViewById(R.id.bg);
 
         SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
         final String id_user = pref.getString("id_user", "");
@@ -84,7 +87,16 @@ public class Profil extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgprofil);
 
+        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER+foto)
+                .thumbnail(0.5f)
+                .centerCrop()
+                .crossFade()
+                .error(R.drawable.no_image)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(bg);
+
         changeStatusBarColor();
+
     }
 
     @Override

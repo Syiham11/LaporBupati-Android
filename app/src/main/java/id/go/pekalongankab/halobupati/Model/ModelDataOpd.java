@@ -5,16 +5,7 @@ package id.go.pekalongankab.halobupati.Model;
  */
 
 public class ModelDataOpd {
-    String id_opd, opd, singkatan, namaKepala, alamat, foto, noTelp, email, fax, website;
-
-    public ModelDataOpd(){
-
-    }
-
-    public ModelDataOpd(String id_opd, String opd) {
-        this.id_opd = id_opd;
-        this.opd = opd;
-    }
+    String id_opd, opd, singkatan, namaKepala, deskripsi, alamat, foto, noTelp, email, fax, website;
 
     public String getId_opd() {
         return id_opd;
@@ -46,6 +37,14 @@ public class ModelDataOpd {
 
     public void setNamaKepala(String namaKepala) {
         this.namaKepala = namaKepala;
+    }
+
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
     }
 
     public String getAlamat() {

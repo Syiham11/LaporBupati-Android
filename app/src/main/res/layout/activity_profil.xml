@@ -14,16 +14,24 @@
             android:layout_height="250dp">
 
             <ImageView
+                android:id="@+id/bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/bg_splash"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@color/colorPrimaryT"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgfotoUser"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
+                android:layout_above="@+id/tvnamaUser"
                 android:layout_marginTop="?attr/actionBarSize"
                 android:elevation="5dp"
                 android:padding="5dp"
@@ -36,7 +44,8 @@
                 android:id="@+id/tvnamaUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imgfotoUser"
+                android:layout_above="@+id/tvbio"
+                android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
                 android:text="Nama User"
                 android:textColor="#fff"
@@ -47,11 +56,13 @@
                 android:id="@+id/tvbio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvnamaUser"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
                 android:text="Bio logi"
                 android:textColor="#fff"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -59,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="#f4f4f4"
             android:layout_below="@+id/profile_layout">
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -179,6 +191,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:elevation="0dp"
+                    app:cardCornerRadius="0dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -216,6 +230,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:layout_gravity="bottom"
                         android:background="#e4e4e4" />
                 </android.support.v7.widget.CardView>
@@ -223,6 +239,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:elevation="0dp"
+                    app:cardCornerRadius="0dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -261,12 +279,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_gravity="bottom"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="#e4e4e4" />
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:elevation="0dp"
+                    app:cardCornerRadius="0dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -305,12 +327,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_gravity="bottom"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="#e4e4e4" />
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:elevation="0dp"
+                    app:cardCornerRadius="0dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -358,12 +384,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_gravity="bottom"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="#e4e4e4" />
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:elevation="0dp"
+                    app:cardCornerRadius="0dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -412,12 +442,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_gravity="bottom"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="#e4e4e4" />
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:elevation="0dp"
+                    app:cardCornerRadius="0dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -459,8 +493,6 @@
                                 android:src="@drawable/ic_right"/>
 
                         </RelativeLayout>
-
-
 
                     </RelativeLayout>
 

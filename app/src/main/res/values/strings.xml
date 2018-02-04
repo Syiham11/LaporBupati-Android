@@ -12,6 +12,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <array name="kategori">
+        <item>Pilih Kategori</item>
         <item>Non Infrastruktur</item>
         <item>Infrastruktur</item>
     </array>

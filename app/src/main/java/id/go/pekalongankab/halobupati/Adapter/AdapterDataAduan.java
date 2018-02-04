@@ -156,8 +156,8 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(context, DetailOpd.class);
-                    context.startActivity(i);
+                    //Intent i = new Intent(context, DetailOpd.class);
+                    //context.startActivity(i);
                 }
             });
         }

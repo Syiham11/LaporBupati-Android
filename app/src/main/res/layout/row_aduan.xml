@@ -4,7 +4,8 @@
     android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="0dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -12,14 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/foto_aduan"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            android:src="@drawable/no_image" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,21 +24,30 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/foto_user"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_no_image_male_white"/>
 
             <TextView
                 android:id="@+id/pengirim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/foto_user"
                 android:text="Nama Pengirim"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+            <TextView
+                android:layout_marginTop="-2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pengirim"
+                android:text="Level"
+                android:id="@+id/level"
+                android:textSize="10sp"
+                android:layout_toRightOf="@id/foto_user"/>
 
             <TextView
                 android:id="@+id/tanggal"
@@ -60,26 +62,28 @@
                 android:id="@+id/isi_aduan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pengirim"
+                android:layout_below="@id/foto_user"
                 android:layout_marginTop="5dp"
                 android:paddingTop="4dp"
                 android:textSize="14sp"
                 android:text="Isi aduan" />
 
-            <View
-                android:id="@+id/hr"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
+
+            <ImageView
                 android:layout_below="@id/isi_aduan"
-                android:layout_marginBottom="2dp"
+                android:id="@+id/foto_aduan"
                 android:layout_marginTop="5dp"
-                android:background="#d7d7d7" />
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:src="@drawable/no_image" />
 
             <ImageView
                 android:id="@+id/ic_kategori"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_below="@id/hr"
+                android:layout_below="@id/foto_aduan"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_label" />
 
@@ -87,7 +91,7 @@
                 android:id="@+id/kategori"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/hr"
+                android:layout_below="@id/foto_aduan"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
@@ -100,11 +104,18 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/hr"
+                android:layout_below="@id/foto_aduan"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_info_blue" />
 
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="-1dp"
+            android:background="#e1e1e1"/>
 
     </LinearLayout>
 

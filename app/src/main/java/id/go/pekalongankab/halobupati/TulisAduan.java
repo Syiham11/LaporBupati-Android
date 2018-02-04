@@ -53,7 +53,7 @@ import id.go.pekalongankab.halobupati.Util.ServerAPI;
 
 public class TulisAduan extends AppCompatActivity {
 
-    ImageView foto_pengirim, foto_aduan, tambahfoto;
+    ImageView foto_pengirim, foto_aduan, tambahfoto, btnHapusfoto;
     EditText isi_aduan;
     Bitmap bitmap, decoded;
     Spinner kategori;
@@ -84,6 +84,7 @@ public class TulisAduan extends AppCompatActivity {
         kategori = (Spinner) findViewById(R.id.spnkategori);
         isi_aduan = (EditText)findViewById(R.id.isi_aduan);
         tambahfoto = (ImageView) findViewById(R.id.tambah_foto);
+        btnHapusfoto = (ImageView) findViewById(R.id.btnHapusfoto);
 
         kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             //ketika memilih salah satu item
@@ -94,6 +95,14 @@ public class TulisAduan extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
+            }
+        });
+
+        btnHapusfoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                foto_aduan.setVisibility(View.GONE);
+                btnHapusfoto.setVisibility(View.GONE);
             }
         });
 
@@ -118,8 +127,37 @@ public class TulisAduan extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp(){
-        finish();
+        new AlertDialog.Builder(this)
+                .setTitle("Perhatian")
+                .setMessage("Apakah anda yakin akan kembali?")
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Tidak", null)
+                .show();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!(isi_aduan.getText().toString().isEmpty())){
+            new AlertDialog.Builder(this)
+                    .setTitle("Perhatian")
+                    .setMessage("Apakah anda yakin akan kembali?")
+                    .setCancelable(false)
+                    .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Tidak", null)
+                    .show();
+        }else{
+            finish();
+        }
     }
 
     @Override
@@ -161,6 +199,9 @@ public class TulisAduan extends AppCompatActivity {
                 isi_aduan.setFocusable(true);
                 isi_aduan.setError("Aduan harus lebih dari 50 karakter!");
                 snackBar("Aduan harus lebih dari 50 karakter!", R.color.Error);
+            }else if (kategori.getSelectedItem().toString().equals("Pilih Kategori")){
+                kategori.setFocusable(true);
+                snackBar("Kategori harus dipilih!", R.color.Error);
             }else if (kategori.getSelectedItem().toString().equals("Infrastruktur")){
                 if (foto_aduan.getVisibility() == View.GONE){
                     snackBar("Aduan kategori Infrastruktur harus ada foto!", R.color.Error);
@@ -224,6 +265,7 @@ public class TulisAduan extends AppCompatActivity {
 
         //menampilkan gambar yang dipilih dari camera/gallery ke ImageView
         foto_aduan.setImageBitmap(decoded);
+        btnHapusfoto.setVisibility(View.VISIBLE);
         foto_aduan.setVisibility(View.VISIBLE);
     }
 
