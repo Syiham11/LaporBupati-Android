@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">Halo Bupati</string>
+    <string name="app_name">Lapor Bupati</string>
     <string name="forgetpass"><a href="http://halobupati.pekalongankab.go.id/forgetpassword">klik di sini</a></string>
     <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="permission_dialog">Mengakses Izin Lokasi yang diperlukan</string>
+    <string name="go_to_permissions_settings">Pergi ke pengaturan aplikasi unruk mengizinkan</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

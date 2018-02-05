@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_aduan">
+    android:background="@color/hr">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="20dp"
         android:layout_margin="10dp"
-        tools:context="id.go.pekalongankab.halobupati.TulisAduan">
+        tools:context="id.go.pekalongankab.laporbupati.TulisAduan">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/foto_pengirim"
@@ -18,67 +18,72 @@
             android:layout_height="30dp"
             android:src="@drawable/ic_no_image_male_white" />
 
-        <EditText
-            android:id="@+id/isi_aduan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <RelativeLayout
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/foto_pengirim"
-            android:background="@color/white"
-            android:gravity="top|left"
-            android:hint="Apa yang sedang terjadi di sekitar anda?"
-            android:inputType="textMultiLine"
-            android:lines="10"
-            android:padding="10dp"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/tambah_foto"
-            android:src="@drawable/ic_add_foto"
+            android:background="@drawable/bg_aduan"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:layout_marginLeft="10dp"
-            android:padding="4dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/isi_aduan"/>
+            android:layout_toRightOf="@+id/foto_pengirim"
+            android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/spnkategori"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/isi_aduan"
-            android:layout_toLeftOf="@id/tambah_foto"
-            android:layout_marginLeft="40dp"
-            android:background="@color/white"
-            android:layout_marginTop="10dp"
-            android:entries="@array/kategori"
-            android:padding="10dp"></Spinner>
+            <EditText
+                android:id="@+id/isi_aduan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_aduan"
+                android:gravity="top|left"
+                android:hint="Apa yang sedang terjadi di sekitar anda?"
+                android:inputType="textMultiLine"
+                android:lines="10"
+                android:padding="10dp"
+                android:textSize="16sp" />
 
-        <ImageButton
-            android:visibility="gone"
-            android:id="@+id/foto_aduan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/spnkategori"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:src="@drawable/no_image" />
+            <ImageView
+                android:background="@drawable/bg_aduan"
+                android:id="@+id/tambah_foto"
+                android:src="@drawable/ic_add_foto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:padding="3dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/isi_aduan"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:visibility="gone"
-            android:id="@+id/btnHapusfoto"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="2dp"
-            android:background="@color/white"
-            android:src="@drawable/ic_close"
-            android:layout_marginTop="10dp"
-            android:layerType="software"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/tambah_foto"/>
+            <Spinner
+                android:id="@+id/spnkategori"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/isi_aduan"
+                android:layout_toLeftOf="@id/tambah_foto"
+                android:background="@drawable/bg_aduan"
+                android:entries="@array/kategori"
+                android:padding="10dp"></Spinner>
+
+            <ImageButton
+                android:visibility="gone"
+                android:id="@+id/foto_aduan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spnkategori"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_aduan"
+                android:padding="10dp"
+                android:src="@drawable/no_image" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:visibility="gone"
+                android:id="@+id/btnHapusfoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:padding="2dp"
+                android:background="@drawable/bg_aduan"
+                android:src="@drawable/ic_close"
+                android:layerType="software"
+                android:layout_alignTop="@+id/foto_aduan"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </ScrollView>
