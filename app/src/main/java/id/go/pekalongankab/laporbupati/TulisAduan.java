@@ -132,14 +132,14 @@ public class TulisAduan extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(foto_pengirim);
 
-        getPermissions();
-
         tambahfoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
             }
         });
+
+        getPermissions();
     }
 
     @Override
@@ -199,11 +199,19 @@ public class TulisAduan extends AppCompatActivity {
         return true;
     }
 
+
+    public void getPermissions() {
+    /* Check and Request permission */
+        if (ContextCompat.checkSelfPermission(TulisAduan.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(TulisAduan.this,
+                    new String[]{Manifest.permission.CAMERA}, 1 );
+        }
+    }
+
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case MODE_ENABLE_WRITE_AHEAD_LOGGING: {
+            case 1: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -215,9 +223,8 @@ public class TulisAduan extends AppCompatActivity {
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    snackBar("Perizinan ditolak! Pergi ke pengaturan untuk mengizinkan!", R.color.Error);
+                    snackBar("Perizinan ditolak! Pergi ke pengaturan aplikasi untuk mengizinkan!", R.color.Error);
                 }
-                return;
             }
 
             // other 'case' lines to check for other
@@ -291,14 +298,6 @@ public class TulisAduan extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void getPermissions() {
-    /* Check and Request permission */
-        if (ContextCompat.checkSelfPermission(TulisAduan.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(TulisAduan.this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MODE_ENABLE_WRITE_AHEAD_LOGGING );
-        }
     }
 
     private void showFileChooser() {
