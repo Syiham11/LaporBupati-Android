@@ -31,24 +31,57 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/txtKtp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:background="@drawable/bg_rounded"
+            android:hint="Nomor KTP"
+            android:textColorHighlight="@color/colorAccent"
             android:textColor="@color/white"
-            android:text="@string/deskripsi"
-            android:layout_marginBottom="20dp"/>
+            android:textColorHint="@color/lgrey"
+            android:inputType="number"
+            android:padding="14dp" />
+        <EditText
+            android:id="@+id/txtNama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded"
+            android:hint="Nama Lengkap"
+            android:layout_marginTop="5dp"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColor="@color/white"
+            android:textColorHint="@color/lgrey"
+            android:inputType="textPersonName"
+            android:padding="14dp" />
+
 
         <EditText
-            android:id="@+id/txttelp"
+            android:id="@+id/txtTelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_rounded"
             android:hint="No. Telepon"
+            android:layout_marginTop="5dp"
             android:textColorHighlight="@color/colorAccent"
             android:textColor="@color/white"
             android:textColorHint="@color/lgrey"
             android:inputType="phone"
+            android:padding="14dp" />
+
+
+
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded"
+            android:hint="Email anda"
+            android:layout_marginTop="5dp"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColor="@color/white"
+            android:textColorHint="@color/lgrey"
+            android:inputType="textEmailAddress"
             android:padding="14dp" />
 
         <android.support.design.widget.TextInputLayout
@@ -70,40 +103,33 @@
                 android:inputType="textPassword"
                 android:padding="10dp" />
         </android.support.design.widget.TextInputLayout>
-
-        <RelativeLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/lp"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false"
+            android:layout_marginTop="5dp"
+            app:passwordToggleTint="@color/white"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/txtUlangi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lupa kata sandi?"
+                android:textColorHighlight="@color/colorAccent"
+                android:background="@drawable/bg_rounded"
+                android:hint="ulangi kata sandi"
+                android:textColorHint="@color/lgrey"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/linkforget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forgetpass"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:textColorLink="@color/white"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
-
-        </RelativeLayout>
+                android:inputType="textPassword"
+                android:padding="10dp" />
+        </android.support.design.widget.TextInputLayout>
 
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnDaftar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_button_error"
-            android:text="Login"
+            android:background="@drawable/bg_button_warning"
+            android:text="Daftar"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"/>
         <RelativeLayout
@@ -115,15 +141,15 @@
                 android:id="@+id/reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Belum punya akun?"
+                android:text="Sudah punya akun?"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/linkdaftar"
+                android:id="@+id/linklogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Daftar"
+                android:text="Masuk"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:textColorLink="@color/white"

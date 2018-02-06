@@ -127,7 +127,6 @@ public class TulisAduan extends AppCompatActivity {
                 .thumbnail(0.5f)
                 .centerCrop()
                 .crossFade()
-                .placeholder(R.drawable.ic_no_image_male_white)
                 .error(R.drawable.ic_no_image_male_white)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(foto_pengirim);
@@ -144,17 +143,21 @@ public class TulisAduan extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp(){
-        new AlertDialog.Builder(this)
-                .setTitle("Perhatian")
-                .setMessage("Apakah anda yakin akan kembali?")
-                .setCancelable(false)
-                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        finish();
-                    }
-                })
-                .setNegativeButton("Tidak", null)
-                .show();
+        if (isi_aduan.getText().toString().isEmpty()){
+            finish();
+        }else{
+            new AlertDialog.Builder(this)
+                    .setTitle("Perhatian")
+                    .setMessage("Apakah anda yakin akan kembali?")
+                    .setCancelable(false)
+                    .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Tidak", null)
+                    .show();
+        }
         return true;
     }
 

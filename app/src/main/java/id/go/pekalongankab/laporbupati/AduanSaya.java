@@ -112,7 +112,7 @@ public class AduanSaya extends Fragment {
                     public void onResponse(JSONArray response) {
                         pd.cancel();
                         Log.d("volley", "response : "+response.toString());
-                        if(response.length() < 0){
+                        if(response.length() <= 0){
                             snackBar("Anda tidak memiliki aduan yang diterima oleh admin", R.color.Info);
                         }else{
                             for (int i = 0; i< perLoad; i++){

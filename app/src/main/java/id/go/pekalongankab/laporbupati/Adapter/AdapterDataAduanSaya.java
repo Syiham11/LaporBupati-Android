@@ -93,8 +93,7 @@ public class AdapterDataAduanSaya extends RecyclerView.Adapter<RecyclerView.View
             Glide.with(context).load(ServerAPI.URL_FOTO_USER+md.getFoto_user())
                     .thumbnail(0.5f)
                     .crossFade()
-                    .placeholder(R.drawable.no_image)
-                    .error(R.drawable.no_image)
+                    .error(R.drawable.ic_no_image_male_white)
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holderDataAduan.foto_user);
@@ -105,7 +104,6 @@ public class AdapterDataAduanSaya extends RecyclerView.Adapter<RecyclerView.View
                 Glide.with(context).load(ServerAPI.URL_FOTO_ADUAN+md.getFoto_aduan())
                         .thumbnail(0.5f)
                         .crossFade()
-                        .placeholder(R.drawable.no_image)
                         .error(R.drawable.no_image)
                         .fitCenter()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)

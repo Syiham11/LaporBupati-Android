@@ -47,7 +47,8 @@ public class Login extends Activity {
 
     Button btnLogin;
     ProgressDialog pd;
-    EditText txtemail, txtpass;
+    EditText txttelp, txtpass;
+    TextView daftar;
     private SharedPreferences pref;
 
     @Override
@@ -57,10 +58,18 @@ public class Login extends Activity {
 
         changeStatusBarColor();
         btnLogin = (Button)findViewById(R.id.btnLogin);
-        txtemail = (EditText)findViewById(R.id.txtemail);
+        txttelp = (EditText)findViewById(R.id.txttelp);
         txtpass = (EditText)findViewById(R.id.txtpass);
+        daftar = (TextView) findViewById(R.id.linkdaftar) ;
         pd = new ProgressDialog(Login.this);
 
+        daftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login.this, Register.class);
+                startActivity(i);
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,23 +101,21 @@ public class Login extends Activity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                String email = txtemail.getText().toString();
-                String password = txtpass.getText().toString();
+                String telp = txttelp.getText().toString().replaceAll("'","");
+                String password = txtpass.getText().toString().replaceAll("'", "");
 
                 // ngecek apakah inputannya kosong atau tidak
-                if (email.isEmpty()){
+                if (telp.isEmpty()){
                     // jika inputan kosong tampilkan pesan
-                    snackBar("Harap isi email anda!", R.color.Error);
-                    txtemail.setError("Harap isi email anda!");
-                    txtemail.setFocusable(true);
+                    snackBar("Harap isi Nomor telepon anda!", R.color.Error);
+                    txttelp.setFocusable(true);
                 }else if (password.isEmpty()){
                     // jika inputan kosong tampilkan pesan
                     snackBar("Harap isi password anda!", R.color.Error);
-                    txtpass.setError("Harap isi password anda!");
                     txtpass.setFocusable(true);
                 } else {
                     // login user
-                    checkLogin(email, password);
+                    checkLogin(telp, password);
                 }
             }
 
@@ -216,7 +223,7 @@ public class Login extends Activity {
             protected Map<String, String> getParams() {
                 // kirim parameter ke server
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
+                params.put("telp", email);
                 params.put("pass", password);
 
                 return params;
