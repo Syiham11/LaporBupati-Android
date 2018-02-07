@@ -12,10 +12,15 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/bgNav"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/bg_splash" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryT"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
 

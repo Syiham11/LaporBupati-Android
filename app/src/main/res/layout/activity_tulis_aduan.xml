@@ -23,7 +23,7 @@
             android:background="@drawable/bg_aduan"
             android:layout_width="wrap_content"
             android:layout_toRightOf="@+id/foto_pengirim"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <EditText
                 android:id="@+id/isi_aduan"
@@ -37,34 +37,14 @@
                 android:padding="10dp"
                 android:textSize="16sp" />
 
-            <ImageView
-                android:background="@drawable/bg_aduan"
-                android:id="@+id/tambah_foto"
-                android:src="@drawable/ic_add_foto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:padding="3dp"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/isi_aduan"/>
 
-            <Spinner
-                android:id="@+id/spnkategori"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/isi_aduan"
-                android:layout_toLeftOf="@id/tambah_foto"
-                android:background="@drawable/bg_aduan"
-                android:entries="@array/kategori"
-                android:padding="10dp"></Spinner>
 
             <ImageButton
                 android:visibility="gone"
                 android:id="@+id/foto_aduan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spnkategori"
-                android:layout_marginTop="10dp"
+                android:layout_below="@+id/isi_aduan"
                 android:background="@drawable/bg_aduan"
                 android:padding="10dp"
                 android:src="@drawable/no_image" />
@@ -82,6 +62,27 @@
                 android:layerType="software"
                 android:layout_alignTop="@+id/foto_aduan"
                 android:layout_alignParentEnd="true" />
+
+            <ImageView
+                android:background="@drawable/bg_aduan"
+                android:id="@+id/tambah_foto"
+                android:src="@drawable/ic_add_foto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:padding="3dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/foto_aduan"/>
+
+            <Spinner
+                android:id="@+id/spnkategori"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foto_aduan"
+                android:layout_toLeftOf="@id/tambah_foto"
+                android:background="@drawable/bg_aduan"
+                android:entries="@array/kategori"
+                android:padding="10dp"></Spinner>
 
         </RelativeLayout>
 

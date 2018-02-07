@@ -68,6 +68,7 @@ public class Login extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(Login.this, Register.class);
                 startActivity(i);
+                finish();
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -80,10 +81,13 @@ public class Login extends Activity {
         });
 
         TextView linkforget =(TextView)findViewById(R.id.linkforget);
-        linkforget.setClickable(true);
-        linkforget.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='http://www.google.com'>klik di sini</a>";
-        linkforget.setText(Html.fromHtml(text));
+        linkforget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login.this, ForgetPassword.class);
+                startActivity(i);
+            }
+        });
 
         // ngecek apakah user udah login atau belum
         pref = getSharedPreferences("data", Context.MODE_PRIVATE);
@@ -156,7 +160,10 @@ public class Login extends Activity {
                     JSONObject data = new JSONObject(response);
                     String code = data.getString("code");
                     // ngecek node error dari api
-                    if (code.equals("1")) {
+                    if (code.equals("2")){
+                        pd.cancel();
+                        snackBar("Akun anda belum diaktifkan! silahkan periksa email anda untuk mengaktifkan", R.color.Error);
+                    }else if (code.equals("1")) {
                         // user berhasil login
                         String id_user = data.getString("id_user");
                         String nama_user = data.getString("nama_user");

@@ -93,7 +93,6 @@ public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Glide.with(context).load(ServerAPI.URL_FOTO_OPD+md.getFoto())
                     .thumbnail(0.5f)
                     .crossFade()
-                    .placeholder(R.drawable.no_image)
                     .error(R.drawable.no_image)
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)

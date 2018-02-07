@@ -107,6 +107,7 @@ public class Register extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(Register.this, Login.class);
                 startActivity(i);
+                finish();
             }
         });
 

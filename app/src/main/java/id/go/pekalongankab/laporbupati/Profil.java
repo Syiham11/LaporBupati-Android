@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +19,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
 public class Profil extends AppCompatActivity {
 
     ImageView imgprofil, bg;
     TextView txno_ktp, txjk, txtmp_lahir, txno_telp, txalamat, txbio, txdibuat, txnama, txemail ;
+    String tlahir;
+    Date date = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,26 +69,62 @@ public class Profil extends AppCompatActivity {
         final String email = pref.getString("email","");
         final String foto = pref.getString("foto","");
 
+
+
+        if (tmp_lahir.toString().isEmpty()){
+            txtmp_lahir.setText("Belum diisi , 00 00 0000");
+        }else{
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-m-d");
+                date = simpleDateFormat.parse(tgl);
+                SimpleDateFormat lahir = new SimpleDateFormat("d-m-yyyy");
+                tlahir = lahir.format(date);
+                txtmp_lahir.setText(tmp_lahir+", "+tlahir);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-m-d");
+            Date tglgabung = simpleDateFormat.parse(dibuat);
+            SimpleDateFormat gabung = new SimpleDateFormat("d-m-yy");
+            txdibuat.setText(gabung.format(tglgabung));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         txnama.setText(nama);
-        txbio.setText(bio);
         txno_ktp.setText(no_ktp);
+
+        if (bio.toString().isEmpty()){
+            txbio.setText("bio belum diisi");
+        }else{
+            txbio.setText(bio);
+        }
 
         if (jk.equals("L")){
             txjk.setText("Laki-laki");
-        }else{
+        }else if(jk.equals("P")){
             txjk.setText("Perempuan");
+        }else{
+            txjk.setText("Belum diisi");
         }
 
-        txtmp_lahir.setText(tmp_lahir+", "+tgl);
         txno_telp.setText(no_telepon);
-        txalamat.setText(alamat);
         txemail.setText(email);
+
+        if (alamat.toString().isEmpty()){
+            txalamat.setText("Belum diisi");
+        }else{
+            txalamat.setText(alamat);
+        }
 
         Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER+foto)
                 .thumbnail(0.5f)
                 .centerCrop()
                 .crossFade()
-                .placeholder(R.drawable.ic_no_image_male_white)
                 .error(R.drawable.ic_no_image_male_white)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgprofil);
@@ -90,7 +133,6 @@ public class Profil extends AppCompatActivity {
                 .thumbnail(0.5f)
                 .centerCrop()
                 .crossFade()
-                .placeholder(R.drawable.no_image)
                 .error(R.drawable.no_image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(bg);

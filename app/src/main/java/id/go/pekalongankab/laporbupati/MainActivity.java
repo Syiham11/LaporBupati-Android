@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txnama, txemail;
-    ImageView imgfoto;
+    ImageView imgfoto, bgnav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         txnama = (TextView)header.findViewById(R.id.nama);
         txemail = (TextView)header.findViewById(R.id.email);
         imgfoto = (ImageView)header.findViewById(R.id.foto);
+        bgnav = (ImageView)header.findViewById(R.id.bgNav);
 
         SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
         final String id_user = pref.getString("id_user", "");
@@ -69,6 +70,14 @@ public class MainActivity extends AppCompatActivity
                 .error(R.drawable.ic_no_image_male_white)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgfoto);
+
+        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER+foto)
+                .thumbnail(0.5f)
+                .centerCrop()
+                .crossFade()
+                .error(R.drawable.bg_splash)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(bgnav);
 
         imgfoto.setOnClickListener(new View.OnClickListener() {
             @Override
