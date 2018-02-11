@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.menuSearch);
         SearchView searchView = (SearchView)item.getActionView();
-        searchView.setQueryHint("Cari aduan...");
+        searchView.setQueryHint("Telusuri aduan...");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

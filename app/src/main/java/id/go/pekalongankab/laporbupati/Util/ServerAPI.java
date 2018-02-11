@@ -6,7 +6,7 @@ package id.go.pekalongankab.laporbupati.Util;
 
 public class ServerAPI {
 
-    public static String IP = "192.168.1.88";
+    public static String IP = "192.168.43.213";
     public static final String URL_OPD = "http://"+IP+"/laporbupati/api/opd";
     public static final String URL_ADUAN = "http://"+IP+"/laporbupati/api/aduan";
     public static final String URL_ADUAN_SAYA = "http://"+IP+"/laporbupati/api/aduansaya/";

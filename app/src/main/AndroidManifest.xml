@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash"
+        <activity
+            android:name=".Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,29 +26,37 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".DetailOpd"
+            android:windowSoftInputMode="stateHidden|adjustPan|adjustResize" />
+        <activity
+            android:name=".DetailOpd"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profil"
+        <activity
+            android:name=".Profil"
             android:screenOrientation="portrait" />
-        <activity android:name=".TulisAduan"
+        <activity
+            android:name=".TulisAduan"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
-        <activity android:name=".CariAduan"
-            android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".CariAduan"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Register"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".ForgetPassword"
+            android:windowSoftInputMode="stateHidden|adjustPan|adjustResize" />
+        <activity
+            android:name=".ForgetPassword"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan|adjustResize" />
+        <activity android:name=".DetailAduan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
     </application>
 
 </manifest>

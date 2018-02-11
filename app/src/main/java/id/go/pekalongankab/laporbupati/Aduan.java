@@ -111,6 +111,7 @@ public class Aduan extends Fragment {
                             try {
                                 JSONObject data = response.getJSONObject(i);
                                 ModelDataAduan md = new ModelDataAduan();
+                                md.setId_aduan(data.getString("id_aduan"));
                                 md.setNama_user(data.getString("nama_user"));
                                 md.setTanggal(data.getString("tanggal"));
                                 md.setAduan(data.getString("aduan"));

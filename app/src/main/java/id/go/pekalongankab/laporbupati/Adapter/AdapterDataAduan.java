@@ -1,6 +1,8 @@
 package id.go.pekalongankab.laporbupati.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
+import id.go.pekalongankab.laporbupati.DetailAduan;
 import id.go.pekalongankab.laporbupati.Model.ModelDataAduan;
 import id.go.pekalongankab.laporbupati.OnLoadMoreListener;
 import id.go.pekalongankab.laporbupati.R;
@@ -80,7 +83,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HolderDataAduan) {
-            ModelDataAduan md = mItems.get(position);
+            final ModelDataAduan md = mItems.get(position);
             HolderDataAduan holderDataAduan = (HolderDataAduan) holder;
             holderDataAduan.nama_user.setText(md.getNama_user());
             holderDataAduan.tanggal.setText(md.getTanggal());
@@ -110,6 +113,24 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(holderDataAduan.foto_aduan);
             }
+
+            holderDataAduan.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, DetailAduan.class);
+                    i.putExtra("id", md.getId_aduan());
+                    i.putExtra("foto_user", md.getFoto_user());
+                    i.putExtra("nama", md.getNama_user());
+                    i.putExtra("level", "Level");
+                    i.putExtra("tanggal", md.getTanggal());
+                    i.putExtra("aduan", md.getAduan());
+                    i.putExtra("foto_aduan", md.getFoto_aduan());
+                    i.putExtra("kategori", md.getKategori());
+                    i.putExtra("status", md.getStatus());
+                    i.putExtra("katgori", md.getKategori());
+                    context.startActivity(i);
+                }
+            });
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
@@ -138,6 +159,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
         ModelDataAduan md;
         public TextView nama_user, tanggal, aduan, kategori;
         public ImageView foto_user, foto_aduan;
+        CardView cardView;
 
         public HolderDataAduan(View view) {
             super(view);
@@ -147,14 +169,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             kategori = (TextView) view.findViewById(R.id.kategori);
             foto_aduan = (ImageView) view.findViewById(R.id.foto_aduan);
             foto_user = (ImageView) view.findViewById(R.id.foto_user);
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Intent i = new Intent(context, DetailOpd.class);
-                    //context.startActivity(i);
-                }
-            });
+            cardView = (CardView) view.findViewById(R.id.cardAduan);
         }
     }
 }

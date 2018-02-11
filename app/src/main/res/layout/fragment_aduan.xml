@@ -1,21 +1,24 @@
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="id.go.pekalongankab.laporbupati.Aduan">
+        android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleAduan"
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context="id.go.pekalongankab.laporbupati.Aduan">
 
-        </android.support.v7.widget.RecyclerView>
+            <!-- TODO: Update blank fragment layout -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleAduan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </FrameLayout>
-</android.support.v4.widget.SwipeRefreshLayout>
+            </android.support.v7.widget.RecyclerView>
+
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>

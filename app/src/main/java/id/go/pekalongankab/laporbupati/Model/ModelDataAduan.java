@@ -5,7 +5,7 @@ package id.go.pekalongankab.laporbupati.Model;
  */
 
 public class ModelDataAduan {
-    String nama_user, tanggal, aduan, kategori, status, foto_aduan, foto_user;
+    String nama_user, tanggal, aduan, kategori, status, foto_aduan, foto_user, id_aduan;
 
     public String getNama_user() {
         return nama_user;
@@ -61,5 +61,13 @@ public class ModelDataAduan {
 
     public void setFoto_user(String foto_user) {
         this.foto_user = foto_user;
+    }
+
+    public String getId_aduan() {
+        return id_aduan;
+    }
+
+    public void setId_aduan(String id_aduan) {
+        this.id_aduan = id_aduan;
     }
 }

@@ -46,6 +46,7 @@ public class Opd extends Fragment {
     ProgressDialog pd;
     SwipeRefreshLayout swLayout;
     int perLoad;
+    int index;
 
     public Opd() {
         // Required empty public constructor
@@ -82,7 +83,9 @@ public class Opd extends Fragment {
                     @Override
                     public void run() {
                         mItems.clear();
-                        loadOpd();
+                        if (index >= 0){
+                            loadOpd();
+                        }
                         swLayout.setRefreshing(false);
                     }
                 }, 1000);
@@ -158,7 +161,7 @@ public class Opd extends Fragment {
                                         pd.cancel();
                                         Log.d("volley", "response : "+response.toString());
                                         if (response.length() > perLoad){
-                                            int index = mItems.size();
+                                            index = mItems.size();
                                             int end = index + perLoad;
                                             for (int i = index; i<end; i++){
                                                 try {
