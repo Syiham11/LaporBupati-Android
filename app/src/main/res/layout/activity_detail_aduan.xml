@@ -174,14 +174,11 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:background="@drawable/bg_komentar"
             android:hint="Tulis komentar..."
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
             android:layout_marginRight="45dp"
-            android:inputType="textMultiLine"/>
+            android:inputType="textCapSentences|textMultiLine"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/btnKirim"

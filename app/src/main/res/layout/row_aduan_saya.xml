@@ -35,15 +35,6 @@
                     android:layout_height="40dp"
                     android:src="@drawable/ic_no_image_male_white" />
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_below="@id/foto_user"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_info_blue" />
-
-
                 <RelativeLayout
                     android:id="@+id/relHead"
                     android:layout_width="match_parent"
@@ -181,13 +172,15 @@
 
         </LinearLayout>
 
-        <View
 
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/foto_user"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            android:background="#cacaca" />
+            android:src="@drawable/ic_info_blue" />
     </LinearLayout>
 
     <View
