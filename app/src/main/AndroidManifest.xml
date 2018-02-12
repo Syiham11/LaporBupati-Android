@@ -54,9 +54,11 @@
             android:name=".ForgetPassword"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan|adjustResize" />
-        <activity android:name=".DetailAduan"
+        <activity
+            android:name=".DetailAduan"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".LihatFoto"></activity>
     </application>
 
 </manifest>

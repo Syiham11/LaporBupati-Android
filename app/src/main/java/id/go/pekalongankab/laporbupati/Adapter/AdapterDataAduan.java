@@ -2,9 +2,11 @@ package id.go.pekalongankab.laporbupati.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +86,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HolderDataAduan) {
             final ModelDataAduan md = mItems.get(position);
-            HolderDataAduan holderDataAduan = (HolderDataAduan) holder;
+            final HolderDataAduan holderDataAduan = (HolderDataAduan) holder;
             holderDataAduan.nama_user.setText(md.getNama_user());
             holderDataAduan.tanggal.setText(md.getTanggal());
             if (md.getAduan().length() <= 200){
@@ -131,6 +133,14 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
                     context.startActivity(i);
                 }
             });
+
+            holderDataAduan.btninfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
@@ -158,7 +168,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
     private class HolderDataAduan extends RecyclerView.ViewHolder {
         ModelDataAduan md;
         public TextView nama_user, tanggal, aduan, kategori;
-        public ImageView foto_user, foto_aduan;
+        public ImageView foto_user, foto_aduan, btninfo;
         CardView cardView;
 
         public HolderDataAduan(View view) {
@@ -170,6 +180,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             foto_aduan = (ImageView) view.findViewById(R.id.foto_aduan);
             foto_user = (ImageView) view.findViewById(R.id.foto_user);
             cardView = (CardView) view.findViewById(R.id.cardAduan);
+            btninfo = (ImageView) view.findViewById(R.id.btnInfo);
         }
     }
 }

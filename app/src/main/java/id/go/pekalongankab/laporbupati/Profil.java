@@ -1,6 +1,7 @@
 package id.go.pekalongankab.laporbupati;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -136,6 +137,16 @@ public class Profil extends AppCompatActivity {
                 .error(R.drawable.no_image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(bg);
+
+        imgprofil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Profil.this, LihatFoto.class);
+                i.putExtra("source", "profil");
+                i.putExtra("foto_profil", foto);
+                startActivity(i);
+            }
+        });
 
         changeStatusBarColor();
 

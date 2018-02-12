@@ -1,159 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="#f1f1f1"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:paddingBottom="80dp"
-            tools:context="id.go.pekalongankab.laporbupati.DetailAduan">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/foto_user"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_no_image_male_white"/>
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:id="@+id/aduanview"
+                android:paddingBottom="50dp"
+                android:orientation="vertical"
+                android:padding="10dp"
+                tools:context="id.go.pekalongankab.laporbupati.DetailAduan">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_toRightOf="@+id/foto_user"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/foto_user"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_no_image_male_white"/>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_toRightOf="@+id/foto_user"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/nama_user"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nama User"
+                            android:textSize="18sp"/>
+                        <TextView
+                            android:id="@+id/level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/nama_user"
+                            android:text="Level"/>
+                    </RelativeLayout>
+
                     <TextView
-                        android:id="@+id/nama_user"
+                        android:id="@+id/tanggal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nama User"
-                        android:textSize="18sp"/>
-                    <TextView
-                        android:id="@+id/level"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/nama_user"
-                        android:text="Level"/>
+                        android:textAlignment="textEnd"
+                        android:text="Tanggal"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/tanggal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_info_blue" />
+
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/tanggal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
-                    android:text="Tanggal"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/tanggal"
+                    android:id="@+id/isi_aduan"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_info_blue" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/isi_aduan"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="isi aduan akan ditampilkan di sini"
-                android:textSize="22sp"/>
-
-
-
-            <ImageView
-                android:id="@+id/foto_aduan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/no_image"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"/>
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:background="@color/white"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:text="isi aduan akan ditampilkan di sini"
+                    android:textSize="22sp"/>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="0dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_marginBottom="10dp">
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/ic_label"/>
-
-                    <TextView
-                        android:id="@+id/kategori"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/foto_aduan"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Kategori"
-                        android:layout_marginLeft="5dp"/>
+                        android:src="@drawable/no_image"/>
 
+                </android.support.v7.widget.CardView>
 
-                </LinearLayout>
-
-
-                <View
-
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#cacaca" />
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
                     android:orientation="horizontal">
 
-
-                    <ImageView
-                        android:id="@+id/btnLike"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/ic_like"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="20k"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_label"/>
+
+                        <TextView
+                            android:id="@+id/kategori"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kategori"
+                            android:layout_marginLeft="5dp"/>
 
 
+                    </LinearLayout>
+
+
+                    <View
+
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#cacaca" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:id="@+id/btnLike"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_like"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20k"
+                            android:layout_marginLeft="5dp"/>
+
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
 
-        </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@+id/aduanview"
+                android:padding="10dp"
+                android:id="@+id/recycleKomentar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="80dp">
+            </android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
+
 
 
     </ScrollView>
@@ -161,11 +187,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/white"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
+        android:paddingTop="15dp"
         android:layout_alignParentBottom="true">
 
         <EditText
@@ -173,7 +196,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:hint="Tulis komentar..."
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
@@ -186,6 +208,7 @@
             android:layout_height="40dp"
             android:background="@drawable/bg_grey"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
             android:src="@drawable/ic_send_white_24dp"
             android:padding="10dp"/>
 
