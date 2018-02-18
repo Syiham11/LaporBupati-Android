@@ -48,6 +48,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.Util.AppController;
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
@@ -56,10 +57,10 @@ import static android.content.ContentValues.TAG;
 public class Login extends Activity {
 
     Button btnLogin;
-    ProgressDialog pd;
     EditText txttelp, txtpass;
     TextView daftar;
     private SharedPreferences pref;
+    SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class Login extends Activity {
         txttelp = (EditText)findViewById(R.id.txttelp);
         txtpass = (EditText)findViewById(R.id.txtpass);
         daftar = (TextView) findViewById(R.id.linkdaftar) ;
-        pd = new ProgressDialog(Login.this);
+        dialog = new SpotsDialog(Login.this, "Login...");
 
         daftar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,9 +178,7 @@ public class Login extends Activity {
     }
 
     private void checkLogin(final String email, final String password) {
-        pd.setMessage("Login...");
-        pd.setCancelable(false);
-        pd.show();
+        dialog.show();
         // Tag biasanya digunakan ketika ingin membatalkan request volley
         String tag_string_req = "req_login";
 
@@ -196,7 +195,7 @@ public class Login extends Activity {
                     String code = data.getString("code");
                     // ngecek node error dari api
                     if (code.equals("2")){
-                        pd.cancel();
+                        dialog.hide();
                         snackBar("Akun anda belum diaktifkan! silahkan periksa email anda untuk mengaktifkan", R.color.Error);
                     }else if (code.equals("1")) {
                         // user berhasil login
@@ -239,12 +238,12 @@ public class Login extends Activity {
                         finish();
                     } else {
                         // terjadi error dan tampilkan pesan error dari API
-                        pd.cancel();
+                        dialog.hide();
                         snackBar("Nomor telepon atau kata sandi salah! Harap periksa kembali", R.color.Error);
                     }
                 } catch (JSONException e) {
                     // JSON error
-                    pd.cancel();
+                    dialog.hide();
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -254,7 +253,7 @@ public class Login extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Login Error: " + error.getMessage());
-                pd.cancel();
+                dialog.hide();
                 //cek error timeout, noconnection dan network error
                 if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                     snackBar("Tidak dapat terhubung ke server! periksa koneksi internet anda.", R.color.Error);

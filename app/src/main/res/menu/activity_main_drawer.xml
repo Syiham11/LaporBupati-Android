@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group>
-        <item
-            android:id="@+id/nav_tulis_aduan"
-            android:icon="@drawable/ic_tulis_aduan_black"
-            android:title="Buat Aduan" />
-    </group>
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_aduan"
@@ -26,15 +19,23 @@
 
     <item android:title="Sistem">
         <menu>
-            <group android:checkableBehavior="single">
+            <group>
                 <item
                     android:id="@+id/nav_masukan"
                     android:icon="@drawable/ic_action_bugreport"
                     android:title="Laporkan Kesalahan" />
                 <item
+                    android:id="@+id/nav_petunjuk"
+                    android:icon="@drawable/ic_help"
+                    android:title="Bantuan" />
+                <item
                     android:id="@+id/nav_update"
                     android:icon="@drawable/ic_action_update"
                     android:title="Periksa Pembaruan" />
+                <item
+                    android:id="@+id/nav_tentang"
+                    android:icon="@drawable/ic_petunjuk"
+                    android:title="Tentang Lapor Bupati" />
                 <item
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_logout"

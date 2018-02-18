@@ -63,15 +63,6 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true" />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_below="@id/tanggal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:src="@drawable/ic_info_blue" />
-
                 </RelativeLayout>
 
                 <TextView
@@ -121,9 +112,10 @@
                         <ImageView
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/ic_label"/>
+                            android:src="@drawable/ic_kategori"/>
 
                         <TextView
+                            android:layout_gravity="center"
                             android:id="@+id/kategori"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -155,12 +147,12 @@
                             android:id="@+id/btnLike"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/ic_like"/>
+                            android:src="@drawable/ic_info_blue"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="20k"
+                            android:text="Diverifikasi"
                             android:layout_marginLeft="5dp"/>
 
 
@@ -178,6 +170,63 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="80dp">
             </android.support.v7.widget.RecyclerView>
+
+            <ProgressBar
+                android:id="@+id/loadingkomen"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="80dp"
+                android:layout_below="@+id/aduanview"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/loaderror"
+                android:paddingBottom="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/aduanview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_sedih"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorPrimaryT"
+                        android:layout_marginLeft="10dp"
+                        android:text="Tidak dapat memuat komentar"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btnCobalagi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_gravity="center"
+                    style="?android:attr/buttonStyleSmall"
+                    android:text="Coba Lagi"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimaryT"/>
+            </LinearLayout>
+
         </RelativeLayout>
 
 

@@ -36,6 +36,7 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.R;
 import id.go.pekalongankab.laporbupati.Util.AppController;
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
@@ -45,7 +46,7 @@ import static android.content.ContentValues.TAG;
 public class Register extends Activity {
 
     TextView login;
-    ProgressDialog pd;
+    SpotsDialog dialog;
     EditText ktp, nama, telp, email, pass, ulangi;
     Button daftar;
 
@@ -61,7 +62,7 @@ public class Register extends Activity {
         pass = (EditText) findViewById(R.id.txtpass);
         ulangi = (EditText) findViewById(R.id.txtUlangi);
         daftar = (Button) findViewById(R.id.btnDaftar);
-        pd = new ProgressDialog(Register.this);
+        dialog = new SpotsDialog(Register.this, "Sedang mendaftar...");
 
         daftar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,9 +128,7 @@ public class Register extends Activity {
     }
 
     private void register(final String ktp, final String nama, final String telp, final String email, final String pass) {
-        pd.setMessage("Mendaftar...");
-        pd.setCancelable(false);
-        pd.show();
+        dialog.show();
         // Tag biasanya digunakan ketika ingin membatalkan request volley
         String tag_string_req = "req_daftar";
 
@@ -146,16 +145,16 @@ public class Register extends Activity {
                     String code = data.getString("code");
                     // ngecek node error dari api
                     if (code.equals("1")) {
-                        pd.cancel();
+                        dialog.hide();
                         dialog();
                     } else {
                         // terjadi error dan tampilkan pesan error dari API
-                        pd.cancel();
+                        dialog.hide();
                         snackBar("Sayang sekali pendaftaran telah gagal!", R.color.Error);
                     }
                 } catch (JSONException e) {
                     // JSON error
-                    pd.cancel();
+                    dialog.hide();
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -165,7 +164,7 @@ public class Register extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Login Error: " + error.getMessage());
-                pd.cancel();
+                dialog.hide();
                 //cek error timeout, noconnection dan network error
                 if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                     snackBar("Tidak dapat terhubung ke server! periksa koneksi internet anda.", R.color.Error);

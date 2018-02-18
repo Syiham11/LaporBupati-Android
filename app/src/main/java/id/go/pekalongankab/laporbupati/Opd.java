@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -30,6 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.Adapter.AdapterDataOpd;
 import id.go.pekalongankab.laporbupati.Model.ModelDataOpd;
 import id.go.pekalongankab.laporbupati.Util.AppController;
@@ -43,10 +46,11 @@ public class Opd extends Fragment {
     AdapterDataOpd mAdapter;
     List<ModelDataOpd> mItems;
     RecyclerView mRecycleopd;
-    ProgressDialog pd;
     SwipeRefreshLayout swLayout;
     int perLoad;
     int index;
+    LinearLayout eror;
+    SpotsDialog dialog;
 
     public Opd() {
         // Required empty public constructor
@@ -59,10 +63,13 @@ public class Opd extends Fragment {
         // Inflate the layout for this fragment
         final View view_opd =  inflater.inflate(R.layout.fragment_opd, container, false);
         ((MainActivity) getActivity()).setActionBarTitle("Data OPD");
+
+        eror = (LinearLayout) view_opd.findViewById(R.id.error);
+        dialog = new SpotsDialog(getActivity(), "Memuat data...");
+
         mRecycleopd = (RecyclerView) view_opd.findViewById(R.id.recycleOpd);
         mItems = new ArrayList<>();
         RecyclerView.LayoutManager mManager;
-        pd = new ProgressDialog(getActivity());
 
         perLoad = 5;
         mItems.clear();
@@ -98,14 +105,14 @@ public class Opd extends Fragment {
     }
 
     private void loadOpd(){
-        pd.setMessage("Memuat data...");
-        pd.setCancelable(false);
-        pd.show();
+        dialog.show();
+        eror.setVisibility(View.GONE);
         JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_OPD, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        pd.cancel();
+                        dialog.hide();
+                        eror.setVisibility(View.GONE);
                         Log.d("volley", "response : "+response.toString());
                         for (int i = 0; i<perLoad; i++){
                             try {
@@ -134,7 +141,8 @@ public class Opd extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
-                        pd.cancel();
+                        dialog.hide();
+                        eror.setVisibility(View.VISIBLE);
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                             snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
                         }
@@ -158,7 +166,8 @@ public class Opd extends Fragment {
                                 new Response.Listener<JSONArray>() {
                                     @Override
                                     public void onResponse(JSONArray response) {
-                                        pd.cancel();
+                                        dialog.hide();
+                                        eror.setVisibility(View.GONE);
                                         Log.d("volley", "response : "+response.toString());
                                         if (response.length() > perLoad){
                                             index = mItems.size();
@@ -192,7 +201,8 @@ public class Opd extends Fragment {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         Log.d("volley", "error : "+error.getMessage());
-                                        pd.cancel();
+                                        dialog.hide();
+                                        eror.setVisibility(View.VISIBLE);
                                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                                             snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
                                         }
@@ -207,8 +217,7 @@ public class Opd extends Fragment {
     }
 
     public void snackBar(String pesan, int color){
-        Snackbar snackbar = Snackbar.make(getActivity()
-                .findViewById(android.R.id.content), pesan, Snackbar.LENGTH_LONG)
+        Snackbar snackbar = Snackbar.make(getView(), pesan, Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(ContextCompat.getColor(getActivity(), color));

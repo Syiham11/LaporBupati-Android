@@ -3,59 +3,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="id.go.pekalongankab.laporbupati.Opd">
+        tools:context="id.go.pekalongankab.laporbupati.Aduan">
 
         <!-- TODO: Update blank fragment layout -->
-
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleOpd"
+            android:id="@+id/recyclePemberitahuan"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
 
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/error"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
 
             <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:src="@drawable/ic_sedih"/>
+                android:src="@drawable/ic_sedih" />
 
             <TextView
-                android:layout_marginTop="5dp"
+                android:id="@+id/textError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tidak dapat memuat data"
-                android:textStyle="italic"
+                android:layout_marginTop="5dp"
+                android:text="Anda tidak memiliki pemberitahuan"
                 android:textColor="@color/colorPrimaryT"
-                android:textSize="18sp"/>
+                android:textSize="14sp"
+                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/btnCobalagi"
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:layout_gravity="center"
-                style="?android:attr/buttonStyleSmall"
                 android:text="Coba Lagi"
-                android:textColor="@color/white"
                 android:textAllCaps="false"
-                android:background="@color/colorPrimaryT"/>
+                style="?android:attr/buttonStyleSmall"
+                android:background="@color/colorPrimaryT"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
 
         </LinearLayout>
 
-    </FrameLayout>
+
+    </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

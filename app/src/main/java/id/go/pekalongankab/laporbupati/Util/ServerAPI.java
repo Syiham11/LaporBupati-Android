@@ -15,6 +15,7 @@ public class ServerAPI {
     public static final String URL_TAMBAH_ADUAN = "http://"+IP+"/laporbupati/api/tambahaduan";
     public static final String URL_CARI_ADUAN = "http://"+IP+"/laporbupati/api/cariaduan/";
     public static final String URL_KOMENTAR = "http://"+IP+"/laporbupati/api/loadkomentar/";
+    public static final String URL_PEMBERITAHUAN = "http://"+IP+"/laporbupati/api/loadnotif/";
 
 
     public static final String URL_FOTO_OPD = "http://"+IP+"/laporbupati/files/opd/source/";

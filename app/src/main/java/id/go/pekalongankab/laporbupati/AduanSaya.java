@@ -16,6 +16,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -32,6 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.Adapter.AdapterDataAduanSaya;
 import id.go.pekalongankab.laporbupati.Model.ModelDataAduanSaya;
 import id.go.pekalongankab.laporbupati.Util.AppController;
@@ -46,10 +50,12 @@ public class AduanSaya extends Fragment {
     AdapterDataAduanSaya mAdapter;
     List<ModelDataAduanSaya> mItems;
     RecyclerView mRecycleaduansaya;
-    ProgressDialog pd;
+    LinearLayout eror;
     SwipeRefreshLayout swLayout;
     int perLoad;
     String id_user;
+    Button btnCobaLagi;
+    SpotsDialog dialog;
 
     public AduanSaya() {
         // Required empty public constructor
@@ -63,10 +69,13 @@ public class AduanSaya extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Aduan Saya");
         View aduan_saya = inflater.inflate(R.layout.fragment_aduan_saya, container, false);
 
+        eror = (LinearLayout) aduan_saya.findViewById(R.id.error);
+        btnCobaLagi = (Button) aduan_saya.findViewById(R.id.btnCobalagi);
+        dialog = new SpotsDialog(getActivity(), "Memuat data...");
+
         mRecycleaduansaya = (RecyclerView) aduan_saya.findViewById(R.id.recycleAduanSaya);
         mItems = new ArrayList<>();
         RecyclerView.LayoutManager mManager;
-        pd = new ProgressDialog(getActivity());
         mItems.clear();
 
         perLoad = 5;
@@ -97,30 +106,38 @@ public class AduanSaya extends Fragment {
             }
         });
 
+        btnCobaLagi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItems.clear();
+                loadAduan();
+            }
+        });
+
         loadMoreAduan();
 
         return aduan_saya;
     }
 
     private void loadAduan(){
-        pd.setMessage("Memuat data...");
-        pd.setCancelable(false);
-        pd.show();
+        dialog.show();
+        eror.setVisibility(View.GONE);
         JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN_SAYA+id_user, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        pd.cancel();
+                        dialog.hide();
+                        eror.setVisibility(View.GONE);
                         Log.d("volley", "response : "+response.toString());
                         if(response.length() <= 0){
-                            snackBar("Anda tidak memiliki aduan yang diterima oleh admin", R.color.Info);
+                            snackBar("Anda tidak memiliki aduan yang diverifikasi oleh admin!", R.color.Error);
                         }else{
                             for (int i = 0; i< perLoad; i++){
                                 try {
                                     JSONObject data = response.getJSONObject(i);
                                     ModelDataAduanSaya md = new ModelDataAduanSaya();
                                     md.setNama_user(data.getString("nama_user"));
-                                    md.setTanggal(data.getString("tanggal"));
+                                    md.setTanggal(data.getString("dibuat"));
                                     md.setAduan(data.getString("aduan"));
                                     md.setKategori(data.getString("kategori"));
                                     md.setStatus(data.getString("status"));
@@ -140,7 +157,8 @@ public class AduanSaya extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
-                        pd.cancel();
+                        dialog.hide();
+                        eror.setVisibility(View.VISIBLE);
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                             snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
                         }
@@ -164,7 +182,8 @@ public class AduanSaya extends Fragment {
                                 new Response.Listener<JSONArray>() {
                                     @Override
                                     public void onResponse(JSONArray response) {
-                                        pd.cancel();
+                                        dialog.hide();
+                                        eror.setVisibility(View.GONE);
                                         if (response.length() > perLoad){
                                             int index = mItems.size();
                                             int end = index + perLoad;
@@ -173,7 +192,7 @@ public class AduanSaya extends Fragment {
                                                     JSONObject data = response.getJSONObject(i);
                                                     ModelDataAduanSaya md = new ModelDataAduanSaya();
                                                     md.setNama_user(data.getString("nama_user"));
-                                                    md.setTanggal(data.getString("tanggal"));
+                                                    md.setTanggal(data.getString("dibuat"));
                                                     md.setAduan(data.getString("aduan"));
                                                     md.setKategori(data.getString("kategori"));
                                                     md.setStatus(data.getString("status"));
@@ -195,7 +214,8 @@ public class AduanSaya extends Fragment {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         Log.d("volley", "error : "+error.getMessage());
-                                        pd.cancel();
+                                        dialog.hide();
+                                        eror.setVisibility(View.VISIBLE);
                                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                                             snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
                                         }
@@ -210,8 +230,7 @@ public class AduanSaya extends Fragment {
     }
 
     public void snackBar(String pesan, int color){
-        Snackbar snackbar = Snackbar.make(getActivity()
-                .findViewById(android.R.id.content), pesan, Snackbar.LENGTH_LONG)
+        Snackbar snackbar = Snackbar.make(getView(), pesan, Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(ContextCompat.getColor(getActivity(), color));

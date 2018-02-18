@@ -11,8 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.NetworkError;
@@ -47,9 +50,11 @@ public class DetailAduan extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mManager;
     List<ModelDataKomentar> mItems;
-    ProgressDialog pd;
+    ProgressBar loadkomem;
+    LinearLayout loaderror;
     SwipeRefreshLayout swLayout;
     String id_aduan;
+    Button btnCobaLagi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +64,11 @@ public class DetailAduan extends AppCompatActivity {
         getSupportActionBar().setTitle("Aduan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        loadkomem = (ProgressBar) findViewById(R.id.loadingkomen);
+        loaderror = (LinearLayout) findViewById(R.id.loaderror);
+        btnCobaLagi = (Button) findViewById(R.id.btnCobalagi);
+
         mRecyclerview = (RecyclerView)findViewById(R.id.recycleKomentar);
-        pd = new ProgressDialog(DetailAduan.this);
         mItems = new ArrayList<>();
         mAdapter = new AdapterDataKomentar(DetailAduan.this, mItems);
         mManager = new LinearLayoutManager(DetailAduan.this, LinearLayoutManager.VERTICAL, false);
@@ -134,6 +142,14 @@ public class DetailAduan extends AppCompatActivity {
             }
         });
 
+        btnCobaLagi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItems.clear();
+                loadKomentar();
+            }
+        });
+
         loadKomentar();
     }
 
@@ -144,14 +160,13 @@ public class DetailAduan extends AppCompatActivity {
     }
 
     private void loadKomentar(){
-        pd.setMessage("Memuat data...");
-        pd.setCancelable(false);
-        pd.show();
+        loadkomem.setVisibility(View.VISIBLE);
+        loaderror.setVisibility(View.GONE);
         JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_KOMENTAR+id_aduan, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        pd.cancel();
+                        loadkomem.setVisibility(View.GONE);
                         Log.d("volley", "response : "+response.toString());
                         for (int i = 0; i< response.length(); i++){
                             try {
@@ -172,7 +187,8 @@ public class DetailAduan extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
-                        pd.cancel();
+                        loadkomem.setVisibility(View.GONE);
+                        loaderror.setVisibility(View.VISIBLE);
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                             snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
                         }

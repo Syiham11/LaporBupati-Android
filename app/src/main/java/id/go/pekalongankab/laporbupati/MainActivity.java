@@ -1,15 +1,15 @@
 package id.go.pekalongankab.laporbupati;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -28,6 +28,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity
 
     TextView txnama, txemail;
     ImageView imgfoto, bgnav;
+    View view;
+    RequestQueue mRequestQueque;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, TulisAduan.class);
+                startActivity(i);
+            }
+        });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -132,7 +145,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        getMenuInflater().inflate(R.menu.menu_notif, menu);
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.menuSearch);
         SearchView searchView = (SearchView)item.getActionView();
@@ -160,8 +173,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menuEdit) {
-            Intent i = new Intent(MainActivity.this, TulisAduan.class);
+        if (id == R.id.menuNotif) {
+            Intent i = new Intent(MainActivity.this, Pemberitahuan.class);
             startActivity(i);
             return true;
         }
@@ -175,10 +188,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_tulis_aduan) {
-            Intent i = new Intent(MainActivity.this, TulisAduan.class);
-            startActivity(i);
-        } else if (id == R.id.nav_aduan) {
+        if (id == R.id.nav_aduan) {
             Aduan fraduan = new Aduan();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameLayout, fraduan);
@@ -214,7 +224,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
@@ -247,5 +256,13 @@ public class MainActivity extends AppCompatActivity
         Intent i = new Intent(MainActivity.this, CariAduan.class);
         i.putExtra("query", query);
         startActivity(i);
+    }
+
+    public void snackBar(View view, String pesan){
+        Snackbar snackbar = Snackbar.make(view, pesan, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.Error));
+        snackbar.show();
     }
 }

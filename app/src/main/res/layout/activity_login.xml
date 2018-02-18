@@ -44,11 +44,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_rounded"
-            android:hint="No. Telepon"
+            android:hint="Email/No. Telepon"
             android:textColorHighlight="@color/colorAccent"
             android:textColor="@color/white"
             android:textColorHint="@color/lgrey"
-            android:inputType="phone"
+            android:inputType="textEmailAddress"
             android:padding="14dp" />
 
         <android.support.design.widget.TextInputLayout
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:textColorHighlight="@color/colorAccent"
                 android:background="@drawable/bg_rounded"
-                android:hint="kata sandi"
+                android:hint="Kata Sandi"
                 android:textColorHint="@color/lgrey"
                 android:textColor="@color/white"
                 android:inputType="textPassword"

@@ -19,6 +19,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -52,6 +53,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.Util.AppController;
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
@@ -66,6 +68,8 @@ public class TulisAduan extends AppCompatActivity {
     Uri fileUri;
     int PICK_IMAGE_REQUEST = 1;
     public final int SELECT_FILE = 1;
+
+    SpotsDialog loading;
 
 
     public final int REQUEST_CAMERA = 0;
@@ -87,6 +91,8 @@ public class TulisAduan extends AppCompatActivity {
         setContentView(R.layout.activity_tulis_aduan);
         getSupportActionBar().setTitle("Buat Aduan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        loading = new SpotsDialog(TulisAduan.this, "Sedang mengirim...");
 
         foto_pengirim = (ImageView) findViewById(R.id.foto_pengirim);
         foto_aduan = (ImageView) findViewById(R.id.foto_aduan);
@@ -393,7 +399,7 @@ public class TulisAduan extends AppCompatActivity {
 
     private void uploadImage() {
         //menampilkan progress dialog
-        final ProgressDialog loading = ProgressDialog.show(this, "Sedang mengirim...", "Harap Tunggu", false, false);
+        loading.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerAPI.URL_TAMBAH_ADUAN,
                 new Response.Listener<String>() {
                     @Override
@@ -416,7 +422,7 @@ public class TulisAduan extends AppCompatActivity {
                         }
 
                         //menghilangkan progress dialog
-                        loading.dismiss();
+                        loading.hide();
                     }
                 },
                 new Response.ErrorListener() {
@@ -456,7 +462,7 @@ public class TulisAduan extends AppCompatActivity {
 
     private void uploadAduan() {
         //menampilkan progress dialog
-        final ProgressDialog loading = ProgressDialog.show(this, "Sedang mengirim...", "Harap Tunggu", false, false);
+        loading.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerAPI.URL_TAMBAH_ADUAN,
                 new Response.Listener<String>() {
                     @Override
@@ -478,7 +484,7 @@ public class TulisAduan extends AppCompatActivity {
                         }
 
                         //menghilangkan progress dialog
-                        loading.dismiss();
+                        loading.hide();
                     }
                 },
                 new Response.ErrorListener() {
