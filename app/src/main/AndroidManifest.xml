@@ -59,8 +59,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".LihatFoto" />
-        <activity android:name=".Petunjuk" />
-        <activity android:name=".Pemberitahuan"></activity>
+        <activity android:name=".Pemberitahuan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan|adjustResize"></activity>
     </application>
 
 </manifest>

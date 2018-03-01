@@ -87,6 +87,24 @@ public class Aduan extends Fragment {
 
         loadAduan();
 
+        mRecycleaduan.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                if (dy < 0) {
+                    // Recycle view scrolling up...
+
+                } else if (dy > 0) {
+                    // Recycle view scrolling down...
+                }
+            }
+        });
+
         mManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecycleaduan.setLayoutManager(mManager);
         mAdapter = new AdapterDataAduan(mRecycleaduan, mItems, getContext());

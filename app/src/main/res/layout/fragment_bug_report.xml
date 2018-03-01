@@ -1,0 +1,52 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="id.go.pekalongankab.laporbupati.BugReport">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bantu kami menyempurnakan Lapor Bupati"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textAlignment="center"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email"
+            android:padding="10dp"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/bg_aduan"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:hint="Masukan dan saran anda"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_aduan"
+            android:padding="10dp"
+            android:gravity="top|left"
+            android:lines="10"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_error"
+            android:text="Kirim"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</FrameLayout>

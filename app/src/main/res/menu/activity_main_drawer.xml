@@ -15,19 +15,20 @@
             android:id="@+id/nav_opd"
             android:icon="@drawable/ic_opd"
             android:title="Data OPD" />
+
+        <item
+            android:id="@+id/nav_masukan"
+            android:icon="@drawable/ic_action_bugreport"
+            android:title="Laporkan Kesalahan" />
+        <item
+            android:id="@+id/nav_petunjuk"
+            android:icon="@drawable/ic_help"
+            android:title="Bantuan" />
     </group>
 
     <item android:title="Sistem">
         <menu>
             <group>
-                <item
-                    android:id="@+id/nav_masukan"
-                    android:icon="@drawable/ic_action_bugreport"
-                    android:title="Laporkan Kesalahan" />
-                <item
-                    android:id="@+id/nav_petunjuk"
-                    android:icon="@drawable/ic_help"
-                    android:title="Bantuan" />
                 <item
                     android:id="@+id/nav_update"
                     android:icon="@drawable/ic_action_update"

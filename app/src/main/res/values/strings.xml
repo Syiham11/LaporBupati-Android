@@ -19,5 +19,9 @@
         <item>Non Infrastruktur</item>
         <item>Infrastruktur</item>
     </array>
+    <string name="petunjuk">
+        1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n
+        2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </string>
     <string name="deskripsi">Sekarang kamu bisa ikut membangun Kabupaten Pekalongan dengan cara melaporkan permasalahan di sekitar ke Bupati Pekalongan</string>
 </resources>

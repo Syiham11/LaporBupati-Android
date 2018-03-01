@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,7 @@ import com.android.volley.RequestQueue;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
 public class MainActivity extends AppCompatActivity
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     ImageView imgfoto, bgnav;
     View view;
     RequestQueue mRequestQueque;
+    SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -203,8 +207,39 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameLayout, opd);
             fragmentTransaction.commit();
+        } else if (id == R.id.nav_masukan) {
+            BugReport bug = new BugReport();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frameLayout, bug);
+            fragmentTransaction.commit();
+        }  else if (id == R.id.nav_petunjuk) {
+            Petunjnuk petunjuk = new Petunjnuk();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frameLayout, petunjuk);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_update) {
-
+            dialog = new SpotsDialog(MainActivity.this, "Memeriksa pembaruan...");
+            dialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.hide();
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Pembaruan")
+                            .setMessage("Anda sudah menggunakan Lapor Bupati versi terbaru.")
+                            .setCancelable(false)
+                            .setNegativeButton("Ok", null)
+                            .show();
+                }
+            }, 2000);
+        }else if (id == R.id.nav_tentang) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Lapor Bupati")
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setMessage("versi 1.0\n\n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing. A arcu cursus vitae congue mauris. Mollis aliquam ut porttitor leo a diam sollicitudin. Quis commodo odio aenean sed adipiscing diam donec.")
+                    .setCancelable(false)
+                    .setNegativeButton("OK", null)
+                    .show();
         } else if (id == R.id.nav_logout) {
             new AlertDialog.Builder(this)
                     .setTitle("Keluar?")
