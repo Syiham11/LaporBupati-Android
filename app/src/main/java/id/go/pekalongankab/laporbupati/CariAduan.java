@@ -47,9 +47,9 @@ public class CariAduan extends AppCompatActivity {
     List<ModelDataCariAduan> mItems;
     RecyclerView mRecycleCariAduan;
     SwipeRefreshLayout swLayout;
-    int perLoad;
     Bundle bundle;
     public String q;
+    int Alldata;
     ProgressBar loading;
     LinearLayout eror;
     TextView texterror;
@@ -75,14 +75,31 @@ public class CariAduan extends AppCompatActivity {
 
         mItems.clear();
 
-        perLoad = 5;
-
         loadAduan();
 
         mManager = new LinearLayoutManager(CariAduan.this, LinearLayoutManager.VERTICAL, false);
         mRecycleCariAduan.setLayoutManager(mManager);
-        mAdapter = new AdapterDataCariAduan(mRecycleCariAduan, mItems, getApplicationContext());
+        mAdapter = new AdapterDataCariAduan(mItems, getApplicationContext());
         mRecycleCariAduan.setAdapter(mAdapter);
+
+        mRecycleCariAduan.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                if (dy < 0) {
+                } else if (dy > 0) {
+                    // Recycle view scrolling down...
+                    if(recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN) == false){
+                        loadMoreAduan();
+                    }
+                }
+            }
+        });
 
         swLayout = (SwipeRefreshLayout) findViewById(R.id.swLayout);
         swLayout.setColorSchemeResources(R.color.Error, R.color.Info, R.color.Warning);
@@ -107,8 +124,6 @@ public class CariAduan extends AppCompatActivity {
                 loadAduan();
             }
         });
-
-        loadMoreAduan();
     }
 
     @Override
@@ -151,13 +166,14 @@ public class CariAduan extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         loading.setVisibility(View.GONE);
                         eror.setVisibility(View.GONE);
+                        Alldata = response.length();
                         Log.d("volley", "response : "+response.toString());
                         if (response.length() <= 0){
                             eror.setVisibility(View.VISIBLE);
                             texterror.setText("Hasil pencarian '"+q+"' tidak ditemukan!");
                             snackBar("Hasil pencarian '"+q+"' tidak ditemukan!", R.color.Error);
                         }else{
-                            for (int i = 0; i< perLoad; i++){
+                            for (int i = 0; i< ServerAPI.perLoadAduan; i++){
                                 try {
                                     JSONObject data = response.getJSONObject(i);
                                     ModelDataCariAduan md = new ModelDataCariAduan();
@@ -194,65 +210,49 @@ public class CariAduan extends AppCompatActivity {
     }
 
     private void loadMoreAduan(){
-        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                mItems.add(null);
-                mAdapter.notifyItemInserted(mItems.size() - 1);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mItems.remove(mItems.size() - 1);
-                        mAdapter.notifyItemRemoved(mItems.size());
-                        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_CARI_ADUAN+q.replaceAll(" ", "%20"), null,
-                                new Response.Listener<JSONArray>() {
-                                    @Override
-                                    public void onResponse(JSONArray response) {
-                                        loading.setVisibility(View.GONE);
-                                        eror.setVisibility(View.GONE);
-                                        Log.d("volley", "response : "+response.toString());
-                                        if (response.length() > perLoad){
-                                            int index = mItems.size();
-                                            int end = index + perLoad;
-                                            for (int i = index; i<end; i++){
-                                                try {
-                                                    JSONObject data = response.getJSONObject(i);
-                                                    ModelDataCariAduan md = new ModelDataCariAduan();
-                                                    md.setNama_user(data.getString("nama_user"));
-                                                    md.setTanggal(data.getString("dibuat"));
-                                                    md.setAduan(data.getString("aduan"));
-                                                    md.setKategori(data.getString("kategori"));
-                                                    md.setStatus(data.getString("status"));
-                                                    md.setFoto_aduan(data.getString("lampiran"));
-                                                    md.setFoto_user(data.getString("foto"));
-                                                    md.setStatus(data.getString("status"));
-                                                    mItems.add(md);
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                            mAdapter.notifyDataSetChanged();
-                                            mAdapter.setLoaded();
-                                        }
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Log.d("volley", "error : "+error.getMessage());
-                                        loading.setVisibility(View.GONE);
-                                        eror.setVisibility(View.VISIBLE);
-                                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
-                                        }
-                                    }
-                                });
-                        AppController.getInstance().addToRequestQueue(requestData);
-                    }
-                }, 3000);
-            }
-        });
-
+        if (mItems.size() < Alldata){
+            JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_CARI_ADUAN+q.replaceAll(" ", "%20"), null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            loading.setVisibility(View.GONE);
+                            eror.setVisibility(View.GONE);
+                            Log.d("volley", "response : "+response.toString());
+                            int index = mItems.size();
+                            int end = index + ServerAPI.perLoadAduan;
+                            for (int i = index; i<end; i++){
+                                try {
+                                    JSONObject data = response.getJSONObject(i);
+                                    ModelDataCariAduan md = new ModelDataCariAduan();
+                                    md.setNama_user(data.getString("nama_user"));
+                                    md.setTanggal(data.getString("dibuat"));
+                                    md.setAduan(data.getString("aduan"));
+                                    md.setKategori(data.getString("kategori"));
+                                    md.setStatus(data.getString("status"));
+                                    md.setFoto_aduan(data.getString("lampiran"));
+                                    md.setFoto_user(data.getString("foto"));
+                                    md.setStatus(data.getString("status"));
+                                    mItems.add(md);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("volley", "error : "+error.getMessage());
+                            loading.setVisibility(View.GONE);
+                            eror.setVisibility(View.VISIBLE);
+                            if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                                snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                            }
+                        }
+                    });
+            AppController.getInstance().addToRequestQueue(requestData);
+        }
     }
 
     private void snackBar(String pesan, int warna){

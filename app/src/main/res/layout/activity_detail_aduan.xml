@@ -70,6 +70,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textIsSelectable="true"
                     android:text="isi aduan akan ditampilkan di sini"
                     android:textSize="22sp"/>
 
@@ -234,6 +235,7 @@
     </ScrollView>
 
     <RelativeLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"

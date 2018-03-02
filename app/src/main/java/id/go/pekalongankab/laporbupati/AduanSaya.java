@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -52,10 +53,11 @@ public class AduanSaya extends Fragment {
     RecyclerView mRecycleaduansaya;
     LinearLayout eror;
     SwipeRefreshLayout swLayout;
-    int perLoad;
     String id_user;
     Button btnCobaLagi;
     SpotsDialog dialog;
+    FloatingActionButton fab;
+    int Alldata;
 
     public AduanSaya() {
         // Required empty public constructor
@@ -67,6 +69,8 @@ public class AduanSaya extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ((MainActivity) getActivity()).setActionBarTitle("Aduan Saya");
+        fab = (FloatingActionButton) ((MainActivity) getActivity()).findViewById(R.id.fab);
+        fab.show();
         View aduan_saya = inflater.inflate(R.layout.fragment_aduan_saya, container, false);
 
         eror = (LinearLayout) aduan_saya.findViewById(R.id.error);
@@ -78,8 +82,6 @@ public class AduanSaya extends Fragment {
         RecyclerView.LayoutManager mManager;
         mItems.clear();
 
-        perLoad = 5;
-
         SharedPreferences pref = getContext().getSharedPreferences("data", Context.MODE_PRIVATE);
         id_user = pref.getString("id_user", "");
 
@@ -87,8 +89,29 @@ public class AduanSaya extends Fragment {
 
         mManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecycleaduansaya.setLayoutManager(mManager);
-        mAdapter = new AdapterDataAduanSaya(mRecycleaduansaya, mItems, getContext());
+        mAdapter = new AdapterDataAduanSaya(mItems, getContext());
         mRecycleaduansaya.setAdapter(mAdapter);
+
+        mRecycleaduansaya.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                if (dy < 0) {
+                    fab.show();
+                } else if (dy > 0) {
+                    fab.hide();
+                    // Recycle view scrolling down...
+                    if(recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN) == false){
+                        loadMoreAduan();
+                    }
+                }
+            }
+        });
 
         swLayout = (SwipeRefreshLayout) aduan_saya.findViewById(R.id.swLayout);
         swLayout.setColorSchemeResources(R.color.Error, R.color.Info, R.color.Warning);
@@ -114,8 +137,6 @@ public class AduanSaya extends Fragment {
             }
         });
 
-        loadMoreAduan();
-
         return aduan_saya;
     }
 
@@ -128,11 +149,12 @@ public class AduanSaya extends Fragment {
                     public void onResponse(JSONArray response) {
                         dialog.hide();
                         eror.setVisibility(View.GONE);
+                        Alldata = response.length();
                         Log.d("volley", "response : "+response.toString());
                         if(response.length() <= 0){
                             snackBar("Anda tidak memiliki aduan yang diverifikasi oleh admin!", R.color.Error);
                         }else{
-                            for (int i = 0; i< perLoad; i++){
+                            for (int i = 0; i< ServerAPI.perLoadAduan; i++){
                                 try {
                                     JSONObject data = response.getJSONObject(i);
                                     ModelDataAduanSaya md = new ModelDataAduanSaya();
@@ -168,65 +190,53 @@ public class AduanSaya extends Fragment {
     }
 
     private void loadMoreAduan(){
-        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                mItems.add(null);
-                mAdapter.notifyItemInserted(mItems.size() - 1);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mItems.remove(mItems.size() - 1);
-                        mAdapter.notifyItemRemoved(mItems.size());
-                        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN_SAYA+id_user, null,
-                                new Response.Listener<JSONArray>() {
-                                    @Override
-                                    public void onResponse(JSONArray response) {
-                                        dialog.hide();
-                                        eror.setVisibility(View.GONE);
-                                        if (response.length() > perLoad){
-                                            int index = mItems.size();
-                                            int end = index + perLoad;
-                                            for (int i = index; i<end; i++){
-                                                try {
-                                                    JSONObject data = response.getJSONObject(i);
-                                                    ModelDataAduanSaya md = new ModelDataAduanSaya();
-                                                    md.setNama_user(data.getString("nama_user"));
-                                                    md.setTanggal(data.getString("dibuat"));
-                                                    md.setAduan(data.getString("aduan"));
-                                                    md.setKategori(data.getString("kategori"));
-                                                    md.setStatus(data.getString("status"));
-                                                    md.setFoto_aduan(data.getString("lampiran"));
-                                                    md.setFoto_user(data.getString("foto"));
-                                                    md.setStatus(data.getString("status"));
-                                                    mItems.add(md);
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                            Log.d("volley", "response : "+response.toString());
-                                            mAdapter.notifyDataSetChanged();
-                                            mAdapter.setLoaded();
-                                        }
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Log.d("volley", "error : "+error.getMessage());
-                                        dialog.hide();
-                                        eror.setVisibility(View.VISIBLE);
-                                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
-                                        }
-                                    }
-                                });
-                        AppController.getInstance().addToRequestQueue(requestData);
-                    }
-                }, 3000);
-            }
-        });
-
+        if (mItems.size() < Alldata){
+            dialog.show();
+            eror.setVisibility(View.GONE);
+            JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN_SAYA+id_user, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            dialog.hide();
+                            eror.setVisibility(View.GONE);
+                            int index = mItems.size();
+                            int end = index + ServerAPI.perLoadAduan;
+                            for (int i = index; i<end; i++){
+                                try {
+                                    JSONObject data = response.getJSONObject(i);
+                                    ModelDataAduanSaya md = new ModelDataAduanSaya();
+                                    md.setNama_user(data.getString("nama_user"));
+                                    md.setTanggal(data.getString("dibuat"));
+                                    md.setAduan(data.getString("aduan"));
+                                    md.setKategori(data.getString("kategori"));
+                                    md.setStatus(data.getString("status"));
+                                    md.setFoto_aduan(data.getString("lampiran"));
+                                    md.setFoto_user(data.getString("foto"));
+                                    md.setStatus(data.getString("status"));
+                                    mItems.add(md);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            Log.d("volley", "response : "+response.toString());
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("volley", "error : "+error.getMessage());
+                            dialog.hide();
+                            eror.setVisibility(View.VISIBLE);
+                            if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                                snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                            }
+                        }
+                    });
+            AppController.getInstance().addToRequestQueue(requestData);
+        }else{
+            snackBar("Anda mencapai batas akhir halaman", R.color.Info);
+        }
     }
 
     public void snackBar(String pesan, int color){

@@ -26,6 +26,7 @@ public class Petunjnuk extends Fragment {
         // Inflate the layout for this fragment
         View view_petunjuk = inflater.inflate(R.layout.fragment_petunjnuk, container, false);
         ((MainActivity) getActivity()).setActionBarTitle("Petunjuk");
+        ((MainActivity) getActivity()).findViewById(R.id.fab).setVisibility(View.GONE);
 
         return view_petunjuk;
     }

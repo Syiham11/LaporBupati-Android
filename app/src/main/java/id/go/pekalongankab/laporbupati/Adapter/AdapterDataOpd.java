@@ -30,114 +30,59 @@ import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
 public class AdapterDataOpd extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final int VIEW_TYPE_ITEM = 0;
-    private final int VIEW_TYPE_LOADING = 1;
-    private OnLoadMoreListener onLoadMoreListener;
-    private boolean isLoading;
     private Context context;
     private List<ModelDataOpd> mItems;
-    private int visibleThreshold = 5;
-    private int lastVisibleItem, totalItemCount;
 
-    public AdapterDataOpd(RecyclerView recyclerView, List<ModelDataOpd> mItems, Context context) {
+    public AdapterDataOpd(List<ModelDataOpd> mItems, Context context) {
         this.mItems = mItems;
         this.context = context;
-
-        final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                totalItemCount = linearLayoutManager.getItemCount();
-                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
-                if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
-                    if (onLoadMoreListener != null) {
-                        onLoadMoreListener.onLoadMore();
-                    }
-                    isLoading = true;
-                }
-            }
-        });
-    }
-
-    public void setOnLoadMoreListener(OnLoadMoreListener mOnLoadMoreListener) {
-        this.onLoadMoreListener = mOnLoadMoreListener;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return mItems.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_ITEM) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_opd, parent, false);
-            return new HolderDataOpd(view);
-        } else if (viewType == VIEW_TYPE_LOADING) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
-            return new LoadingViewHolder(view);
-        }
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_opd, parent, false);
+        return new HolderDataOpd(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof HolderDataOpd) {
-            final ModelDataOpd md = mItems.get(position);
-            HolderDataOpd holderDataOpd = (HolderDataOpd) holder;
-            holderDataOpd.id_opd.setText(md.getId_opd());
-            holderDataOpd.opd.setText(md.getOpd());
-            holderDataOpd.singkatan.setText(md.getSingkatan());
-            holderDataOpd.alamat.setText(md.getAlamat());
-            Glide.with(context).load(ServerAPI.URL_FOTO_OPD+md.getFoto())
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .error(R.drawable.no_image)
-                    .fitCenter()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(holderDataOpd.foto);
-            holderDataOpd.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("opd", md.getOpd());
-                    bundle.putString("singkatan", md.getSingkatan());
-                    bundle.putString("alamat", md.getAlamat());
-                    bundle.putString("nama_kepala", md.getNamaKepala());
-                    bundle.putString("deskripsi", md.getDeskripsi());
-                    bundle.putString("no_telp", md.getNoTelp());
-                    bundle.putString("email", md.getEmail());
-                    bundle.putString("fax", md.getFax());
-                    bundle.putString("website", md.getWebsite());
-                    bundle.putString("foto", md.getFoto());
-                    Intent i = new Intent(context, DetailOpd.class);
-                    i.putExtras(bundle);
-                    context.startActivity(i);
-                }
-            });
-        } else if (holder instanceof LoadingViewHolder) {
-            LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
-            loadingViewHolder.progressBar.setIndeterminate(true);
-        }
+        final ModelDataOpd md = mItems.get(position);
+        HolderDataOpd holderDataOpd = (HolderDataOpd) holder;
+        holderDataOpd.id_opd.setText(md.getId_opd());
+        holderDataOpd.opd.setText(md.getOpd());
+        holderDataOpd.singkatan.setText(md.getSingkatan());
+        holderDataOpd.alamat.setText(md.getAlamat());
+        Glide.with(context).load(ServerAPI.URL_FOTO_OPD+md.getFoto())
+                .thumbnail(0.5f)
+                .crossFade()
+                .error(R.drawable.no_image)
+                .fitCenter()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holderDataOpd.foto);
+        holderDataOpd.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("opd", md.getOpd());
+                bundle.putString("singkatan", md.getSingkatan());
+                bundle.putString("alamat", md.getAlamat());
+                bundle.putString("nama_kepala", md.getNamaKepala());
+                bundle.putString("deskripsi", md.getDeskripsi());
+                bundle.putString("no_telp", md.getNoTelp());
+                bundle.putString("email", md.getEmail());
+                bundle.putString("fax", md.getFax());
+                bundle.putString("website", md.getWebsite());
+                bundle.putString("foto", md.getFoto());
+                Intent i = new Intent(context, DetailOpd.class);
+                i.putExtras(bundle);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mItems == null ? 0 : mItems.size();
-    }
-
-    public void setLoaded() {
-        isLoading = false;
-    }
-
-    private class LoadingViewHolder extends RecyclerView.ViewHolder {
-        public ProgressBar progressBar;
-
-        public LoadingViewHolder(View view) {
-            super(view);
-            progressBar = (ProgressBar) view.findViewById(R.id.progressBar1);
-        }
+        return mItems.size();
     }
 
     private class HolderDataOpd extends RecyclerView.ViewHolder {

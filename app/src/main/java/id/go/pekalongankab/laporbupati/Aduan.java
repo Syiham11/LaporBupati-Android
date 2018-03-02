@@ -53,10 +53,10 @@ public class Aduan extends Fragment {
     RecyclerView mRecycleaduan;
     ProgressDialog pd;
     SwipeRefreshLayout swLayout;
-    int perLoad;
     LinearLayout eror;
     FloatingActionButton fab;
     Button btnCobaLagi;
+    int Alldata;
 
     SpotsDialog dialog;
 
@@ -71,6 +71,8 @@ public class Aduan extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ((MainActivity) getActivity()).setActionBarTitle("Lapor Bupati");
+        fab = (FloatingActionButton) ((MainActivity) getActivity()).findViewById(R.id.fab);
+        fab.show();
         View view_aduan = inflater.inflate(R.layout.fragment_aduan, container, false);
 
         eror = (LinearLayout) view_aduan.findViewById(R.id.error);
@@ -83,9 +85,12 @@ public class Aduan extends Fragment {
         dialog = new SpotsDialog(getActivity(), "Memuat data...");
         mItems.clear();
 
-        perLoad = 5;
-
         loadAduan();
+
+        mManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mRecycleaduan.setLayoutManager(mManager);
+        mAdapter = new AdapterDataAduan(mItems, getContext());
+        mRecycleaduan.setAdapter(mAdapter);
 
         mRecycleaduan.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -97,18 +102,16 @@ public class Aduan extends Fragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
                 if (dy < 0) {
-                    // Recycle view scrolling up...
-
+                    fab.show();
                 } else if (dy > 0) {
+                    fab.hide();
                     // Recycle view scrolling down...
+                    if(recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN) == false){
+                        loadMoreAduan();
+                    }
                 }
             }
         });
-
-        mManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mRecycleaduan.setLayoutManager(mManager);
-        mAdapter = new AdapterDataAduan(mRecycleaduan, mItems, getContext());
-        mRecycleaduan.setAdapter(mAdapter);
 
         swLayout = (SwipeRefreshLayout) view_aduan.findViewById(R.id.swLayout);
         swLayout.setColorSchemeResources(R.color.Error, R.color.Info, R.color.Warning);
@@ -133,8 +136,6 @@ public class Aduan extends Fragment {
             }
         });
 
-        loadMoreAduan();
-
         return  view_aduan;
     }
 
@@ -151,8 +152,9 @@ public class Aduan extends Fragment {
                         //pd.cancel();
                         dialog.hide();
                         eror.setVisibility(View.GONE);
+                        Alldata = response.length();
                         Log.d("volley", "response : "+response.toString());
-                        for (int i = 0; i< perLoad; i++){
+                        for (int i = 0; i< ServerAPI.perLoadAduan; i++){
                             try {
                                 JSONObject data = response.getJSONObject(i);
                                 ModelDataAduan md = new ModelDataAduan();
@@ -181,7 +183,7 @@ public class Aduan extends Fragment {
                         dialog.hide();
                         eror.setVisibility(View.VISIBLE);
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            ((MainActivity)getActivity()).snackBar(getView(), "Tidak dapat terhubung ke server! periksa koneksi internet!");
+                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
                         }
                     }
                 });
@@ -189,64 +191,53 @@ public class Aduan extends Fragment {
     }
 
     private void loadMoreAduan(){
-        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                mItems.add(null);
-                mAdapter.notifyItemInserted(mItems.size() - 1);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mItems.remove(mItems.size() - 1);
-                        mAdapter.notifyItemRemoved(mItems.size());
-                        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN, null,
-                                new Response.Listener<JSONArray>() {
-                                    @Override
-                                    public void onResponse(JSONArray response) {
-                                        Log.d("volley", "response : "+response.toString());
-                                        dialog.hide();
-                                        eror.setVisibility(View.GONE);
-                                        if (response.length() > perLoad){
-                                            int index = mItems.size();
-                                            int end = index + perLoad;
-                                            for (int i = index; i<end; i++){
-                                                try {
-                                                    JSONObject data = response.getJSONObject(i);
-                                                    ModelDataAduan md = new ModelDataAduan();
-                                                    md.setNama_user(data.getString("nama_user"));
-                                                    md.setTanggal(data.getString("dibuat"));
-                                                    md.setAduan(data.getString("aduan"));
-                                                    md.setKategori(data.getString("kategori"));
-                                                    md.setStatus(data.getString("status"));
-                                                    md.setFoto_aduan(data.getString("lampiran"));
-                                                    md.setFoto_user(data.getString("foto"));
-                                                    md.setStatus(data.getString("status"));
-                                                    mItems.add(md);
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                            mAdapter.notifyDataSetChanged();
-                                            mAdapter.setLoaded();
-                                        }
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Log.d("volley", "error : "+error.getMessage());
-                                        dialog.hide();
-                                        eror.setVisibility(View.VISIBLE);
-                                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
-                                        }
-                                    }
-                                });
-                        AppController.getInstance().addToRequestQueue(requestData);
-                    }
-                }, 3000);
-            }
-        });
+        if (mItems.size() < Alldata){
+            dialog.show();
+            eror.setVisibility(View.GONE);
+            JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.d("volley", "response : "+response.toString());
+                            dialog.hide();
+                            eror.setVisibility(View.GONE);
+                            int index = mItems.size();
+                            int end = index + ServerAPI.perLoadAduan;
+                            for (int i = index; i<end; i++){
+                                try {
+                                    JSONObject data = response.getJSONObject(i);
+                                    ModelDataAduan md = new ModelDataAduan();
+                                    md.setNama_user(data.getString("nama_user"));
+                                    md.setTanggal(data.getString("dibuat"));
+                                    md.setAduan(data.getString("aduan"));
+                                    md.setKategori(data.getString("kategori"));
+                                    md.setStatus(data.getString("status"));
+                                    md.setFoto_aduan(data.getString("lampiran"));
+                                    md.setFoto_user(data.getString("foto"));
+                                    md.setStatus(data.getString("status"));
+                                    mItems.add(md);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("volley", "error : "+error.getMessage());
+                            dialog.hide();
+                            eror.setVisibility(View.VISIBLE);
+                            if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                                snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                            }
+                        }
+                    });
+            AppController.getInstance().addToRequestQueue(requestData);
+        }else{
+            snackBar("Anda mencapai batas akhir halaman", R.color.Info);
+        }
 
     }
 
