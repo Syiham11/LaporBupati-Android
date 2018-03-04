@@ -1,12 +1,18 @@
 package id.go.pekalongankab.laporbupati;
 
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.R;
 
 /**
@@ -14,6 +20,9 @@ import id.go.pekalongankab.laporbupati.R;
  */
 public class Petunjnuk extends Fragment {
 
+    FloatingActionButton fab;
+    WebView webView;
+    SpotsDialog dialog;
 
     public Petunjnuk() {
         // Required empty public constructor
@@ -26,7 +35,32 @@ public class Petunjnuk extends Fragment {
         // Inflate the layout for this fragment
         View view_petunjuk = inflater.inflate(R.layout.fragment_petunjnuk, container, false);
         ((MainActivity) getActivity()).setActionBarTitle("Petunjuk");
-        ((MainActivity) getActivity()).findViewById(R.id.fab).setVisibility(View.GONE);
+        fab = (FloatingActionButton) ((MainActivity) getActivity()).findViewById(R.id.fab);
+        fab.hide();
+
+        dialog = new SpotsDialog(getActivity(), "Memuat data...");
+
+        webView = (WebView) view_petunjuk.findViewById(R.id.webPetunjuk);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+
+        webView.getSettings().setSupportZoom(false);
+        webView.getSettings().setBuiltInZoomControls(false);
+        webView.getSettings().setDisplayZoomControls(false);
+
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl(Uri.parse("file:///android_asset/index.html").toString());
+
+        dialog.show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.hide();
+            }
+        }, 1000);
 
         return view_petunjuk;
     }

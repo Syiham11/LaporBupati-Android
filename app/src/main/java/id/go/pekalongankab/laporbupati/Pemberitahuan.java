@@ -61,6 +61,7 @@ public class Pemberitahuan extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Pemberitahuan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
 
         SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
         id_user = pref.getString("id_user", "");
@@ -81,7 +82,7 @@ public class Pemberitahuan extends AppCompatActivity {
 
         mManager = new LinearLayoutManager(Pemberitahuan.this, LinearLayoutManager.VERTICAL, false);
         mRecycleCariAduan.setLayoutManager(mManager);
-        mAdapter = new AdapterDataPemberitahuan(mRecycleCariAduan, mItems, getApplicationContext());
+        mAdapter = new AdapterDataPemberitahuan(mItems, getApplicationContext());
         mRecycleCariAduan.setAdapter(mAdapter);
 
         swLayout = (SwipeRefreshLayout) findViewById(R.id.swLayout);

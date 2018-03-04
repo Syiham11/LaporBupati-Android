@@ -1,6 +1,5 @@
 package id.go.pekalongankab.laporbupati;
 
-import android.app.ProgressDialog;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -34,17 +33,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import id.go.pekalongankab.laporbupati.Adapter.AdapterDataCariAduan;
-import id.go.pekalongankab.laporbupati.Model.ModelDataCariAduan;
+import dmax.dialog.SpotsDialog;
+import id.go.pekalongankab.laporbupati.Adapter.AdapterDataAduan;
+import id.go.pekalongankab.laporbupati.Model.ModelDataAduan;
 import id.go.pekalongankab.laporbupati.Util.AppController;
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
-import static java.security.AccessController.getContext;
-
 public class CariAduan extends AppCompatActivity {
 
-    AdapterDataCariAduan mAdapter;
-    List<ModelDataCariAduan> mItems;
+    AdapterDataAduan mAdapter;
+    List<ModelDataAduan> mItems;
     RecyclerView mRecycleCariAduan;
     SwipeRefreshLayout swLayout;
     Bundle bundle;
@@ -54,6 +52,8 @@ public class CariAduan extends AppCompatActivity {
     LinearLayout eror;
     TextView texterror;
     Button btnCobaLagi;
+    boolean loaded;
+    SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,10 @@ public class CariAduan extends AppCompatActivity {
         bundle = getIntent().getExtras();
         q = bundle.getString("query");
         getSupportActionBar().setTitle(q);
+        getSupportActionBar().setElevation(0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        dialog = new SpotsDialog(CariAduan.this, "Memuat data...");
 
         loading = (ProgressBar) findViewById(R.id.loading);
         eror = (LinearLayout) findViewById(R.id.error);
@@ -73,13 +76,15 @@ public class CariAduan extends AppCompatActivity {
         mItems = new ArrayList<>();
         RecyclerView.LayoutManager mManager;
 
+        loaded = false;
+
         mItems.clear();
 
         loadAduan();
 
         mManager = new LinearLayoutManager(CariAduan.this, LinearLayoutManager.VERTICAL, false);
         mRecycleCariAduan.setLayoutManager(mManager);
-        mAdapter = new AdapterDataCariAduan(mItems, getApplicationContext());
+        mAdapter = new AdapterDataAduan(mItems, getApplicationContext());
         mRecycleCariAduan.setAdapter(mAdapter);
 
         mRecycleCariAduan.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -91,8 +96,7 @@ public class CariAduan extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-                if (dy < 0) {
-                } else if (dy > 0) {
+                if (dy > 0) {
                     // Recycle view scrolling down...
                     if(recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN) == false){
                         loadMoreAduan();
@@ -109,7 +113,6 @@ public class CariAduan extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mItems.clear();
                         loadAduan();
                         swLayout.setRefreshing(false);
                     }
@@ -166,17 +169,20 @@ public class CariAduan extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         loading.setVisibility(View.GONE);
                         eror.setVisibility(View.GONE);
+                        mItems.clear();
                         Alldata = response.length();
                         Log.d("volley", "response : "+response.toString());
                         if (response.length() <= 0){
+                            loaded = false;
                             eror.setVisibility(View.VISIBLE);
                             texterror.setText("Hasil pencarian '"+q+"' tidak ditemukan!");
                             snackBar("Hasil pencarian '"+q+"' tidak ditemukan!", R.color.Error);
                         }else{
+                            loaded = true;
                             for (int i = 0; i< ServerAPI.perLoadAduan; i++){
                                 try {
                                     JSONObject data = response.getJSONObject(i);
-                                    ModelDataCariAduan md = new ModelDataCariAduan();
+                                    ModelDataAduan md = new ModelDataAduan();
                                     md.setId_aduan(data.getString("id_aduan"));
                                     md.setNama_user(data.getString("nama_user"));
                                     md.setTanggal(data.getString("dibuat"));
@@ -200,9 +206,11 @@ public class CariAduan extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
                         loading.setVisibility(View.GONE);
-                        eror.setVisibility(View.VISIBLE);
+                        if (loaded == false){
+                            eror.setVisibility(View.VISIBLE);
+                        }
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                            snackBar(R.string.error_koneksi, R.color.Error);
                         }
                     }
                 });
@@ -211,11 +219,13 @@ public class CariAduan extends AppCompatActivity {
 
     private void loadMoreAduan(){
         if (mItems.size() < Alldata){
+            dialog.show();
+            eror.setVisibility(View.GONE);
             JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_CARI_ADUAN+q.replaceAll(" ", "%20"), null,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            loading.setVisibility(View.GONE);
+                            dialog.hide();
                             eror.setVisibility(View.GONE);
                             Log.d("volley", "response : "+response.toString());
                             int index = mItems.size();
@@ -223,7 +233,7 @@ public class CariAduan extends AppCompatActivity {
                             for (int i = index; i<end; i++){
                                 try {
                                     JSONObject data = response.getJSONObject(i);
-                                    ModelDataCariAduan md = new ModelDataCariAduan();
+                                    ModelDataAduan md = new ModelDataAduan();
                                     md.setNama_user(data.getString("nama_user"));
                                     md.setTanggal(data.getString("dibuat"));
                                     md.setAduan(data.getString("aduan"));
@@ -244,15 +254,24 @@ public class CariAduan extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.d("volley", "error : "+error.getMessage());
-                            loading.setVisibility(View.GONE);
-                            eror.setVisibility(View.VISIBLE);
+                            dialog.hide();
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                                snackBar(R.string.error_koneksi, R.color.Error);
                             }
                         }
                     });
             AppController.getInstance().addToRequestQueue(requestData);
+        }else{
+            snackBar(R.string.info_batas_akhir, R.color.Info);
         }
+    }
+
+    private void snackBar(int pesan, int warna){
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), pesan, Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), warna));
+        snackbar.show();
     }
 
     private void snackBar(String pesan, int warna){

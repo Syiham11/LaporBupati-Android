@@ -57,6 +57,7 @@ public class Aduan extends Fragment {
     FloatingActionButton fab;
     Button btnCobaLagi;
     int Alldata;
+    boolean loaded;
 
     SpotsDialog dialog;
 
@@ -84,6 +85,7 @@ public class Aduan extends Fragment {
         pd = new ProgressDialog(getActivity());
         dialog = new SpotsDialog(getActivity(), "Memuat data...");
         mItems.clear();
+        loaded = false;
 
         loadAduan();
 
@@ -121,11 +123,10 @@ public class Aduan extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mItems.clear();
                         loadAduan();
                         swLayout.setRefreshing(false);
                     }
-                }, 1000);
+                }, 100);
             }
         });
 
@@ -151,6 +152,8 @@ public class Aduan extends Fragment {
                     public void onResponse(JSONArray response) {
                         //pd.cancel();
                         dialog.hide();
+                        loaded = true;
+                        mItems.clear();
                         eror.setVisibility(View.GONE);
                         Alldata = response.length();
                         Log.d("volley", "response : "+response.toString());
@@ -181,9 +184,11 @@ public class Aduan extends Fragment {
                         Log.d("volley", "error : "+error.getMessage());
                         //pd.cancel();
                         dialog.hide();
-                        eror.setVisibility(View.VISIBLE);
+                        if (loaded == false){
+                            eror.setVisibility(View.VISIBLE);
+                        }
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                            snackBar(R.string.error_koneksi, R.color.Error);
                         }
                     }
                 });
@@ -200,6 +205,7 @@ public class Aduan extends Fragment {
                         public void onResponse(JSONArray response) {
                             Log.d("volley", "response : "+response.toString());
                             dialog.hide();
+                            loaded = true;
                             eror.setVisibility(View.GONE);
                             int index = mItems.size();
                             int end = index + ServerAPI.perLoadAduan;
@@ -228,20 +234,19 @@ public class Aduan extends Fragment {
                         public void onErrorResponse(VolleyError error) {
                             Log.d("volley", "error : "+error.getMessage());
                             dialog.hide();
-                            eror.setVisibility(View.VISIBLE);
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                                snackBar(R.string.error_koneksi, R.color.Error);
                             }
                         }
                     });
             AppController.getInstance().addToRequestQueue(requestData);
         }else{
-            snackBar("Anda mencapai batas akhir halaman", R.color.Info);
+            snackBar(R.string.info_batas_akhir, R.color.Info);
         }
 
     }
 
-    public void snackBar(String pesan, int color){
+    public void snackBar(int pesan, int color){
         Snackbar snackbar = Snackbar.make(getView(), pesan, Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         View sbView = snackbar.getView();

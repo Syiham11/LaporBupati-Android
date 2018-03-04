@@ -147,11 +147,11 @@ public class Login extends Activity {
                 // ngecek apakah inputannya kosong atau tidak
                 if (telp.isEmpty()){
                     // jika inputan kosong tampilkan pesan
-                    snackBar("Harap isi Nomor telepon anda!", R.color.Error);
+                    snackBar(R.string.error_empty_email, R.color.Error);
                     txttelp.setFocusable(true);
                 }else if (password.isEmpty()){
                     // jika inputan kosong tampilkan pesan
-                    snackBar("Harap isi password anda!", R.color.Error);
+                    snackBar(R.string.error_empty_pass, R.color.Error);
                     txtpass.setFocusable(true);
                 } else {
                     // login user
@@ -196,7 +196,7 @@ public class Login extends Activity {
                     // ngecek node error dari api
                     if (code.equals("2")){
                         dialog.hide();
-                        snackBar("Akun anda belum diaktifkan! silahkan periksa email anda untuk mengaktifkan", R.color.Error);
+                        snackBar(R.string.belum_aktif, R.color.Error);
                     }else if (code.equals("1")) {
                         // user berhasil login
                         String id_user = data.getString("id_user");
@@ -236,10 +236,10 @@ public class Login extends Activity {
                                 MainActivity.class);
                         startActivity(intent);
                         finish();
-                    } else {
+                    } else if(code.equals("0")) {
                         // terjadi error dan tampilkan pesan error dari API
                         dialog.hide();
-                        snackBar("Nomor telepon atau kata sandi salah! Harap periksa kembali", R.color.Error);
+                        snackBar(R.string.error_sandi, R.color.Error);
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -256,7 +256,7 @@ public class Login extends Activity {
                 dialog.hide();
                 //cek error timeout, noconnection dan network error
                 if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                    snackBar("Tidak dapat terhubung ke server! periksa koneksi internet anda.", R.color.Error);
+                    snackBar(R.string.error_koneksi, R.color.Error);
                 }
             }
         }) {
@@ -274,7 +274,7 @@ public class Login extends Activity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void snackBar(String pesan, int warna){
+    private void snackBar(int pesan, int warna){
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), pesan, Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         View sbView = snackbar.getView();

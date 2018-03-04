@@ -2,16 +2,12 @@ package id.go.pekalongankab.laporbupati.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,7 +17,6 @@ import java.util.List;
 
 import id.go.pekalongankab.laporbupati.DetailAduan;
 import id.go.pekalongankab.laporbupati.Model.ModelDataAduan;
-import id.go.pekalongankab.laporbupati.OnLoadMoreListener;
 import id.go.pekalongankab.laporbupati.R;
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
@@ -82,6 +77,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailAduan.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);// | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 i.putExtra("id", md.getId_aduan());
                 i.putExtra("foto_user", md.getFoto_user());
                 i.putExtra("nama", md.getNama_user());

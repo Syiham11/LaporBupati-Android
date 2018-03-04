@@ -91,6 +91,7 @@ public class TulisAduan extends AppCompatActivity {
         setContentView(R.layout.activity_tulis_aduan);
         getSupportActionBar().setTitle("Buat Aduan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
 
         loading = new SpotsDialog(TulisAduan.this, "Sedang mengirim...");
 
@@ -283,7 +284,7 @@ public class TulisAduan extends AppCompatActivity {
     }
 
     private void selectImage() {
-        foto_aduan.setImageResource(0);
+        //foto_aduan.setImageResource(0);
         final CharSequence[] items = {"Buka kamera", "Pilih dari galeri"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(TulisAduan.this);

@@ -26,6 +26,7 @@ public class DetailOpd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_opd);
         getSupportActionBar().setTitle("");
+        getSupportActionBar().setElevation(0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle bundle = getIntent().getExtras();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

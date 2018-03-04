@@ -27,6 +27,7 @@ public class LihatFoto extends AppCompatActivity {
         setContentView(R.layout.activity_lihat_foto);
         Bundle bundle = getIntent().getExtras();
         getSupportActionBar().setTitle("");
+        getSupportActionBar().setElevation(0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

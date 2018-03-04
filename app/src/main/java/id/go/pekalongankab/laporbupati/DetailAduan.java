@@ -63,6 +63,7 @@ public class DetailAduan extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
         getSupportActionBar().setTitle("Aduan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
 
         loadkomem = (ProgressBar) findViewById(R.id.loadingkomen);
         loaderror = (LinearLayout) findViewById(R.id.loaderror);

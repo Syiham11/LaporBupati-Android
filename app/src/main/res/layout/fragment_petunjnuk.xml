@@ -2,27 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="id.go.pekalongankab.laporbupati.Petunjnuk">
 
     <!-- TODO: Update blank fragment layout -->
-    <ScrollView
+    <WebView
+        android:id="@+id/webPetunjuk"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:lineSpacingMultiplier="1.1"
-                android:textSize="16sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/petunjuk"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:layout_height="match_parent"></WebView>
 
 </FrameLayout>

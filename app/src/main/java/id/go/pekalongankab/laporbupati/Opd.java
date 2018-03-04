@@ -176,7 +176,7 @@ public class Opd extends Fragment {
                         dialog.hide();
                         eror.setVisibility(View.VISIBLE);
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                            snackBar(R.string.error_koneksi, R.color.Error);
                         }
                     }
                 });
@@ -226,17 +226,17 @@ public class Opd extends Fragment {
                             dialog.hide();
                             eror.setVisibility(View.VISIBLE);
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                                snackBar(R.string.error_koneksi, R.color.Error);
                             }
                         }
                     });
             AppController.getInstance().addToRequestQueue(requestData);
         }else{
-            snackBar("Anda mencapai batas akhir halaman", R.color.Info);
+            snackBar(R.string.info_batas_akhir, R.color.Info);
         }
     }
 
-    public void snackBar(String pesan, int color){
+    public void snackBar(int pesan, int color){
         Snackbar snackbar = Snackbar.make(getView(), pesan, Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         View sbView = snackbar.getView();

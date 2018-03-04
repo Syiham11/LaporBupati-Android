@@ -1,7 +1,6 @@
 package id.go.pekalongankab.laporbupati;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -37,8 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
-import id.go.pekalongankab.laporbupati.Adapter.AdapterDataAduanSaya;
-import id.go.pekalongankab.laporbupati.Model.ModelDataAduanSaya;
+import id.go.pekalongankab.laporbupati.Adapter.AdapterDataAduan;
+import id.go.pekalongankab.laporbupati.Model.ModelDataAduan;
 import id.go.pekalongankab.laporbupati.Util.AppController;
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
@@ -48,8 +46,8 @@ import id.go.pekalongankab.laporbupati.Util.ServerAPI;
  */
 public class AduanSaya extends Fragment {
 
-    AdapterDataAduanSaya mAdapter;
-    List<ModelDataAduanSaya> mItems;
+    AdapterDataAduan mAdapter;
+    List<ModelDataAduan> mItems;
     RecyclerView mRecycleaduansaya;
     LinearLayout eror;
     SwipeRefreshLayout swLayout;
@@ -58,6 +56,7 @@ public class AduanSaya extends Fragment {
     SpotsDialog dialog;
     FloatingActionButton fab;
     int Alldata;
+    boolean loaded;
 
     public AduanSaya() {
         // Required empty public constructor
@@ -84,12 +83,13 @@ public class AduanSaya extends Fragment {
 
         SharedPreferences pref = getContext().getSharedPreferences("data", Context.MODE_PRIVATE);
         id_user = pref.getString("id_user", "");
+        loaded = false;
 
         loadAduan();
 
         mManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecycleaduansaya.setLayoutManager(mManager);
-        mAdapter = new AdapterDataAduanSaya(mItems, getContext());
+        mAdapter = new AdapterDataAduan(mItems, getContext());
         mRecycleaduansaya.setAdapter(mAdapter);
 
         mRecycleaduansaya.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -121,11 +121,10 @@ public class AduanSaya extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mItems.clear();
                         loadAduan();
                         swLayout.setRefreshing(false);
                     }
-                }, 1000);
+                }, 100);
             }
         });
 
@@ -148,16 +147,18 @@ public class AduanSaya extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         dialog.hide();
+                        loaded = true;
+                        mItems.clear();
                         eror.setVisibility(View.GONE);
                         Alldata = response.length();
                         Log.d("volley", "response : "+response.toString());
                         if(response.length() <= 0){
-                            snackBar("Anda tidak memiliki aduan yang diverifikasi oleh admin!", R.color.Error);
+                            snackBar(R.string.error_koneksi, R.color.Error);
                         }else{
                             for (int i = 0; i< ServerAPI.perLoadAduan; i++){
                                 try {
                                     JSONObject data = response.getJSONObject(i);
-                                    ModelDataAduanSaya md = new ModelDataAduanSaya();
+                                    ModelDataAduan md = new ModelDataAduan();
                                     md.setNama_user(data.getString("nama_user"));
                                     md.setTanggal(data.getString("dibuat"));
                                     md.setAduan(data.getString("aduan"));
@@ -180,9 +181,11 @@ public class AduanSaya extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
                         dialog.hide();
-                        eror.setVisibility(View.VISIBLE);
+                        if (loaded == false){
+                            eror.setVisibility(View.VISIBLE);
+                        }
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                            snackBar(R.string.error_koneksi, R.color.Error);
                         }
                     }
                 });
@@ -204,7 +207,7 @@ public class AduanSaya extends Fragment {
                             for (int i = index; i<end; i++){
                                 try {
                                     JSONObject data = response.getJSONObject(i);
-                                    ModelDataAduanSaya md = new ModelDataAduanSaya();
+                                    ModelDataAduan md = new ModelDataAduan();
                                     md.setNama_user(data.getString("nama_user"));
                                     md.setTanggal(data.getString("dibuat"));
                                     md.setAduan(data.getString("aduan"));
@@ -227,19 +230,18 @@ public class AduanSaya extends Fragment {
                         public void onErrorResponse(VolleyError error) {
                             Log.d("volley", "error : "+error.getMessage());
                             dialog.hide();
-                            eror.setVisibility(View.VISIBLE);
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                                snackBar(R.string.error_koneksi, R.color.Error);
                             }
                         }
                     });
             AppController.getInstance().addToRequestQueue(requestData);
         }else{
-            snackBar("Anda mencapai batas akhir halaman", R.color.Info);
+            snackBar(R.string.info_batas_akhir, R.color.Info);
         }
     }
 
-    public void snackBar(String pesan, int color){
+    public void snackBar(int pesan, int color){
         Snackbar snackbar = Snackbar.make(getView(), pesan, Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         View sbView = snackbar.getView();

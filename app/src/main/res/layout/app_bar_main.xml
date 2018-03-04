@@ -9,6 +9,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -32,6 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_mode_edit_white_24dp"/>
+        app:elevation="0dp"
+        android:elevation="0dp"
+        app:srcCompat="@drawable/ic_mode_edit_white_24dp"/>
 
 </android.support.design.widget.CoordinatorLayout>
