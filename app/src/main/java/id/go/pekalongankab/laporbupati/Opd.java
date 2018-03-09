@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,6 +56,9 @@ public class Opd extends Fragment {
     FloatingActionButton fab;
     Button cobaLagi;
     int Alldata;
+    ProgressBar loadingbar;
+    CardView loadingmore;
+    boolean loaded;
 
     public Opd() {
         // Required empty public constructor
@@ -73,11 +77,14 @@ public class Opd extends Fragment {
         eror = (LinearLayout) view_opd.findViewById(R.id.error);
         dialog = new SpotsDialog(getActivity(), "Memuat data...");
         cobaLagi = (Button) view_opd.findViewById(R.id.btnCobalagi);
+        loadingbar = (ProgressBar) view_opd.findViewById(R.id.loadingbar);
+        loadingmore = (CardView) view_opd.findViewById(R.id.loadingmore);
 
         mRecycleopd = (RecyclerView) view_opd.findViewById(R.id.recycleOpd);
         mItems = new ArrayList<>();
         RecyclerView.LayoutManager mManager;
         mItems.clear();
+        loaded = false;
 
         loadOpd();
 
@@ -112,16 +119,8 @@ public class Opd extends Fragment {
         swLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mItems.clear();
-                        if (index >= 0){
-                            loadOpd();
-                        }
-                        swLayout.setRefreshing(false);
-                    }
-                }, 1000);
+                swLayout.setRefreshing(false);
+                refresh();
             }
         });
 
@@ -136,13 +135,17 @@ public class Opd extends Fragment {
     }
 
     private void loadOpd(){
-        dialog.show();
+        //dialog.show();
+        loadingbar.setVisibility(View.VISIBLE);
         eror.setVisibility(View.GONE);
         JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_OPD, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        dialog.hide();
+                        //dialog.hide();
+                        loaded = true;
+                        mItems.clear();
+                        loadingbar.setVisibility(View.GONE);
                         eror.setVisibility(View.GONE);
                         Alldata = response.length();
                         Log.d("volley", "response : "+response.toString());
@@ -173,10 +176,13 @@ public class Opd extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
-                        dialog.hide();
-                        eror.setVisibility(View.VISIBLE);
+                        //dialog.hide();
+                        loadingbar.setVisibility(View.GONE);
+                        if (loaded == false){
+                            eror.setVisibility(View.VISIBLE);
+                        }
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            snackBar(R.string.error_koneksi, R.color.Error);
+                            //snackBar(R.string.error_koneksi, R.color.Error);
                         }
                     }
                 });
@@ -185,13 +191,15 @@ public class Opd extends Fragment {
 
     private void loadmoreOpd(){
         if (mItems.size() < Alldata){
-            dialog.show();
+            //dialog.show();
+            loadingmore.setVisibility(View.VISIBLE);
             eror.setVisibility(View.GONE);
             JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_OPD, null,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            dialog.hide();
+                            //dialog.hide();
+                            loadingmore.setVisibility(View.GONE);
                             eror.setVisibility(View.GONE);
                             Log.d("volley", "response : "+response.toString());
                             index = mItems.size();
@@ -223,10 +231,13 @@ public class Opd extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.d("volley", "error : "+error.getMessage());
-                            dialog.hide();
-                            eror.setVisibility(View.VISIBLE);
+                            //dialog.hide();
+                            loadingmore.setVisibility(View.GONE);
+                            if (loaded == false){
+                                eror.setVisibility(View.VISIBLE);
+                            }
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                snackBar(R.string.error_koneksi, R.color.Error);
+                                //snackBar(R.string.error_koneksi, R.color.Error);
                             }
                         }
                     });
@@ -234,6 +245,60 @@ public class Opd extends Fragment {
         }else{
             snackBar(R.string.info_batas_akhir, R.color.Info);
         }
+    }
+
+    private void refresh(){
+        dialog.show();
+        loadingbar.setVisibility(View.GONE);
+        eror.setVisibility(View.GONE);
+        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_OPD, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        dialog.hide();
+                        mItems.clear();
+                        loadingbar.setVisibility(View.GONE);
+                        eror.setVisibility(View.GONE);
+                        Alldata = response.length();
+                        Log.d("volley", "response : "+response.toString());
+                        for (int i = 0; i<ServerAPI.perLoadOpd; i++){
+                            try {
+                                JSONObject data = response.getJSONObject(i);
+                                ModelDataOpd md = new ModelDataOpd();
+                                md.setId_opd(data.getString("id_opd"));
+                                md.setOpd(data.getString("nama_opd"));
+                                md.setSingkatan(data.getString("singkatan"));
+                                md.setAlamat(data.getString("alamat"));
+                                md.setFoto(data.getString("foto"));
+                                md.setNamaKepala(data.getString("nama_kepala"));
+                                md.setNoTelp(data.getString("no_telp"));
+                                md.setEmail(data.getString("email"));
+                                md.setFax(data.getString("fax"));
+                                md.setWebsite(data.getString("website"));
+                                md.setDeskripsi(data.getString("deskripsi"));
+                                mItems.add(md);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "error : "+error.getMessage());
+                        dialog.hide();
+                        loadingbar.setVisibility(View.GONE);
+                        if (loaded == false){
+                            eror.setVisibility(View.VISIBLE);
+                        }
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            //snackBar(R.string.error_koneksi, R.color.Error);
+                        }
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(requestData);
     }
 
     public void snackBar(int pesan, int color){

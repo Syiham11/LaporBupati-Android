@@ -37,21 +37,11 @@ public class Petunjnuk extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Petunjuk");
         fab = (FloatingActionButton) ((MainActivity) getActivity()).findViewById(R.id.fab);
         fab.hide();
-
-        dialog = new SpotsDialog(getActivity(), "Memuat data...");
-
         webView = (WebView) view_petunjuk.findViewById(R.id.webPetunjuk);
-        webView.getSettings().setLoadsImagesAutomatically(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-
-        webView.getSettings().setSupportZoom(false);
-        webView.getSettings().setBuiltInZoomControls(false);
-        webView.getSettings().setDisplayZoomControls(false);
-
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(Uri.parse("file:///android_asset/index.html").toString());
+
+        dialog = new SpotsDialog(getActivity(), "Memuat data...");
 
         dialog.show();
 
@@ -59,6 +49,7 @@ public class Petunjnuk extends Fragment {
             @Override
             public void run() {
                 dialog.hide();
+                webView.loadUrl(Uri.parse("file:///android_asset/petunjuk.html").toString());
             }
         }, 1000);
 

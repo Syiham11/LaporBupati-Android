@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -54,6 +55,7 @@ public class CariAduan extends AppCompatActivity {
     Button btnCobaLagi;
     boolean loaded;
     SpotsDialog dialog;
+    CardView loadingmore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class CariAduan extends AppCompatActivity {
         eror = (LinearLayout) findViewById(R.id.error);
         texterror = (TextView) findViewById(R.id.textError);
         btnCobaLagi = (Button) findViewById(R.id.btnCobalagi);
+        loadingmore = (CardView) findViewById(R.id.loadingmore);
 
         mRecycleCariAduan = (RecyclerView) findViewById(R.id.recycleCariAduan);
         mItems = new ArrayList<>();
@@ -192,6 +195,8 @@ public class CariAduan extends AppCompatActivity {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("foto"));
                                     md.setStatus(data.getString("status"));
+                                    md.setLongi(data.getString("longitude"));
+                                    md.setLati(data.getString("latitude"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -219,13 +224,15 @@ public class CariAduan extends AppCompatActivity {
 
     private void loadMoreAduan(){
         if (mItems.size() < Alldata){
-            dialog.show();
+            //dialog.show();
+            loadingmore.setVisibility(View.VISIBLE);
             eror.setVisibility(View.GONE);
             JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_CARI_ADUAN+q.replaceAll(" ", "%20"), null,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            dialog.hide();
+                            //dialog.hide();
+                            loadingmore.setVisibility(View.GONE);
                             eror.setVisibility(View.GONE);
                             Log.d("volley", "response : "+response.toString());
                             int index = mItems.size();
@@ -242,6 +249,8 @@ public class CariAduan extends AppCompatActivity {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("foto"));
                                     md.setStatus(data.getString("status"));
+                                    md.setLongi(data.getString("longitude"));
+                                    md.setLati(data.getString("latitude"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -254,7 +263,8 @@ public class CariAduan extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.d("volley", "error : "+error.getMessage());
-                            dialog.hide();
+                            //dialog.hide();
+                            loadingmore.setVisibility(View.GONE);
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                                 snackBar(R.string.error_koneksi, R.color.Error);
                             }

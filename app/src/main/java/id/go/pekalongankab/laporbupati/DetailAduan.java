@@ -44,7 +44,7 @@ import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 public class DetailAduan extends AppCompatActivity {
 
     ImageView fotoUser, fotoAduan, btnKirim, btnLike;
-    TextView namaUser, level, tanggal, isiAduan, kategori;
+    TextView namaUser, level, tanggal, isiAduan, kategori, lokasi;
     EditText komentar;
     RecyclerView mRecyclerview;
     RecyclerView.Adapter mAdapter;
@@ -88,8 +88,18 @@ public class DetailAduan extends AppCompatActivity {
         tanggal = (TextView) findViewById(R.id.tanggal);
         isiAduan = (TextView) findViewById(R.id.isi_aduan);
         kategori = (TextView) findViewById(R.id.kategori);
+        lokasi = (TextView) findViewById(R.id.lokasi);
 
         komentar = (EditText) findViewById(R.id.komentar);
+
+        lokasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bundle.getString("long").equals(null) && bundle.getString("lat").equals(null)){
+                    snackBar("Lokasi tidak ditemukan!", R.color.Error);
+                }
+            }
+        });
 
         namaUser.setText(bundle.getString("nama"));
         level.setText(bundle.getString("level"));

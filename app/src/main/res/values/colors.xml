@@ -8,8 +8,8 @@
     <color name="grey">#595959</color>
     <color name="lgrey">#98ffffff</color>
     <color name="Error">#ff5f5c</color>
-    <color name="Info">#67a0fd</color>
-    <color name="Yellow">#fad455</color>
-    <color name="Warning">#fa7c55</color>
+    <color name="Info">#0288D1</color>
+    <color name="Yellow">#ffab00</color>
+    <color name="Warning">#f57c00</color>
     <color name="hr">#dfdfdf</color>
 </resources>

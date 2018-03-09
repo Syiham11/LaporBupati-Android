@@ -88,6 +88,8 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
                 i.putExtra("kategori", md.getKategori());
                 i.putExtra("status", md.getStatus());
                 i.putExtra("katgori", md.getKategori());
+                i.putExtra("long", md.getLongi());
+                i.putExtra("lat", md.getLati());
                 context.startActivity(i);
             }
         });

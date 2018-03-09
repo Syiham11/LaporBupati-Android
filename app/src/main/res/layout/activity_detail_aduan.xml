@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="match_parent"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="#f1f1f1"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -39,29 +40,41 @@
                         android:layout_toRightOf="@+id/foto_user"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
                         <TextView
                             android:id="@+id/nama_user"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nama User"
+                            android:layout_alignParentTop="true"
                             android:textSize="18sp"/>
                         <TextView
                             android:id="@+id/level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/nama_user"
+                            android:layout_alignParentBottom="true"
                             android:text="Level"/>
-                    </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/tanggal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:text="Tanggal"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true" />
+
+                        <TextView
+                            android:id="@+id/tanggal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textEnd"
+                            android:text="Tanggal"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/lokasi"
+                            android:text="Tampilkan Lokasi"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginBottom="10dp"/>
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
@@ -148,7 +161,7 @@
                             android:id="@+id/btnLike"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/ic_info_blue"/>
+                            app:srcCompat="@drawable/ic_info_blue"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -200,7 +213,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_sedih"/>
+                        app:srcCompat="@drawable/ic_sedih"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -260,7 +273,7 @@
             android:background="@drawable/bg_grey"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
-            android:src="@drawable/ic_send_white_24dp"
+            app:srcCompat="@drawable/ic_send_white_24dp"
             android:padding="10dp"/>
 
     </RelativeLayout>

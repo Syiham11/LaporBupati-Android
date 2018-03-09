@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -57,6 +59,8 @@ public class AduanSaya extends Fragment {
     FloatingActionButton fab;
     int Alldata;
     boolean loaded;
+    ProgressBar loadingbar;
+    CardView loadingmore;
 
     public AduanSaya() {
         // Required empty public constructor
@@ -75,6 +79,8 @@ public class AduanSaya extends Fragment {
         eror = (LinearLayout) aduan_saya.findViewById(R.id.error);
         btnCobaLagi = (Button) aduan_saya.findViewById(R.id.btnCobalagi);
         dialog = new SpotsDialog(getActivity(), "Memuat data...");
+        loadingbar = (ProgressBar) aduan_saya.findViewById(R.id.loadingbar);
+        loadingmore = (CardView)  aduan_saya.findViewById(R.id.loadingmore);
 
         mRecycleaduansaya = (RecyclerView) aduan_saya.findViewById(R.id.recycleAduanSaya);
         mItems = new ArrayList<>();
@@ -118,13 +124,8 @@ public class AduanSaya extends Fragment {
         swLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadAduan();
-                        swLayout.setRefreshing(false);
-                    }
-                }, 100);
+                swLayout.setRefreshing(false);
+                refresh();
             }
         });
 
@@ -140,13 +141,15 @@ public class AduanSaya extends Fragment {
     }
 
     private void loadAduan(){
-        dialog.show();
+        //dialog.show();
+        loadingbar.setVisibility(View.VISIBLE);
         eror.setVisibility(View.GONE);
         JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN_SAYA+id_user, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        dialog.hide();
+                        //dialog.show();
+                        loadingbar.setVisibility(View.GONE);
                         loaded = true;
                         mItems.clear();
                         eror.setVisibility(View.GONE);
@@ -167,6 +170,8 @@ public class AduanSaya extends Fragment {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("foto"));
                                     md.setStatus(data.getString("status"));
+                                    md.setLongi(data.getString("longitude"));
+                                    md.setLati(data.getString("latitude"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -180,12 +185,13 @@ public class AduanSaya extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
-                        dialog.hide();
+                        //dialog.show();
+                        loadingbar.setVisibility(View.GONE);
                         if (loaded == false){
                             eror.setVisibility(View.VISIBLE);
                         }
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            snackBar(R.string.error_koneksi, R.color.Error);
+                            //snackBar(R.string.error_koneksi, R.color.Error);
                         }
                     }
                 });
@@ -216,6 +222,8 @@ public class AduanSaya extends Fragment {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("foto"));
                                     md.setStatus(data.getString("status"));
+                                    md.setLongi(data.getString("longitude"));
+                                    md.setLati(data.getString("latitude"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -239,6 +247,64 @@ public class AduanSaya extends Fragment {
         }else{
             snackBar(R.string.info_batas_akhir, R.color.Info);
         }
+    }
+
+    private void refresh(){
+        dialog.show();
+        loadingbar.setVisibility(View.GONE);
+        eror.setVisibility(View.GONE);
+        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN_SAYA+id_user, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        dialog.show();
+                        loadingbar.setVisibility(View.GONE);
+                        loaded = true;
+                        mItems.clear();
+                        eror.setVisibility(View.GONE);
+                        Alldata = response.length();
+                        Log.d("volley", "response : "+response.toString());
+                        if(response.length() <= 0){
+                            snackBar(R.string.error_koneksi, R.color.Error);
+                        }else{
+                            for (int i = 0; i< ServerAPI.perLoadAduan; i++){
+                                try {
+                                    JSONObject data = response.getJSONObject(i);
+                                    ModelDataAduan md = new ModelDataAduan();
+                                    md.setNama_user(data.getString("nama_user"));
+                                    md.setTanggal(data.getString("dibuat"));
+                                    md.setAduan(data.getString("aduan"));
+                                    md.setKategori(data.getString("kategori"));
+                                    md.setStatus(data.getString("status"));
+                                    md.setFoto_aduan(data.getString("lampiran"));
+                                    md.setFoto_user(data.getString("foto"));
+                                    md.setStatus(data.getString("status"));
+                                    md.setLongi(data.getString("longitude"));
+                                    md.setLati(data.getString("latitude"));
+                                    mItems.add(md);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "error : "+error.getMessage());
+                        dialog.show();
+                        loadingbar.setVisibility(View.GONE);
+                        if (loaded == false){
+                            eror.setVisibility(View.VISIBLE);
+                        }
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            //snackBar(R.string.error_koneksi, R.color.Error);
+                        }
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(requestData);
     }
 
     public void snackBar(int pesan, int color){

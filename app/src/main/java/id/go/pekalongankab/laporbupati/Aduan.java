@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -58,7 +59,8 @@ public class Aduan extends Fragment {
     Button btnCobaLagi;
     int Alldata;
     boolean loaded;
-
+    ProgressBar loadingbar;
+    CardView loadingmore;
     SpotsDialog dialog;
 
 
@@ -78,6 +80,8 @@ public class Aduan extends Fragment {
 
         eror = (LinearLayout) view_aduan.findViewById(R.id.error);
         btnCobaLagi = (Button) view_aduan.findViewById(R.id.btnCobalagi);
+        loadingbar = (ProgressBar) view_aduan.findViewById(R.id.loadingbar);
+        loadingmore = (CardView) view_aduan.findViewById(R.id.loadingmore);
 
         mRecycleaduan = (RecyclerView) view_aduan.findViewById(R.id.recycleAduan);
         mItems = new ArrayList<>();
@@ -120,13 +124,8 @@ public class Aduan extends Fragment {
         swLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadAduan();
-                        swLayout.setRefreshing(false);
-                    }
-                }, 100);
+                swLayout.setRefreshing(false);
+                refresh();
             }
         });
 
@@ -144,14 +143,16 @@ public class Aduan extends Fragment {
         /*pd.setMessage("Memuat data...");
         pd.setCancelable(false);
         pd.show();*/
-        dialog.show();
+        //dialog.show();
+        loadingbar.setVisibility(View.VISIBLE);
         eror.setVisibility(View.GONE);
         JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         //pd.cancel();
-                        dialog.hide();
+                        //dialog.hide();
+                        loadingbar.setVisibility(View.GONE);
                         loaded = true;
                         mItems.clear();
                         eror.setVisibility(View.GONE);
@@ -170,6 +171,8 @@ public class Aduan extends Fragment {
                                 md.setFoto_aduan(data.getString("lampiran"));
                                 md.setFoto_user(data.getString("foto"));
                                 md.setStatus(data.getString("status"));
+                                md.setLongi(data.getString("longitude"));
+                                md.setLati(data.getString("latitude"));
                                 mItems.add(md);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -183,12 +186,13 @@ public class Aduan extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
                         //pd.cancel();
-                        dialog.hide();
+                        //dialog.hide();
+                        loadingbar.setVisibility(View.GONE);
                         if (loaded == false){
                             eror.setVisibility(View.VISIBLE);
                         }
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            snackBar(R.string.error_koneksi, R.color.Error);
+                            //snackBar(R.string.error_koneksi, R.color.Error);
                         }
                     }
                 });
@@ -197,14 +201,16 @@ public class Aduan extends Fragment {
 
     private void loadMoreAduan(){
         if (mItems.size() < Alldata){
-            dialog.show();
+            //dialog.show();
+            loadingmore.setVisibility(View.VISIBLE);
             eror.setVisibility(View.GONE);
             JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN, null,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
                             Log.d("volley", "response : "+response.toString());
-                            dialog.hide();
+                            //dialog.hide();
+                            loadingmore.setVisibility(View.GONE);
                             loaded = true;
                             eror.setVisibility(View.GONE);
                             int index = mItems.size();
@@ -221,6 +227,8 @@ public class Aduan extends Fragment {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("foto"));
                                     md.setStatus(data.getString("status"));
+                                    md.setLongi(data.getString("longitude"));
+                                    md.setLati(data.getString("latitude"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -233,7 +241,8 @@ public class Aduan extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.d("volley", "error : "+error.getMessage());
-                            dialog.hide();
+                            //dialog.hide();
+                            loadingmore.setVisibility(View.GONE);
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                                 snackBar(R.string.error_koneksi, R.color.Error);
                             }
@@ -244,6 +253,66 @@ public class Aduan extends Fragment {
             snackBar(R.string.info_batas_akhir, R.color.Info);
         }
 
+    }
+
+    private void refresh(){
+        /*pd.setMessage("Memuat data...");
+        pd.setCancelable(false);
+        pd.show();*/
+        dialog.show();
+        loadingbar.setVisibility(View.GONE);
+        eror.setVisibility(View.GONE);
+        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_ADUAN, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //pd.cancel();
+                        dialog.hide();
+                        loadingbar.setVisibility(View.GONE);
+                        loaded = true;
+                        mItems.clear();
+                        eror.setVisibility(View.GONE);
+                        Alldata = response.length();
+                        Log.d("volley", "response : "+response.toString());
+                        for (int i = 0; i< ServerAPI.perLoadAduan; i++){
+                            try {
+                                JSONObject data = response.getJSONObject(i);
+                                ModelDataAduan md = new ModelDataAduan();
+                                md.setId_aduan(data.getString("id_aduan"));
+                                md.setNama_user(data.getString("nama_user"));
+                                md.setTanggal(data.getString("dibuat"));
+                                md.setAduan(data.getString("aduan"));
+                                md.setKategori(data.getString("kategori"));
+                                md.setStatus(data.getString("status"));
+                                md.setFoto_aduan(data.getString("lampiran"));
+                                md.setFoto_user(data.getString("foto"));
+                                md.setStatus(data.getString("status"));
+                                md.setLongi(data.getString("longitude"));
+                                md.setLati(data.getString("latitude"));
+                                mItems.add(md);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "error : "+error.getMessage());
+                        //pd.cancel();
+                        dialog.hide();
+                        loadingbar.setVisibility(View.GONE);
+                        if (loaded == false){
+                            eror.setVisibility(View.VISIBLE);
+                        }
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            //snackBar(R.string.error_koneksi, R.color.Error);
+                        }
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(requestData);
     }
 
     public void snackBar(int pesan, int color){
