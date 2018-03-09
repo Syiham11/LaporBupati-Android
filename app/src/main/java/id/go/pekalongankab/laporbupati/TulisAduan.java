@@ -22,10 +22,13 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -39,6 +42,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.tooltip.Tooltip;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,7 +63,7 @@ import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
 public class TulisAduan extends AppCompatActivity {
 
-    ImageView foto_pengirim, foto_aduan, tambahfoto, btnHapusfoto;
+    ImageView foto_pengirim, foto_aduan, tambahfoto, btnHapusfoto, helpRahasia;
     EditText isi_aduan;
     Bitmap bitmap, decoded;
     Spinner kategori;
@@ -68,6 +72,7 @@ public class TulisAduan extends AppCompatActivity {
     Uri fileUri;
     int PICK_IMAGE_REQUEST = 1;
     public final int SELECT_FILE = 1;
+    CheckBox ckRahasia;
 
     SpotsDialog loading;
 
@@ -101,6 +106,8 @@ public class TulisAduan extends AppCompatActivity {
         isi_aduan = (EditText)findViewById(R.id.isi_aduan);
         tambahfoto = (ImageView) findViewById(R.id.tambah_foto);
         btnHapusfoto = (ImageView) findViewById(R.id.btnHapusfoto);
+        ckRahasia = (CheckBox) findViewById(R.id.checkRahasia);
+        helpRahasia = (ImageView) findViewById(R.id.helpRahasia);
 
         //spinner kategori
         kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -112,6 +119,17 @@ public class TulisAduan extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
+            }
+        });
+
+        helpRahasia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tooltip tooltip = new Tooltip.Builder(helpRahasia, R.style.Tooltip)
+                        .setGravity(Gravity.TOP)
+                        .setCancelable(true)
+                        .setDismissOnClick(true)
+                        .show();
             }
         });
 

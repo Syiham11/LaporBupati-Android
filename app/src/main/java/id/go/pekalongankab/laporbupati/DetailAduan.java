@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,8 +45,8 @@ import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 
 public class DetailAduan extends AppCompatActivity {
 
-    ImageView fotoUser, fotoAduan, btnKirim, btnLike;
-    TextView namaUser, level, tanggal, isiAduan, kategori, lokasi;
+    ImageView fotoUser, fotoAduan, btnKirim, btnKategori;
+    TextView namaUser, level, tanggal, isiAduan, kategori, lokasi, status;
     EditText komentar;
     RecyclerView mRecyclerview;
     RecyclerView.Adapter mAdapter;
@@ -55,12 +57,13 @@ public class DetailAduan extends AppCompatActivity {
     SwipeRefreshLayout swLayout;
     String id_aduan;
     Button btnCobaLagi;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_aduan);
-        final Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         getSupportActionBar().setTitle("Aduan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setElevation(0);
@@ -81,23 +84,22 @@ public class DetailAduan extends AppCompatActivity {
         fotoUser = (ImageView) findViewById(R.id.foto_user);
         fotoAduan = (ImageView) findViewById(R.id.foto_aduan);
         btnKirim = (ImageView) findViewById(R.id.btnKirim);
-        btnLike = (ImageView) findViewById(R.id.btnLike);
+        btnKategori = (ImageView) findViewById(R.id.btnStatus);
 
         namaUser = (TextView) findViewById(R.id.nama_user);
         level = (TextView) findViewById(R.id.level);
         tanggal = (TextView) findViewById(R.id.tanggal);
         isiAduan = (TextView) findViewById(R.id.isi_aduan);
         kategori = (TextView) findViewById(R.id.kategori);
-        lokasi = (TextView) findViewById(R.id.lokasi);
+        lokasi = (TextView) findViewById(R.id.txtLonglat);
+        status = (TextView) findViewById(R.id.txtStatus);
 
         komentar = (EditText) findViewById(R.id.komentar);
 
         lokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bundle.getString("long").equals(null) && bundle.getString("lat").equals(null)){
-                    snackBar("Lokasi tidak ditemukan!", R.color.Error);
-                }
+                snackBar("Lokasi tidak ditemukan!", R.color.Error);
             }
         });
 
@@ -146,12 +148,22 @@ public class DetailAduan extends AppCompatActivity {
             }
         });
 
-        btnLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnLike.setImageResource(R.drawable.ic_like_filled);
-            }
-        });
+        if (bundle.getString("status").equals("diverifikasi")){
+            btnKategori.setImageResource(R.drawable.ic_info_blue);
+            status.setText(bundle.getString("status"));
+        }else if(bundle.getString("status").equals("didisposisikan")){
+            btnKategori.setImageResource(R.drawable.ic_info_yellow);
+            status.setText(bundle.getString("status"));
+        }else if(bundle.getString("status").equals("penanganan")){
+            btnKategori.setImageResource(R.drawable.ic_info_orange);
+            status.setText(bundle.getString("status"));
+        }else if(bundle.getString("status").equals("selesai")){
+            btnKategori.setImageResource(R.drawable.ic_info_green);
+            status.setText(bundle.getString("status"));
+        }else if(bundle.getString("status").equals("bukan kewenangan")){
+            btnKategori.setImageResource(R.drawable.ic_info_red);
+            status.setText(bundle.getString("status"));
+        }
 
         btnCobaLagi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +174,29 @@ public class DetailAduan extends AppCompatActivity {
         });
 
         loadKomentar();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_lokasi, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.menuLokasi) {
+            snackBar("Lokasi tidak ditemukan!", R.color.Error);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

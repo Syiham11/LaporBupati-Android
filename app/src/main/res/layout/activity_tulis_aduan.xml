@@ -14,7 +14,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="50dp"
+            android:paddingBottom="100dp"
             android:layout_margin="10dp"
             tools:context="id.go.pekalongankab.laporbupati.TulisAduan">
 
@@ -30,7 +30,7 @@
                 android:background="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_toRightOf="@+id/foto_pengirim"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/isi_aduan"
@@ -71,6 +71,8 @@
                         android:layout_alignTop="@+id/foto_aduan"
                         android:layout_alignRight="@+id/foto_aduan"/>
 
+
+
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -79,12 +81,39 @@
     </ScrollView>
 
     <RelativeLayout
+        android:layout_above="@+id/inputKomen"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkRahasia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:checked="false"
+            android:text="Aduan rahasia"/>
+        <ImageView
+            android:id="@+id/helpRahasia"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_help"
+            android:layout_toRightOf="@+id/checkRahasia"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/inputKomen"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:background="@color/white"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
         android:layout_height="wrap_content">
+
 
         <ImageView
             android:background="@color/white"

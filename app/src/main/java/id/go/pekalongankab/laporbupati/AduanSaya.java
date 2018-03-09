@@ -162,6 +162,7 @@ public class AduanSaya extends Fragment {
                                 try {
                                     JSONObject data = response.getJSONObject(i);
                                     ModelDataAduan md = new ModelDataAduan();
+                                    md.setId_aduan(data.getString("id_aduan"));
                                     md.setNama_user(data.getString("nama_user"));
                                     md.setTanggal(data.getString("dibuat"));
                                     md.setAduan(data.getString("aduan"));
@@ -214,6 +215,7 @@ public class AduanSaya extends Fragment {
                                 try {
                                     JSONObject data = response.getJSONObject(i);
                                     ModelDataAduan md = new ModelDataAduan();
+                                    md.setId_aduan(data.getString("id_aduan"));
                                     md.setNama_user(data.getString("nama_user"));
                                     md.setTanggal(data.getString("dibuat"));
                                     md.setAduan(data.getString("aduan"));
@@ -300,7 +302,7 @@ public class AduanSaya extends Fragment {
                             eror.setVisibility(View.VISIBLE);
                         }
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                            //snackBar(R.string.error_koneksi, R.color.Error);
+                            snackBar(R.string.error_koneksi, R.color.Error);
                         }
                     }
                 });

@@ -241,6 +241,7 @@ public class CariAduan extends AppCompatActivity {
                                 try {
                                     JSONObject data = response.getJSONObject(i);
                                     ModelDataAduan md = new ModelDataAduan();
+                                    md.setId_aduan(data.getString("id_aduan"));
                                     md.setNama_user(data.getString("nama_user"));
                                     md.setTanggal(data.getString("dibuat"));
                                     md.setAduan(data.getString("aduan"));

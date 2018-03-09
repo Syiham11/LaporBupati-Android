@@ -94,6 +94,18 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
         });
 
+        if (md.getStatus().equals("diverifikasi")){
+            holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_blue);
+        }else if(md.getStatus().equals("didisposisikan")){
+            holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_yellow);
+        }else if(md.getStatus().equals("penanganan")){
+            holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_orange);
+        }else if(md.getStatus().equals("selesai")){
+            holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_green);
+        }else if(md.getStatus().equals("bukan kewenangan")){
+            holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_red);
+        }
+
         holderDataAduan.btninfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

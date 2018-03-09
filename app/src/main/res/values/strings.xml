@@ -30,4 +30,5 @@
     <string name="belum_aktif">"Akun anda belum diaktifkan! silahkan periksa email anda untuk mengaktifkan"</string>
     <string name="error_empty_email">"Harap isi Nomor telepon/email anda!"</string>
     <string name="error_empty_pass">"Harap isi password anda!"</string>
+    <string name="aduan_rahasia">"Aduan rahasia berfungsi untuk melindungi identitas anda karena aduan yang sensitif. Aduan rahasia tidak ditampilkan ke publik tapi bisa dilihat di menu aduan saya."</string>
 </resources>
