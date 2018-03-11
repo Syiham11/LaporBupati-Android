@@ -245,7 +245,7 @@ public class Aduan extends Fragment {
                             //dialog.hide();
                             loadingmore.setVisibility(View.GONE);
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                snackBar(R.string.error_koneksi, R.color.Error);
+                                //snackBar(R.string.error_koneksi, R.color.Error);
                             }
                         }
                     });

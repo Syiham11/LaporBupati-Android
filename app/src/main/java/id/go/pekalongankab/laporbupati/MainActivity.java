@@ -1,9 +1,12 @@
 package id.go.pekalongankab.laporbupati;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,7 +38,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import dmax.dialog.SpotsDialog;
+import id.go.pekalongankab.laporbupati.Util.PrefManager;
 import id.go.pekalongankab.laporbupati.Util.ServerAPI;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,12 +51,16 @@ public class MainActivity extends AppCompatActivity
     RequestQueue mRequestQueque;
     SpotsDialog dialog;
     public FloatingActionButton fab;
+    String versi;
+    PrefManager prefManager;
+    Toolbar toolbar;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
 
@@ -64,6 +73,14 @@ public class MainActivity extends AppCompatActivity
                 startActivity(i);
             }
         });
+
+        //mendapatkan versi
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            versi = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -113,6 +130,25 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fraduan);
         fragmentTransaction.commit();
+
+        //saat aplikasi pertama kali dibuka
+        prefManager = new PrefManager(this);
+        if (prefManager.isFirstTimeLaunch()){
+            //prefManager.setFirstTimeLaunch(false);
+            new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                    .setTarget(findViewById(R.id.fab))
+                    .setBackButtonDismissEnabled(true)
+                    .setBackgroundColour(Color.parseColor("#DC1CAF9A"))
+                    .setPrimaryText("Mengirim aduan")
+                    .setSecondaryText("Tekan tombol ini untuk memulai membuat aduan")
+                    .show();
+
+            /*final MaterialTapTargetPrompt.Builder tapTargetPromptBuilder = new MaterialTapTargetPrompt.Builder(this)
+                    .setPrimaryText("Menu search")
+                    .setSecondaryText("Menu search");
+            tapTargetPromptBuilder.setTarget(toolbar.getChildAt(0));
+            tapTargetPromptBuilder.show();*/
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -238,7 +274,7 @@ public class MainActivity extends AppCompatActivity
             new AlertDialog.Builder(this)
                     .setTitle("Lapor Bupati")
                     .setIcon(R.mipmap.ic_launcher)
-                    .setMessage("versi 1.0\n\n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing. A arcu cursus vitae congue mauris. Mollis aliquam ut porttitor leo a diam sollicitudin. Quis commodo odio aenean sed adipiscing diam donec.")
+                    .setMessage("versi "+versi+"\n\n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing. A arcu cursus vitae congue mauris. Mollis aliquam ut porttitor leo a diam sollicitudin. Quis commodo odio aenean sed adipiscing diam donec.")
                     .setCancelable(false)
                     .setNegativeButton("OK", null)
                     .show();

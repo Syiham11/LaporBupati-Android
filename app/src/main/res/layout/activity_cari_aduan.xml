@@ -73,7 +73,7 @@
             android:visibility="gone"
             android:layout_gravity="bottom|center"
             app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/colorPrimaryT"
+            app:cardBackgroundColor="@color/colorPrimary"
             android:layout_margin="20dp"
             android:id="@+id/loadingmore"
             app:cardElevation="0dp"

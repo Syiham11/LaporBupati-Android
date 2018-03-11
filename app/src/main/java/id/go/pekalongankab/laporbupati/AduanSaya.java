@@ -241,7 +241,7 @@ public class AduanSaya extends Fragment {
                             Log.d("volley", "error : "+error.getMessage());
                             dialog.hide();
                             if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
-                                snackBar(R.string.error_koneksi, R.color.Error);
+                                //snackBar(R.string.error_koneksi, R.color.Error);
                             }
                         }
                     });
@@ -259,7 +259,7 @@ public class AduanSaya extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        dialog.show();
+                        dialog.hide();
                         loadingbar.setVisibility(View.GONE);
                         loaded = true;
                         mItems.clear();
@@ -296,7 +296,7 @@ public class AduanSaya extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("volley", "error : "+error.getMessage());
-                        dialog.show();
+                        dialog.hide();
                         loadingbar.setVisibility(View.GONE);
                         if (loaded == false){
                             eror.setVisibility(View.VISIBLE);

@@ -20,12 +20,6 @@ android {
     }
 }
 
-
-
-
-
-
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -51,6 +45,7 @@ dependencies {
     compile 'com.jsibbold:zoomage:1.1.0'
     compile 'com.github.d-max:spots-dialog:0.7@aar'
     compile 'com.github.vihtarb:tooltip:0.1.9'
+    implementation 'uk.co.samuelwall:material-tap-target-prompt:2.7.0'
     compile 'com.google.android.gms:play-services-location:11.8.0'
     testCompile 'junit:junit:4.12'
 }
