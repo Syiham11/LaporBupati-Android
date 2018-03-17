@@ -294,13 +294,14 @@ public class TulisAduan extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showFileChooser() {
+    /*private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
+    }*/
 
+    //memilih foto
     private void selectImage() {
         //foto_aduan.setImageResource(0);
         final CharSequence[] items = {"Buka kamera", "Pilih dari galeri"};
@@ -332,6 +333,7 @@ public class TulisAduan extends AppCompatActivity {
         return Uri.fromFile(getOutputMediaFile());
     }
 
+    //menyimpan foto ke direktori internal
     private static File getOutputMediaFile() {
 
         // External sdcard location
@@ -353,6 +355,7 @@ public class TulisAduan extends AppCompatActivity {
         return mediaFile;
     }
 
+    //menampilkan foto terpiih
     private void setToImageView(Bitmap bmp) {
         //compress image
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -381,6 +384,7 @@ public class TulisAduan extends AppCompatActivity {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
+    //menentukan sumber foto
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -408,6 +412,7 @@ public class TulisAduan extends AppCompatActivity {
 
     }
 
+    //mengubah foto ke base64
     public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, baos);
@@ -416,6 +421,7 @@ public class TulisAduan extends AppCompatActivity {
         return encodedImage;
     }
 
+    //mengirim aduan dengan foto
     private void uploadImage() {
         //menampilkan progress dialog
         loading.show();
@@ -479,6 +485,7 @@ public class TulisAduan extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(stringRequest, tag_json_obj);
     }
 
+    //mengirim aduan tanpa foto
     private void uploadAduan() {
         //menampilkan progress dialog
         loading.show();

@@ -1,16 +1,20 @@
 package id.go.pekalongankab.laporbupati;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,6 +36,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.Adapter.AdapterDataPemberitahuan;
 import id.go.pekalongankab.laporbupati.Model.ModelDataKomentar;
 import id.go.pekalongankab.laporbupati.Model.ModelDataPemberitahuan;
@@ -53,6 +58,7 @@ public class Pemberitahuan extends AppCompatActivity {
     String id_user;
     TextView texterror;
     Button btnCobaLagi;
+    SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +121,39 @@ public class Pemberitahuan extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_delete, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.menuDelete) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Hapus pemberitahuan?")
+                    .setMessage("Anda yakin akan menghapus semua pemberitahuan?")
+                    .setCancelable(false)
+                    .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            deletePemberitahuan();
+                        }
+                    })
+                    .setNegativeButton("Tidak", null)
+                    .show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void loadPembritahuan(){
         loading.setVisibility(View.VISIBLE);
         eror.setVisibility(View.GONE);
@@ -156,6 +195,22 @@ public class Pemberitahuan extends AppCompatActivity {
                     }
                 });
         AppController.getInstance().addToRequestQueue(requestData);
+    }
+
+    private void deletePemberitahuan(){
+        dialog = new SpotsDialog(this, "Menghapus pemberitahuan...");
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.hide();
+                new AlertDialog.Builder(Pemberitahuan.this)
+                        .setMessage("Pemberitahuan berhasil dihapus.")
+                        .setCancelable(false)
+                        .setNegativeButton("Ok", null)
+                        .show();
+            }
+        }, 2000);
     }
 
     private void snackBar(String pesan, int warna){

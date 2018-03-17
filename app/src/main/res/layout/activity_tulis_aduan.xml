@@ -40,7 +40,7 @@
                     android:gravity="top|left"
                     android:minLines="10"
                     android:hint="Apa yang sedang terjadi di sekitar anda?"
-                    android:inputType="textMultiLine"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:padding="10dp"
                     android:textSize="16sp" />
                 <RelativeLayout
@@ -118,7 +118,7 @@
         <ImageView
             android:background="@color/white"
             android:id="@+id/tambah_foto"
-            android:src="@drawable/ic_add_foto"
+            android:src="@drawable/ic_add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="2dp"

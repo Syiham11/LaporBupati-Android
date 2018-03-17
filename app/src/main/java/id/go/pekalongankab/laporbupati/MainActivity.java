@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
         //saat aplikasi pertama kali dibuka
         prefManager = new PrefManager(this);
         if (prefManager.isFirstTimeLaunch()){
-            //prefManager.setFirstTimeLaunch(false);
+            prefManager.setFirstTimeLaunch(false);
             new MaterialTapTargetPrompt.Builder(MainActivity.this)
                     .setTarget(findViewById(R.id.fab))
                     .setBackButtonDismissEnabled(true)

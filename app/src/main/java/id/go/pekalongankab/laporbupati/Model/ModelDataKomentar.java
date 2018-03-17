@@ -6,7 +6,7 @@ package id.go.pekalongankab.laporbupati.Model;
 
 public class ModelDataKomentar {
 
-    String id_komentar, komentar, tanggal;
+    String id_komentar, komentar, tanggal, foto, role;
 
     public String getId_komentar() {
         return id_komentar;
@@ -30,5 +30,21 @@ public class ModelDataKomentar {
 
     public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

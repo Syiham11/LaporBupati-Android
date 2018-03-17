@@ -1,10 +1,16 @@
 package id.go.pekalongankab.laporbupati.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -41,21 +47,30 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
         HolderDataKomentar holderDataKomentar = (HolderDataKomentar) holder;
         holderDataKomentar.komentar.setText(md.getKomentar());
         holderDataKomentar.tglkomentar.setText(md.getTanggal());
-        /*if (Integer.parseInt(holder.md.getNilai_siswa()) <= Integer.parseInt(holder.md.getMin())){
-            holder.tvnama_siswa.setTextColor(R.color.bg_screen1);
-            holder.tvno_daftar.setTextColor(R.color.bg_screen1);
-        }*/
 
-        /*holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("detail", "Detail Sekolah");
-                Intent intent = new Intent(context, DetailSekolah.class);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
-        });*/
+        if (md.getFoto().isEmpty()){
+            holderDataKomentar.fotoKomen.setVisibility(View.GONE);
+        }else{
+            holderDataKomentar.fotoKomen.setVisibility(View.VISIBLE);
+        }
+
+        if (md.getRole().equals("1")){
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            layoutParams.setMargins(0,0,100,0);
+            holderDataKomentar.role.setLayoutParams(layoutParams);
+        }else{
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            layoutParams.setMargins(100,0,0,0);
+            holderDataKomentar.cardKomen.setCardBackgroundColor(Color.parseColor("#DC1CAF9A"));
+            holderDataKomentar.komentar.setTextColor(Color.parseColor("#ffffff"));
+            holderDataKomentar.role.setLayoutParams(layoutParams);
+        }
 
     }
 
@@ -68,7 +83,9 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
 
     class HolderDataKomentar extends RecyclerView.ViewHolder {
         TextView komentar, tglkomentar;
-        //CardView card;
+        ImageView fotoKomen;
+        CardView cardKomen;
+        RelativeLayout role;
         ModelDataKomentar md;
 
         public HolderDataKomentar(View view){
@@ -76,6 +93,9 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
 
             komentar = (TextView) view.findViewById(R.id.komentar);
             tglkomentar = (TextView) view.findViewById(R.id.tanggalkomen);
+            fotoKomen = (ImageView) view.findViewById(R.id.fotoKomen);
+            cardKomen = (CardView) view.findViewById(R.id.cardkomentar);
+            role = (RelativeLayout) view.findViewById(R.id.relAlign);
 
             /*view.setOnClickListener(new View.OnClickListener() {
                 @Override
