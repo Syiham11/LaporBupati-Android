@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
-
+        Bundle bundle = getIntent().getExtras();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -126,10 +126,17 @@ public class MainActivity extends AppCompatActivity
         });
 
         //inisialisasi fragment
-        Aduan fraduan = new Aduan();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, fraduan);
-        fragmentTransaction.commit();
+        if (bundle.getString("source").equals("login")){
+            Aduan fraduan = new Aduan();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frameLayout, fraduan);
+            fragmentTransaction.commit();
+        }else{
+            AduanSaya fraduan = new AduanSaya();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frameLayout, fraduan);
+            fragmentTransaction.commit();
+        }
 
         //saat aplikasi pertama kali dibuka
         prefManager = new PrefManager(this);

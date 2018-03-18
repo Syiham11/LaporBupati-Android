@@ -1,6 +1,7 @@
 package id.go.pekalongankab.laporbupati.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import id.go.pekalongankab.laporbupati.DetailAduan;
+import id.go.pekalongankab.laporbupati.LihatFoto;
 import id.go.pekalongankab.laporbupati.Model.ModelDataKomentar;
 import id.go.pekalongankab.laporbupati.R;
 
@@ -46,13 +49,22 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
         ModelDataKomentar md = mItems.get(position);
         HolderDataKomentar holderDataKomentar = (HolderDataKomentar) holder;
         holderDataKomentar.komentar.setText(md.getKomentar());
-        holderDataKomentar.tglkomentar.setText(md.getTanggal());
+        holderDataKomentar.tglkomentar.setText("-- "+md.getTanggal()+" --");
 
         if (md.getFoto().isEmpty()){
             holderDataKomentar.fotoKomen.setVisibility(View.GONE);
         }else{
             holderDataKomentar.fotoKomen.setVisibility(View.VISIBLE);
         }
+
+        holderDataKomentar.fotoKomen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, LihatFoto.class);
+                i.putExtra("source", "komentar");
+                context.startActivity(i);
+            }
+        });
 
         if (md.getRole().equals("1")){
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(

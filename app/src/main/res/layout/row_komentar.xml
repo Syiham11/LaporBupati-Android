@@ -18,7 +18,7 @@
             app:cardBackgroundColor="@color/white"
             android:layout_width="wrap_content"
             app:cardElevation="1dp"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="10dp"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -28,15 +28,17 @@
 
                 <ImageView
                     android:id="@+id/fotoKomen"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/no_image"/>
 
                 <TextView
                     android:id="@+id/komentar"
-                    android:layout_margin="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:layout_margin="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:layout_width="match_parent"
@@ -48,17 +50,18 @@
 
         </android.support.v7.widget.CardView>
 
-        <TextView
-            android:id="@+id/tanggalkomen"
-            android:layout_width="wrap_content"
-            android:layout_below="@+id/cardkomentar"
-            android:layout_height="wrap_content"
-            android:text="Tanggal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:textSize="10sp"/>
-
     </RelativeLayout>
+
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tanggalkomen"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/relAlign"
+        android:layout_height="wrap_content"
+        android:text="Tanggal"
+        android:textAlignment="center"
+        android:layout_marginTop="5dp"
+        android:textSize="10sp"/>
 
 </RelativeLayout>

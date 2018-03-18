@@ -106,6 +106,7 @@ public class Login extends Activity {
         if (login == 1) {
             // kalau user ternyata udah login langsung di lempar ke main activity tanpa harus login terlebih dahulu
             Intent intent = new Intent(Login.this, MainActivity.class);
+            intent.putExtra("source", "login");
             startActivity(intent);
             finish();
         }
@@ -235,6 +236,7 @@ public class Login extends Activity {
                         //jika sudah masuk ke mainactivity
                         Intent intent = new Intent(Login.this,
                                 MainActivity.class);
+                        intent.putExtra("source", "login");
                         startActivity(intent);
                         finish();
                     } else if(code.equals("0")) {
