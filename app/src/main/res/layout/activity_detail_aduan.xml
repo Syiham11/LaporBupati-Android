@@ -84,7 +84,6 @@
                 <ImageView
                     android:id="@+id/foto_aduan"
                     android:clickable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/no_image" />
@@ -104,6 +103,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_weight="1"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -122,14 +122,30 @@
 
                     </LinearLayout>
 
-
-                    <View
-
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:background="#cacaca" />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_action_komentar" />
+
+                        <TextView
+                            android:id="@+id/jmlkomentar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:text="12" />
+
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"

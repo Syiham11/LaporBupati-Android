@@ -169,10 +169,12 @@ public class Aduan extends Fragment {
                                 md.setKategori(data.getString("kategori"));
                                 md.setStatus(data.getString("status"));
                                 md.setFoto_aduan(data.getString("lampiran"));
-                                md.setFoto_user(data.getString("foto"));
+                                md.setFoto_user(data.getString("thumb"));
                                 md.setStatus(data.getString("status"));
                                 md.setLongi(data.getString("longitude"));
                                 md.setLati(data.getString("latitude"));
+                                md.setJmladuan(data.getString("jmladuan"));
+                                md.setJmlkomen(data.getString("jmlkomen"));
                                 mItems.add(md);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -226,10 +228,12 @@ public class Aduan extends Fragment {
                                     md.setKategori(data.getString("kategori"));
                                     md.setStatus(data.getString("status"));
                                     md.setFoto_aduan(data.getString("lampiran"));
-                                    md.setFoto_user(data.getString("foto"));
+                                    md.setFoto_user(data.getString("thumb"));
                                     md.setStatus(data.getString("status"));
                                     md.setLongi(data.getString("longitude"));
                                     md.setLati(data.getString("latitude"));
+                                    md.setJmladuan(data.getString("jmladuan"));
+                                    md.setJmlkomen(data.getString("jmlkomen"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -286,10 +290,12 @@ public class Aduan extends Fragment {
                                 md.setKategori(data.getString("kategori"));
                                 md.setStatus(data.getString("status"));
                                 md.setFoto_aduan(data.getString("lampiran"));
-                                md.setFoto_user(data.getString("foto"));
+                                md.setFoto_user(data.getString("thumb"));
                                 md.setStatus(data.getString("status"));
                                 md.setLongi(data.getString("longitude"));
                                 md.setLati(data.getString("latitude"));
+                                md.setJmladuan(data.getString("jmladuan"));
+                                md.setJmlkomen(data.getString("jmlkomen"));
                                 mItems.add(md);
                             } catch (JSONException e) {
                                 e.printStackTrace();

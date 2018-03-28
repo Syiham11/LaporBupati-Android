@@ -20,6 +20,7 @@ public class ServerAPI {
 
     public static final String URL_FOTO_OPD = "http://"+IP+"/laporbupati/files/opd/source/";
     public static final String URL_FOTO_USER = "http://"+IP+"/laporbupati/files/user/source/";
+    public static final String URL_FOTO_USER_THUMB = "http://"+IP+"/laporbupati/files/user/thumb/";
     public static final String URL_FOTO_ADUAN = "http://"+IP+"/laporbupati/files/aduan/source/";
 
     public static int perLoadAduan = 10;

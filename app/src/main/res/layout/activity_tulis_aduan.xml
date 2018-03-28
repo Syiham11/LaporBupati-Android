@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="match_parent"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -69,7 +70,8 @@
                         android:background="@drawable/bg_btn_hapus"
                         app:cardBackgroundColor="#5b000000"
                         android:layout_alignTop="@+id/foto_aduan"
-                        android:layout_alignRight="@+id/foto_aduan"/>
+                        android:layout_alignRight="@+id/foto_aduan"
+                        tools:ignore="MissingPrefix" />
 
 
 

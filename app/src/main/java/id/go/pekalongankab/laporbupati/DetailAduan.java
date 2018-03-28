@@ -43,6 +43,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -63,7 +64,7 @@ import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 public class DetailAduan extends AppCompatActivity {
 
     ImageView fotoUser, fotoAduan, btnKategori, btnTambahFoto, fotoKomen, btnHapusFoto;
-    TextView namaUser, level, tanggal, isiAduan, kategori, status;
+    TextView namaUser, level, tanggal, isiAduan, kategori, status, jmlkomen;
     CardView btnKirim;
     EditText komentar;
     RecyclerView mRecyclerview;
@@ -132,6 +133,7 @@ public class DetailAduan extends AppCompatActivity {
         isiAduan = (TextView) findViewById(R.id.isi_aduan);
         kategori = (TextView) findViewById(R.id.kategori);
         status = (TextView) findViewById(R.id.txtStatus);
+        jmlkomen = (TextView) findViewById(R.id.jmlkomentar);
 
         komentar = (EditText) findViewById(R.id.komentar);
 
@@ -140,8 +142,9 @@ public class DetailAduan extends AppCompatActivity {
         tanggal.setText(bundle.getString("tanggal"));
         isiAduan.setText(bundle.getString("aduan"));
         kategori.setText(bundle.getString("kategori"));
+        jmlkomen.setText(bundle.getString("jmlkomen"));
 
-        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER+bundle.getString("foto_user"))
+        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER_THUMB+bundle.getString("foto_user"))
                 .thumbnail(0.5f)
                 .centerCrop()
                 .crossFade()

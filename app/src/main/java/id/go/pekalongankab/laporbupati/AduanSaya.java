@@ -156,7 +156,7 @@ public class AduanSaya extends Fragment {
                         Alldata = response.length();
                         Log.d("volley", "response : "+response.toString());
                         if(response.length() <= 0){
-                            snackBar(R.string.error_koneksi, R.color.Error);
+                            snackBar(R.string.aduan_kosong, R.color.Info);
                         }else{
                             for (int i = 0; i< ServerAPI.perLoadAduan; i++){
                                 try {
@@ -169,10 +169,12 @@ public class AduanSaya extends Fragment {
                                     md.setKategori(data.getString("kategori"));
                                     md.setStatus(data.getString("status"));
                                     md.setFoto_aduan(data.getString("lampiran"));
-                                    md.setFoto_user(data.getString("foto"));
+                                    md.setFoto_user(data.getString("thumb"));
                                     md.setStatus(data.getString("status"));
                                     md.setLongi(data.getString("longitude"));
                                     md.setLati(data.getString("latitude"));
+                                    md.setJmladuan(data.getString("jmladuan"));
+                                    md.setJmlkomen(data.getString("jmlkomen"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -222,10 +224,12 @@ public class AduanSaya extends Fragment {
                                     md.setKategori(data.getString("kategori"));
                                     md.setStatus(data.getString("status"));
                                     md.setFoto_aduan(data.getString("lampiran"));
-                                    md.setFoto_user(data.getString("foto"));
+                                    md.setFoto_user(data.getString("thumb"));
                                     md.setStatus(data.getString("status"));
                                     md.setLongi(data.getString("longitude"));
                                     md.setLati(data.getString("latitude"));
+                                    md.setJmladuan(data.getString("jmladuan"));
+                                    md.setJmlkomen(data.getString("jmlkomen"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -279,10 +283,12 @@ public class AduanSaya extends Fragment {
                                     md.setKategori(data.getString("kategori"));
                                     md.setStatus(data.getString("status"));
                                     md.setFoto_aduan(data.getString("lampiran"));
-                                    md.setFoto_user(data.getString("foto"));
+                                    md.setFoto_user(data.getString("thumb"));
                                     md.setStatus(data.getString("status"));
                                     md.setLongi(data.getString("longitude"));
                                     md.setLati(data.getString("latitude"));
+                                    md.setJmladuan(data.getString("jmladuan"));
+                                    md.setJmlkomen(data.getString("jmlkomen"));
                                     mItems.add(md);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

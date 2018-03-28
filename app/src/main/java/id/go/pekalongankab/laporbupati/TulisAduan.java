@@ -67,7 +67,7 @@ public class TulisAduan extends AppCompatActivity {
     EditText isi_aduan;
     Bitmap bitmap, decoded;
     Spinner kategori;
-    String txtkategori;
+    String txtkategori, rahasia;
     int success;
     Uri fileUri;
     int PICK_IMAGE_REQUEST = 1;
@@ -122,6 +122,20 @@ public class TulisAduan extends AppCompatActivity {
             }
         });
 
+        rahasia = "0";
+
+        //checkbox rahasia
+        ckRahasia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ckRahasia.isChecked()){
+                    rahasia = "1";
+                }else{
+                    rahasia = "0";
+                }
+            }
+        });
+
         helpRahasia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +162,7 @@ public class TulisAduan extends AppCompatActivity {
         final String foto = pref.getString("foto","");
 
         //load foto dg glide
-        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER+foto)
+        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER_THUMB+foto)
                 .thumbnail(0.5f)
                 .centerCrop()
                 .crossFade()
@@ -475,6 +489,7 @@ public class TulisAduan extends AppCompatActivity {
                 params.put("aduan", isi_aduan.getText().toString());
                 params.put("kategori", txtkategori);
                 params.put("id_user", id_user);
+                params.put("rahasia", rahasia);
 
                 //kembali ke parameters
                 Log.e(TAG, "" + params);
@@ -537,6 +552,7 @@ public class TulisAduan extends AppCompatActivity {
                 params.put("aduan", isi_aduan.getText().toString());
                 params.put("kategori", txtkategori);
                 params.put("id_user", id_user);
+                params.put("rahasia", rahasia);
 
                 //kembali ke parameters
                 Log.e(TAG, "" + params);

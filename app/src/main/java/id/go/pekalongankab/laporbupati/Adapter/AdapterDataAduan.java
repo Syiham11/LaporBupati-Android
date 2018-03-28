@@ -53,7 +53,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             holderDataAduan.aduan.setText(aduanp+" ... Selengkapnya");
         }
         holderDataAduan.kategori.setText(md.getKategori());
-        Glide.with(context).load(ServerAPI.URL_FOTO_USER+md.getFoto_user())
+        Glide.with(context).load(ServerAPI.URL_FOTO_USER_THUMB+md.getFoto_user())
                 .thumbnail(0.5f)
                 .crossFade()
                 .error(R.drawable.ic_no_image_male_white)
@@ -90,6 +90,8 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
                 i.putExtra("katgori", md.getKategori());
                 i.putExtra("long", md.getLongi());
                 i.putExtra("lat", md.getLati());
+                i.putExtra("level", md.getJmladuan());
+                i.putExtra("jmlkomen", md.getJmlkomen());
                 context.startActivity(i);
             }
         });
@@ -106,6 +108,9 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_red);
         }
 
+        holderDataAduan.jmlkomen.setText(md.getJmlkomen());
+        holderDataAduan.jmladuan.setText(md.getJmladuan());
+
         holderDataAduan.btninfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +126,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private class HolderDataAduan extends RecyclerView.ViewHolder {
         ModelDataAduan md;
-        public TextView nama_user, tanggal, aduan, kategori;
+        public TextView nama_user, tanggal, aduan, kategori, jmlkomen, jmladuan;
         public ImageView foto_user, foto_aduan, btninfo;
         CardView cardView;
 
@@ -135,6 +140,8 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             foto_user = (ImageView) view.findViewById(R.id.foto_user);
             cardView = (CardView) view.findViewById(R.id.cardAduan);
             btninfo = (ImageView) view.findViewById(R.id.btnInfo);
+            jmlkomen = (TextView) view.findViewById(R.id.komentar);
+            jmladuan = (TextView) view.findViewById(R.id.level);
         }
     }
 }
