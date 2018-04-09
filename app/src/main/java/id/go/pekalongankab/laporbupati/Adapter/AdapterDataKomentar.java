@@ -20,6 +20,7 @@ import id.go.pekalongankab.laporbupati.DetailAduan;
 import id.go.pekalongankab.laporbupati.LihatFoto;
 import id.go.pekalongankab.laporbupati.Model.ModelDataKomentar;
 import id.go.pekalongankab.laporbupati.R;
+import id.go.pekalongankab.laporbupati.Util.Tanggal;
 
 /**
  * Created by erik on 12/02/2018.
@@ -29,6 +30,7 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
 
     private List<ModelDataKomentar> mItems;
     private Context context;
+    Tanggal tanggal = new Tanggal();
 
     public AdapterDataKomentar(Context context, List<ModelDataKomentar> items){
         this.mItems = items;
@@ -49,7 +51,7 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
         ModelDataKomentar md = mItems.get(position);
         HolderDataKomentar holderDataKomentar = (HolderDataKomentar) holder;
         holderDataKomentar.komentar.setText(md.getKomentar());
-        holderDataKomentar.tglkomentar.setText("-- "+md.getTanggal()+" --");
+        holderDataKomentar.tglkomentar.setText("-- "+tanggal.tanggal(md.getTanggal())+" --");
 
         if (md.getFoto().isEmpty()){
             holderDataKomentar.fotoKomen.setVisibility(View.GONE);

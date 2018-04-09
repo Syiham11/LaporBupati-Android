@@ -162,7 +162,7 @@ public class TulisAduan extends AppCompatActivity {
         final String foto = pref.getString("foto","");
 
         //load foto dg glide
-        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER_THUMB+foto)
+        Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER+foto)
                 .thumbnail(0.5f)
                 .centerCrop()
                 .crossFade()

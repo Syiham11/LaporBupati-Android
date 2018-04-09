@@ -198,6 +198,9 @@ public class DetailAduan extends AppCompatActivity {
         }else if(bundle.getString("status").equals("bukan kewenangan")){
             btnKategori.setImageResource(R.drawable.ic_info_red);
             status.setText(bundle.getString("status"));
+        }else if(bundle.getString("status").equals("sampah")){
+            btnKategori.setImageResource(R.drawable.ic_info_red);
+            status.setText(bundle.getString("status"));
         }
 
         btnCobaLagi.setOnClickListener(new View.OnClickListener() {

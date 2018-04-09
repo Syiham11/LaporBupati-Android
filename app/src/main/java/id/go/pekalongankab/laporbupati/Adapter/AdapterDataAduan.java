@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import id.go.pekalongankab.laporbupati.Util.Tanggal;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -28,6 +29,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private Context context;
     private List<ModelDataAduan> mItems;
+    Tanggal tanggal = new Tanggal();
 
     public AdapterDataAduan(List<ModelDataAduan> mItems, Context context) {
         this.mItems = mItems;
@@ -45,7 +47,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
         final ModelDataAduan md = mItems.get(position);
         final HolderDataAduan holderDataAduan = (HolderDataAduan) holder;
         holderDataAduan.nama_user.setText(md.getNama_user());
-        holderDataAduan.tanggal.setText(md.getTanggal());
+        holderDataAduan.tanggal.setText(tanggal.tanggal(md.getTanggal()));
         if (md.getAduan().length() <= 200){
             holderDataAduan.aduan.setText(md.getAduan());
         }else{
@@ -82,7 +84,7 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
                 i.putExtra("foto_user", md.getFoto_user());
                 i.putExtra("nama", md.getNama_user());
                 i.putExtra("level", "Level");
-                i.putExtra("tanggal", md.getTanggal());
+                i.putExtra("tanggal", tanggal.tanggal(md.getTanggal()));
                 i.putExtra("aduan", md.getAduan());
                 i.putExtra("foto_aduan", md.getFoto_aduan());
                 i.putExtra("kategori", md.getKategori());
@@ -105,6 +107,8 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
         }else if(md.getStatus().equals("selesai")){
             holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_green);
         }else if(md.getStatus().equals("bukan kewenangan")){
+            holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_red);
+        }else if(md.getStatus().equals("sampah")){
             holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_red);
         }
 

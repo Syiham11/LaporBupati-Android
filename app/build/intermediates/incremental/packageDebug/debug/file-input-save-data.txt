@@ -1,0 +1,11 @@
+#Internal package file, do not edit.
+#Sun Mar 18 02:43:59 ICT 2018
+1.base=D\:\\AndroidStudioProjects\\laporbupati\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.baseType=DIRECTORY
+1.baseType=DIRECTORY
+count=2
+1.set=DEX
+0.path=petunjuk.html
+0.set=ASSET
+0.base=D\:\\AndroidStudioProjects\\laporbupati\\app\\build\\intermediates\\assets\\debug
+1.path=classes.dex

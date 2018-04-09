@@ -20,6 +20,7 @@ import id.go.pekalongankab.laporbupati.AduanSaya;
 import id.go.pekalongankab.laporbupati.MainActivity;
 import id.go.pekalongankab.laporbupati.Model.ModelDataPemberitahuan;
 import id.go.pekalongankab.laporbupati.R;
+import id.go.pekalongankab.laporbupati.Util.Tanggal;
 
 /**
  * Created by erik on 2/18/2018.
@@ -30,6 +31,7 @@ public class AdapterDataPemberitahuan extends RecyclerView.Adapter<RecyclerView.
     private Context context;
     private List<ModelDataPemberitahuan> mItems;
     public static final int NOTIFICATION_ID = 1;
+    Tanggal tanggal = new Tanggal();
 
     public AdapterDataPemberitahuan(List<ModelDataPemberitahuan> mItems, Context context) {
         this.mItems = mItems;
@@ -47,7 +49,7 @@ public class AdapterDataPemberitahuan extends RecyclerView.Adapter<RecyclerView.
         final ModelDataPemberitahuan md = mItems.get(position);
         HolderDataPemberitahuan holderDataPemberitahuan = (HolderDataPemberitahuan) holder;
         holderDataPemberitahuan.pemberitahuan.setText(md.getPemberitahuan());
-        holderDataPemberitahuan.tanggal.setText(md.getTanggal());
+        holderDataPemberitahuan.tanggal.setText(tanggal.tanggal(md.getTanggal()));
 
         holderDataPemberitahuan.cardPemberitahuan.setOnClickListener(new View.OnClickListener() {
             @Override
