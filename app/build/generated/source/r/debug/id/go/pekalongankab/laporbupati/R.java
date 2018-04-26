@@ -3791,62 +3791,63 @@ public final class R {
     public static final int ic_help=0x7f08008e;
     public static final int ic_info_blue=0x7f08008f;
     public static final int ic_info_green=0x7f080090;
-    public static final int ic_info_orange=0x7f080091;
-    public static final int ic_info_red=0x7f080092;
-    public static final int ic_info_yellow=0x7f080093;
-    public static final int ic_jk=0x7f080094;
-    public static final int ic_kategori=0x7f080095;
-    public static final int ic_key_white_24dp=0x7f080096;
-    public static final int ic_komentar=0x7f080097;
-    public static final int ic_ktp=0x7f080098;
-    public static final int ic_label=0x7f080099;
-    public static final int ic_lahir=0x7f08009a;
-    public static final int ic_like=0x7f08009b;
-    public static final int ic_like_filled=0x7f08009c;
-    public static final int ic_logo=0x7f08009d;
-    public static final int ic_logo_kab=0x7f08009e;
-    public static final int ic_logo_white=0x7f08009f;
-    public static final int ic_logout=0x7f0800a0;
-    public static final int ic_lokasi_white=0x7f0800a1;
-    public static final int ic_menu_camera=0x7f0800a2;
-    public static final int ic_menu_gallery=0x7f0800a3;
-    public static final int ic_menu_manage=0x7f0800a4;
-    public static final int ic_menu_send=0x7f0800a5;
-    public static final int ic_menu_share=0x7f0800a6;
-    public static final int ic_menu_slideshow=0x7f0800a7;
-    public static final int ic_mode_edit_white_24dp=0x7f0800a8;
-    public static final int ic_new_search=0x7f0800a9;
-    public static final int ic_no_image_male_white=0x7f0800aa;
-    public static final int ic_noimage=0x7f0800ab;
-    public static final int ic_notifications=0x7f0800ac;
-    public static final int ic_opd=0x7f0800ad;
-    public static final int ic_pemberitahuan_ada=0x7f0800ae;
-    public static final int ic_petunjuk=0x7f0800af;
-    public static final int ic_phone_white_24dp=0x7f0800b0;
-    public static final int ic_refresh=0x7f0800b1;
-    public static final int ic_right=0x7f0800b2;
-    public static final int ic_search_white_24dp=0x7f0800b3;
-    public static final int ic_sedih=0x7f0800b4;
-    public static final int ic_send_white_24dp=0x7f0800b5;
-    public static final int ic_telp=0x7f0800b6;
-    public static final int ic_tulis_aduan_black=0x7f0800b7;
-    public static final int ic_user=0x7f0800b8;
-    public static final int ic_website=0x7f0800b9;
-    public static final int navigation_empty_icon=0x7f0800ba;
-    public static final int no_image=0x7f0800bb;
-    public static final int notification_action_background=0x7f0800bc;
-    public static final int notification_bg=0x7f0800bd;
-    public static final int notification_bg_low=0x7f0800be;
-    public static final int notification_bg_low_normal=0x7f0800bf;
-    public static final int notification_bg_low_pressed=0x7f0800c0;
-    public static final int notification_bg_normal=0x7f0800c1;
-    public static final int notification_bg_normal_pressed=0x7f0800c2;
-    public static final int notification_icon_background=0x7f0800c3;
-    public static final int notification_template_icon_bg=0x7f0800c4;
-    public static final int notification_template_icon_low_bg=0x7f0800c5;
-    public static final int notification_tile_bg=0x7f0800c6;
-    public static final int notify_panel_notification_icon_bg=0x7f0800c7;
-    public static final int side_nav_bar=0x7f0800c8;
+    public static final int ic_info_grey=0x7f080091;
+    public static final int ic_info_orange=0x7f080092;
+    public static final int ic_info_red=0x7f080093;
+    public static final int ic_info_yellow=0x7f080094;
+    public static final int ic_jk=0x7f080095;
+    public static final int ic_kategori=0x7f080096;
+    public static final int ic_key_white_24dp=0x7f080097;
+    public static final int ic_komentar=0x7f080098;
+    public static final int ic_ktp=0x7f080099;
+    public static final int ic_label=0x7f08009a;
+    public static final int ic_lahir=0x7f08009b;
+    public static final int ic_like=0x7f08009c;
+    public static final int ic_like_filled=0x7f08009d;
+    public static final int ic_logo=0x7f08009e;
+    public static final int ic_logo_kab=0x7f08009f;
+    public static final int ic_logo_white=0x7f0800a0;
+    public static final int ic_logout=0x7f0800a1;
+    public static final int ic_lokasi_white=0x7f0800a2;
+    public static final int ic_menu_camera=0x7f0800a3;
+    public static final int ic_menu_gallery=0x7f0800a4;
+    public static final int ic_menu_manage=0x7f0800a5;
+    public static final int ic_menu_send=0x7f0800a6;
+    public static final int ic_menu_share=0x7f0800a7;
+    public static final int ic_menu_slideshow=0x7f0800a8;
+    public static final int ic_mode_edit_white_24dp=0x7f0800a9;
+    public static final int ic_new_search=0x7f0800aa;
+    public static final int ic_no_image_male_white=0x7f0800ab;
+    public static final int ic_noimage=0x7f0800ac;
+    public static final int ic_notifications=0x7f0800ad;
+    public static final int ic_opd=0x7f0800ae;
+    public static final int ic_pemberitahuan_ada=0x7f0800af;
+    public static final int ic_petunjuk=0x7f0800b0;
+    public static final int ic_phone_white_24dp=0x7f0800b1;
+    public static final int ic_refresh=0x7f0800b2;
+    public static final int ic_right=0x7f0800b3;
+    public static final int ic_search_white_24dp=0x7f0800b4;
+    public static final int ic_sedih=0x7f0800b5;
+    public static final int ic_send_white_24dp=0x7f0800b6;
+    public static final int ic_telp=0x7f0800b7;
+    public static final int ic_tulis_aduan_black=0x7f0800b8;
+    public static final int ic_user=0x7f0800b9;
+    public static final int ic_website=0x7f0800ba;
+    public static final int navigation_empty_icon=0x7f0800bb;
+    public static final int no_image=0x7f0800bc;
+    public static final int notification_action_background=0x7f0800bd;
+    public static final int notification_bg=0x7f0800be;
+    public static final int notification_bg_low=0x7f0800bf;
+    public static final int notification_bg_low_normal=0x7f0800c0;
+    public static final int notification_bg_low_pressed=0x7f0800c1;
+    public static final int notification_bg_normal=0x7f0800c2;
+    public static final int notification_bg_normal_pressed=0x7f0800c3;
+    public static final int notification_icon_background=0x7f0800c4;
+    public static final int notification_template_icon_bg=0x7f0800c5;
+    public static final int notification_template_icon_low_bg=0x7f0800c6;
+    public static final int notification_tile_bg=0x7f0800c7;
+    public static final int notify_panel_notification_icon_bg=0x7f0800c8;
+    public static final int side_nav_bar=0x7f0800c9;
   }
   public static final class id {
     public static final int ADD=0x7f090000;
@@ -3982,194 +3983,195 @@ public final class R {
     public static final int jmlkomentar=0x7f090082;
     public static final int kabupaten=0x7f090083;
     public static final int kategori=0x7f090084;
-    public static final int komentar=0x7f090085;
-    public static final int largeLabel=0x7f090086;
-    public static final int left=0x7f090087;
-    public static final int level=0x7f090088;
-    public static final int light=0x7f090089;
-    public static final int line1=0x7f09008a;
-    public static final int line3=0x7f09008b;
-    public static final int linearLayout=0x7f09008c;
-    public static final int linfo=0x7f09008d;
-    public static final int linfo2=0x7f09008e;
-    public static final int linkdaftar=0x7f09008f;
-    public static final int linkforget=0x7f090090;
-    public static final int linklogin=0x7f090091;
-    public static final int linkmasuk=0x7f090092;
-    public static final int listMode=0x7f090093;
-    public static final int list_item=0x7f090094;
-    public static final int loaderror=0x7f090095;
-    public static final int loading=0x7f090096;
-    public static final int loadingbar=0x7f090097;
-    public static final int loadingkomen=0x7f090098;
-    public static final int loadingmore=0x7f090099;
-    public static final int loadweb=0x7f09009a;
-    public static final int login=0x7f09009b;
-    public static final int logo=0x7f09009c;
-    public static final int logokab=0x7f09009d;
-    public static final int lp=0x7f09009e;
-    public static final int masked=0x7f09009f;
-    public static final int material_target_prompt_view=0x7f0900a0;
-    public static final int media_actions=0x7f0900a1;
-    public static final int menuDelete=0x7f0900a2;
-    public static final int menuEdit=0x7f0900a3;
-    public static final int menuKirim=0x7f0900a4;
-    public static final int menuLokasi=0x7f0900a5;
-    public static final int menuNotif=0x7f0900a6;
-    public static final int menuSearch=0x7f0900a7;
-    public static final int middle=0x7f0900a8;
-    public static final int mini=0x7f0900a9;
-    public static final int monospace=0x7f0900aa;
-    public static final int multiply=0x7f0900ab;
-    public static final int nama=0x7f0900ac;
-    public static final int nama_user=0x7f0900ad;
-    public static final int nav_aduan=0x7f0900ae;
-    public static final int nav_aduan_saya=0x7f0900af;
-    public static final int nav_logout=0x7f0900b0;
-    public static final int nav_masukan=0x7f0900b1;
-    public static final int nav_opd=0x7f0900b2;
-    public static final int nav_petunjuk=0x7f0900b3;
-    public static final int nav_tentang=0x7f0900b4;
-    public static final int nav_update=0x7f0900b5;
-    public static final int nav_view=0x7f0900b6;
-    public static final int navigation_header_container=0x7f0900b7;
-    public static final int never=0x7f0900b8;
-    public static final int noimage=0x7f0900b9;
-    public static final int none=0x7f0900ba;
-    public static final int normal=0x7f0900bb;
-    public static final int notification_background=0x7f0900bc;
-    public static final int notification_main_column=0x7f0900bd;
-    public static final int notification_main_column_container=0x7f0900be;
-    public static final int opd=0x7f0900bf;
-    public static final int packed=0x7f0900c0;
-    public static final int parallax=0x7f0900c1;
-    public static final int parent=0x7f0900c2;
-    public static final int parentPanel=0x7f0900c3;
-    public static final int pemberitahuan=0x7f0900c4;
-    public static final int pengirim=0x7f0900c5;
-    public static final int pin=0x7f0900c6;
-    public static final int profile_layout=0x7f0900c7;
-    public static final int progressBar1=0x7f0900c8;
-    public static final int progress_circular=0x7f0900c9;
-    public static final int progress_horizontal=0x7f0900ca;
-    public static final int radio=0x7f0900cb;
-    public static final int recycleAduan=0x7f0900cc;
-    public static final int recycleAduanSaya=0x7f0900cd;
-    public static final int recycleCariAduan=0x7f0900ce;
-    public static final int recycleKomentar=0x7f0900cf;
-    public static final int recycleOpd=0x7f0900d0;
-    public static final int recyclePemberitahuan=0x7f0900d1;
-    public static final int reg=0x7f0900d2;
-    public static final int relAlign=0x7f0900d3;
-    public static final int relHead=0x7f0900d4;
-    public static final int relKomen=0x7f0900d5;
-    public static final int right=0x7f0900d6;
-    public static final int right_icon=0x7f0900d7;
-    public static final int right_side=0x7f0900d8;
-    public static final int sans=0x7f0900d9;
-    public static final int screen=0x7f0900da;
-    public static final int scroll=0x7f0900db;
-    public static final int scrollIndicatorDown=0x7f0900dc;
-    public static final int scrollIndicatorUp=0x7f0900dd;
-    public static final int scrollView=0x7f0900de;
-    public static final int scrollable=0x7f0900df;
-    public static final int search_badge=0x7f0900e0;
-    public static final int search_bar=0x7f0900e1;
-    public static final int search_button=0x7f0900e2;
-    public static final int search_close_btn=0x7f0900e3;
-    public static final int search_edit_frame=0x7f0900e4;
-    public static final int search_go_btn=0x7f0900e5;
-    public static final int search_mag_icon=0x7f0900e6;
-    public static final int search_plate=0x7f0900e7;
-    public static final int search_src_text=0x7f0900e8;
-    public static final int search_voice_btn=0x7f0900e9;
-    public static final int select_dialog_listview=0x7f0900ea;
-    public static final int serif=0x7f0900eb;
-    public static final int shortcut=0x7f0900ec;
-    public static final int showCustom=0x7f0900ed;
-    public static final int showHome=0x7f0900ee;
-    public static final int showTitle=0x7f0900ef;
-    public static final int singkatan=0x7f0900f0;
-    public static final int smallLabel=0x7f0900f1;
-    public static final int snackbar_action=0x7f0900f2;
-    public static final int snackbar_text=0x7f0900f3;
-    public static final int snap=0x7f0900f4;
-    public static final int spacer=0x7f0900f5;
-    public static final int split_action_bar=0x7f0900f6;
-    public static final int spnkategori=0x7f0900f7;
-    public static final int spread=0x7f0900f8;
-    public static final int spread_inside=0x7f0900f9;
-    public static final int src_atop=0x7f0900fa;
-    public static final int src_in=0x7f0900fb;
-    public static final int src_over=0x7f0900fc;
-    public static final int standard=0x7f0900fd;
-    public static final int start=0x7f0900fe;
-    public static final int status_bar_latest_event_content=0x7f0900ff;
-    public static final int submenuarrow=0x7f090100;
-    public static final int submit_area=0x7f090101;
-    public static final int swLayout=0x7f090102;
-    public static final int tabMode=0x7f090103;
-    public static final int tambah_foto=0x7f090104;
-    public static final int tambah_foto_komentar=0x7f090105;
-    public static final int tanggal=0x7f090106;
-    public static final int tanggalkomen=0x7f090107;
-    public static final int text=0x7f090108;
-    public static final int text2=0x7f090109;
-    public static final int textError=0x7f09010a;
-    public static final int textSpacerNoButtons=0x7f09010b;
-    public static final int textSpacerNoTitle=0x7f09010c;
-    public static final int textView=0x7f09010d;
-    public static final int text_input_password_toggle=0x7f09010e;
-    public static final int textinput_counter=0x7f09010f;
-    public static final int textinput_error=0x7f090110;
-    public static final int time=0x7f090111;
-    public static final int title=0x7f090112;
-    public static final int titleDividerNoCustom=0x7f090113;
-    public static final int title_template=0x7f090114;
-    public static final int toolbar=0x7f090115;
-    public static final int top=0x7f090116;
-    public static final int topPanel=0x7f090117;
-    public static final int touch_outside=0x7f090118;
-    public static final int transition_current_scene=0x7f090119;
-    public static final int transition_scene_layoutid_cache=0x7f09011a;
-    public static final int tvAduan=0x7f09011b;
-    public static final int tvAlamat=0x7f09011c;
-    public static final int tvBergabung=0x7f09011d;
-    public static final int tvEmail=0x7f09011e;
-    public static final int tvJk=0x7f09011f;
-    public static final int tvKtp=0x7f090120;
-    public static final int tvLahir=0x7f090121;
-    public static final int tvLevel=0x7f090122;
-    public static final int tvTelp=0x7f090123;
-    public static final int tvbio=0x7f090124;
-    public static final int tvnamaUser=0x7f090125;
-    public static final int txtEmail=0x7f090126;
-    public static final int txtKtp=0x7f090127;
-    public static final int txtNama=0x7f090128;
-    public static final int txtStatus=0x7f090129;
-    public static final int txtTelp=0x7f09012a;
-    public static final int txtUlangi=0x7f09012b;
-    public static final int txtalamat=0x7f09012c;
-    public static final int txtarea=0x7f09012d;
-    public static final int txtdesc=0x7f09012e;
-    public static final int txtemail=0x7f09012f;
-    public static final int txtfax=0x7f090130;
-    public static final int txtnama_kepala=0x7f090131;
-    public static final int txtnamaopd=0x7f090132;
-    public static final int txtno_telp=0x7f090133;
-    public static final int txtpass=0x7f090134;
-    public static final int txtsingkatan=0x7f090135;
-    public static final int txttelp=0x7f090136;
-    public static final int txtwebsite=0x7f090137;
-    public static final int up=0x7f090138;
-    public static final int useLogo=0x7f090139;
-    public static final int view_offset_helper=0x7f09013a;
-    public static final int visible=0x7f09013b;
-    public static final int webPetunjuk=0x7f09013c;
-    public static final int wide=0x7f09013d;
-    public static final int withText=0x7f09013e;
-    public static final int wrap=0x7f09013f;
-    public static final int wrap_content=0x7f090140;
+    public static final int kolomkomentar=0x7f090085;
+    public static final int komentar=0x7f090086;
+    public static final int largeLabel=0x7f090087;
+    public static final int left=0x7f090088;
+    public static final int level=0x7f090089;
+    public static final int light=0x7f09008a;
+    public static final int line1=0x7f09008b;
+    public static final int line3=0x7f09008c;
+    public static final int linearLayout=0x7f09008d;
+    public static final int linfo=0x7f09008e;
+    public static final int linfo2=0x7f09008f;
+    public static final int linkdaftar=0x7f090090;
+    public static final int linkforget=0x7f090091;
+    public static final int linklogin=0x7f090092;
+    public static final int linkmasuk=0x7f090093;
+    public static final int listMode=0x7f090094;
+    public static final int list_item=0x7f090095;
+    public static final int loaderror=0x7f090096;
+    public static final int loading=0x7f090097;
+    public static final int loadingbar=0x7f090098;
+    public static final int loadingkomen=0x7f090099;
+    public static final int loadingmore=0x7f09009a;
+    public static final int loadweb=0x7f09009b;
+    public static final int login=0x7f09009c;
+    public static final int logo=0x7f09009d;
+    public static final int logokab=0x7f09009e;
+    public static final int lp=0x7f09009f;
+    public static final int masked=0x7f0900a0;
+    public static final int material_target_prompt_view=0x7f0900a1;
+    public static final int media_actions=0x7f0900a2;
+    public static final int menuDelete=0x7f0900a3;
+    public static final int menuEdit=0x7f0900a4;
+    public static final int menuKirim=0x7f0900a5;
+    public static final int menuLokasi=0x7f0900a6;
+    public static final int menuNotif=0x7f0900a7;
+    public static final int menuSearch=0x7f0900a8;
+    public static final int middle=0x7f0900a9;
+    public static final int mini=0x7f0900aa;
+    public static final int monospace=0x7f0900ab;
+    public static final int multiply=0x7f0900ac;
+    public static final int nama=0x7f0900ad;
+    public static final int nama_user=0x7f0900ae;
+    public static final int nav_aduan=0x7f0900af;
+    public static final int nav_aduan_saya=0x7f0900b0;
+    public static final int nav_logout=0x7f0900b1;
+    public static final int nav_masukan=0x7f0900b2;
+    public static final int nav_opd=0x7f0900b3;
+    public static final int nav_petunjuk=0x7f0900b4;
+    public static final int nav_tentang=0x7f0900b5;
+    public static final int nav_update=0x7f0900b6;
+    public static final int nav_view=0x7f0900b7;
+    public static final int navigation_header_container=0x7f0900b8;
+    public static final int never=0x7f0900b9;
+    public static final int noimage=0x7f0900ba;
+    public static final int none=0x7f0900bb;
+    public static final int normal=0x7f0900bc;
+    public static final int notification_background=0x7f0900bd;
+    public static final int notification_main_column=0x7f0900be;
+    public static final int notification_main_column_container=0x7f0900bf;
+    public static final int opd=0x7f0900c0;
+    public static final int packed=0x7f0900c1;
+    public static final int parallax=0x7f0900c2;
+    public static final int parent=0x7f0900c3;
+    public static final int parentPanel=0x7f0900c4;
+    public static final int pemberitahuan=0x7f0900c5;
+    public static final int pengirim=0x7f0900c6;
+    public static final int pin=0x7f0900c7;
+    public static final int profile_layout=0x7f0900c8;
+    public static final int progressBar1=0x7f0900c9;
+    public static final int progress_circular=0x7f0900ca;
+    public static final int progress_horizontal=0x7f0900cb;
+    public static final int radio=0x7f0900cc;
+    public static final int recycleAduan=0x7f0900cd;
+    public static final int recycleAduanSaya=0x7f0900ce;
+    public static final int recycleCariAduan=0x7f0900cf;
+    public static final int recycleKomentar=0x7f0900d0;
+    public static final int recycleOpd=0x7f0900d1;
+    public static final int recyclePemberitahuan=0x7f0900d2;
+    public static final int reg=0x7f0900d3;
+    public static final int relAlign=0x7f0900d4;
+    public static final int relHead=0x7f0900d5;
+    public static final int relKomen=0x7f0900d6;
+    public static final int right=0x7f0900d7;
+    public static final int right_icon=0x7f0900d8;
+    public static final int right_side=0x7f0900d9;
+    public static final int sans=0x7f0900da;
+    public static final int screen=0x7f0900db;
+    public static final int scroll=0x7f0900dc;
+    public static final int scrollIndicatorDown=0x7f0900dd;
+    public static final int scrollIndicatorUp=0x7f0900de;
+    public static final int scrollView=0x7f0900df;
+    public static final int scrollable=0x7f0900e0;
+    public static final int search_badge=0x7f0900e1;
+    public static final int search_bar=0x7f0900e2;
+    public static final int search_button=0x7f0900e3;
+    public static final int search_close_btn=0x7f0900e4;
+    public static final int search_edit_frame=0x7f0900e5;
+    public static final int search_go_btn=0x7f0900e6;
+    public static final int search_mag_icon=0x7f0900e7;
+    public static final int search_plate=0x7f0900e8;
+    public static final int search_src_text=0x7f0900e9;
+    public static final int search_voice_btn=0x7f0900ea;
+    public static final int select_dialog_listview=0x7f0900eb;
+    public static final int serif=0x7f0900ec;
+    public static final int shortcut=0x7f0900ed;
+    public static final int showCustom=0x7f0900ee;
+    public static final int showHome=0x7f0900ef;
+    public static final int showTitle=0x7f0900f0;
+    public static final int singkatan=0x7f0900f1;
+    public static final int smallLabel=0x7f0900f2;
+    public static final int snackbar_action=0x7f0900f3;
+    public static final int snackbar_text=0x7f0900f4;
+    public static final int snap=0x7f0900f5;
+    public static final int spacer=0x7f0900f6;
+    public static final int split_action_bar=0x7f0900f7;
+    public static final int spnkategori=0x7f0900f8;
+    public static final int spread=0x7f0900f9;
+    public static final int spread_inside=0x7f0900fa;
+    public static final int src_atop=0x7f0900fb;
+    public static final int src_in=0x7f0900fc;
+    public static final int src_over=0x7f0900fd;
+    public static final int standard=0x7f0900fe;
+    public static final int start=0x7f0900ff;
+    public static final int status_bar_latest_event_content=0x7f090100;
+    public static final int submenuarrow=0x7f090101;
+    public static final int submit_area=0x7f090102;
+    public static final int swLayout=0x7f090103;
+    public static final int tabMode=0x7f090104;
+    public static final int tambah_foto=0x7f090105;
+    public static final int tambah_foto_komentar=0x7f090106;
+    public static final int tanggal=0x7f090107;
+    public static final int tanggalkomen=0x7f090108;
+    public static final int text=0x7f090109;
+    public static final int text2=0x7f09010a;
+    public static final int textError=0x7f09010b;
+    public static final int textSpacerNoButtons=0x7f09010c;
+    public static final int textSpacerNoTitle=0x7f09010d;
+    public static final int textView=0x7f09010e;
+    public static final int text_input_password_toggle=0x7f09010f;
+    public static final int textinput_counter=0x7f090110;
+    public static final int textinput_error=0x7f090111;
+    public static final int time=0x7f090112;
+    public static final int title=0x7f090113;
+    public static final int titleDividerNoCustom=0x7f090114;
+    public static final int title_template=0x7f090115;
+    public static final int toolbar=0x7f090116;
+    public static final int top=0x7f090117;
+    public static final int topPanel=0x7f090118;
+    public static final int touch_outside=0x7f090119;
+    public static final int transition_current_scene=0x7f09011a;
+    public static final int transition_scene_layoutid_cache=0x7f09011b;
+    public static final int tvAduan=0x7f09011c;
+    public static final int tvAlamat=0x7f09011d;
+    public static final int tvBergabung=0x7f09011e;
+    public static final int tvEmail=0x7f09011f;
+    public static final int tvJk=0x7f090120;
+    public static final int tvKtp=0x7f090121;
+    public static final int tvLahir=0x7f090122;
+    public static final int tvLevel=0x7f090123;
+    public static final int tvTelp=0x7f090124;
+    public static final int tvbio=0x7f090125;
+    public static final int tvnamaUser=0x7f090126;
+    public static final int txtEmail=0x7f090127;
+    public static final int txtKtp=0x7f090128;
+    public static final int txtNama=0x7f090129;
+    public static final int txtStatus=0x7f09012a;
+    public static final int txtTelp=0x7f09012b;
+    public static final int txtUlangi=0x7f09012c;
+    public static final int txtalamat=0x7f09012d;
+    public static final int txtarea=0x7f09012e;
+    public static final int txtdesc=0x7f09012f;
+    public static final int txtemail=0x7f090130;
+    public static final int txtfax=0x7f090131;
+    public static final int txtnama_kepala=0x7f090132;
+    public static final int txtnamaopd=0x7f090133;
+    public static final int txtno_telp=0x7f090134;
+    public static final int txtpass=0x7f090135;
+    public static final int txtsingkatan=0x7f090136;
+    public static final int txttelp=0x7f090137;
+    public static final int txtwebsite=0x7f090138;
+    public static final int up=0x7f090139;
+    public static final int useLogo=0x7f09013a;
+    public static final int view_offset_helper=0x7f09013b;
+    public static final int visible=0x7f09013c;
+    public static final int webPetunjuk=0x7f09013d;
+    public static final int wide=0x7f09013e;
+    public static final int withText=0x7f09013f;
+    public static final int wrap=0x7f090140;
+    public static final int wrap_content=0x7f090141;
   }
   public static final class integer {
     public static final int abc_config_activityDefaultDur=0x7f0a0000;
@@ -5234,19 +5236,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -9558,9 +9560,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * <tr><td>fill_parent</td><td>ffffffff</td><td></td></tr>
      * <tr><td>match_parent</td><td>ffffffff</td><td></td></tr>
+     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
      * @attr name android:layout_width
@@ -9581,9 +9583,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * <tr><td>fill_parent</td><td>ffffffff</td><td></td></tr>
      * <tr><td>match_parent</td><td>ffffffff</td><td></td></tr>
+     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
      * @attr name android:layout_height
@@ -10479,19 +10481,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -11159,19 +11161,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -11307,19 +11309,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -11341,9 +11343,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * <tr><td>fill_parent</td><td>ffffffff</td><td></td></tr>
      * <tr><td>match_parent</td><td>ffffffff</td><td></td></tr>
+     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
      * @attr name android:layout_width
@@ -11364,9 +11366,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * <tr><td>fill_parent</td><td>ffffffff</td><td></td></tr>
      * <tr><td>match_parent</td><td>ffffffff</td><td></td></tr>
+     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
      * @attr name android:layout_height
@@ -11573,8 +11575,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>all</td><td>1</td><td></td></tr>
+     * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>single</td><td>2</td><td></td></tr>
      * </table>
      *
@@ -12870,6 +12872,14 @@ public final class R {
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>auto</td><td>10</td><td></td></tr>
+     * </table>
      *
      * @attr name android:focusable
      */
@@ -12897,9 +12907,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>date</td><td>14</td><td></td></tr>
      * <tr><td>datetime</td><td>4</td><td></td></tr>
+     * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>number</td><td>2</td><td></td></tr>
      * <tr><td>numberDecimal</td><td>2002</td><td></td></tr>
      * <tr><td>numberPassword</td><td>12</td><td></td></tr>
@@ -12944,7 +12954,6 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>normal</td><td>0</td><td></td></tr>
      * <tr><td>actionDone</td><td>6</td><td></td></tr>
      * <tr><td>actionGo</td><td>2</td><td></td></tr>
      * <tr><td>actionNext</td><td>5</td><td></td></tr>
@@ -12960,6 +12969,8 @@ public final class R {
      * <tr><td>flagNoEnterAction</td><td>40000000</td><td></td></tr>
      * <tr><td>flagNoExtractUi</td><td>10000000</td><td></td></tr>
      * <tr><td>flagNoFullscreen</td><td>2000000</td><td></td></tr>
+     * <tr><td>flagNoPersonalizedLearning</td><td>1000000</td><td></td></tr>
+     * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
      * @attr name android:imeOptions
@@ -13325,9 +13336,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * <tr><td>fill_parent</td><td>ffffffff</td><td></td></tr>
      * <tr><td>match_parent</td><td>ffffffff</td><td></td></tr>
+     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
      * @attr name android:dropDownWidth
@@ -13950,9 +13961,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>normal</td><td>0</td><td></td></tr>
      * <tr><td>bold</td><td>1</td><td></td></tr>
      * <tr><td>italic</td><td>2</td><td></td></tr>
+     * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
      * @attr name android:textStyle
@@ -14359,19 +14370,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -14817,9 +14828,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>normal</td><td>0</td><td></td></tr>
      * <tr><td>bold</td><td>1</td><td></td></tr>
      * <tr><td>italic</td><td>2</td><td></td></tr>
+     * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
      * @attr name android:textStyle
@@ -14850,19 +14861,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -15072,6 +15083,14 @@ public final class R {
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>auto</td><td>10</td><td></td></tr>
+     * </table>
      *
      * @attr name android:focusable
      */

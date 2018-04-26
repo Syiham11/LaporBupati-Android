@@ -14,12 +14,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 
 import id.go.pekalongankab.laporbupati.DetailAduan;
 import id.go.pekalongankab.laporbupati.LihatFoto;
 import id.go.pekalongankab.laporbupati.Model.ModelDataKomentar;
 import id.go.pekalongankab.laporbupati.R;
+import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 import id.go.pekalongankab.laporbupati.Util.Tanggal;
 
 /**
@@ -48,7 +52,7 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
     // Bind data
     @Override
     public void onBindViewHolder(final HolderDataKomentar holder, final int position) {
-        ModelDataKomentar md = mItems.get(position);
+        final ModelDataKomentar md = mItems.get(position);
         HolderDataKomentar holderDataKomentar = (HolderDataKomentar) holder;
         holderDataKomentar.komentar.setText(md.getKomentar());
         holderDataKomentar.tglkomentar.setText("-- "+tanggal.tanggal(md.getTanggal())+" --");
@@ -57,6 +61,13 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
             holderDataKomentar.fotoKomen.setVisibility(View.GONE);
         }else{
             holderDataKomentar.fotoKomen.setVisibility(View.VISIBLE);
+            Glide.with(context).load(ServerAPI.URL_FOTO_KOMEN+md.getFoto())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .error(R.drawable.ic_no_image_male_white)
+                    .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderDataKomentar.fotoKomen);
         }
 
         holderDataKomentar.fotoKomen.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +75,7 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
             public void onClick(View v) {
                 Intent i = new Intent(context, LihatFoto.class);
                 i.putExtra("source", "komentar");
+                i.putExtra("foto_komen", md.getFoto());
                 context.startActivity(i);
             }
         });

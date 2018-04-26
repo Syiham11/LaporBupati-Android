@@ -60,6 +60,14 @@ public class LihatFoto extends AppCompatActivity {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(foto);
         }
+        else if (source.equals("komentar")){
+            Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_KOMEN+bundle.getString("foto_komen"))
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .error(R.drawable.no_image)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(foto);
+        }
     }
 
     @Override

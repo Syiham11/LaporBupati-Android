@@ -46,11 +46,11 @@ public final class R {
         public static final int SRC_OVER = 0x7f090008;
         public static final int bold = 0x7f09002b;
         public static final int italic = 0x7f090080;
-        public static final int material_target_prompt_view = 0x7f0900a0;
-        public static final int monospace = 0x7f0900aa;
-        public static final int normal = 0x7f0900bb;
-        public static final int sans = 0x7f0900d9;
-        public static final int serif = 0x7f0900eb;
+        public static final int material_target_prompt_view = 0x7f0900a1;
+        public static final int monospace = 0x7f0900ab;
+        public static final int normal = 0x7f0900bc;
+        public static final int sans = 0x7f0900da;
+        public static final int serif = 0x7f0900ec;
     }
     public static final class styleable {
         public static final int[] PromptView = { 0x7f040104, 0x7f040105, 0x7f040106, 0x7f040107, 0x7f040108, 0x7f040109, 0x7f04010a, 0x7f04010b, 0x7f04010c, 0x7f04010d, 0x7f04010e, 0x7f04010f, 0x7f040110, 0x7f040111, 0x7f040112, 0x7f040113, 0x7f040114, 0x7f040115, 0x7f040116, 0x7f040117, 0x7f040118, 0x7f040119, 0x7f04011a, 0x7f04011b, 0x7f04011c, 0x7f04011d, 0x7f04011e };

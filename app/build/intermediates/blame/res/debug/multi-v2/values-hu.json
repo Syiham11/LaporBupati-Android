@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/media/erik/Download/AndroidStudioProjects/laporbupati/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hu/values-hu.xml",
+            "outputFile": "D:\\AndroidStudioProjects\\laporbupati\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hu\\values-hu.xml",
             "map": [
                 {
-                    "source": "/home/erik/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/4cbb3563d480a629d2326930d1d4f7d3/res/values-hu/values.xml",
+                    "source": "C:\\Users\\erik\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.8.0.aar\\11d1be29da4618a94e2e95ff7d8e5cee\\res\\values-hu\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/home/erik/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.3.1.aar/63b711d36e716b3bb0b1d131f3ad1712/res/values-hu/values-hu.xml",
+                    "source": "C:\\Users\\erik\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\43a192b3d275f436b57ed11e46341732\\res\\values-hu\\values-hu.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/home/erik/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/1d5046571259269c8b593a909b47bc75/res/values-hu/values.xml",
+                    "source": "C:\\Users\\erik\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-11.8.0.aar\\f29099b4f2e6d475e43284c94d359600\\res\\values-hu\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

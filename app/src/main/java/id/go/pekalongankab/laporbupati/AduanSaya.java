@@ -91,6 +91,8 @@ public class AduanSaya extends Fragment {
         id_user = pref.getString("id_user", "");
         loaded = false;
 
+        Log.d("volley", "id user"+id_user);
+
         loadAduan();
 
         mManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -171,8 +173,6 @@ public class AduanSaya extends Fragment {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("thumb"));
                                     md.setStatus(data.getString("status"));
-                                    md.setLongi(data.getString("longitude"));
-                                    md.setLati(data.getString("latitude"));
                                     md.setJmladuan(data.getString("jmladuan"));
                                     md.setJmlkomen(data.getString("jmlkomen"));
                                     mItems.add(md);
@@ -226,8 +226,6 @@ public class AduanSaya extends Fragment {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("thumb"));
                                     md.setStatus(data.getString("status"));
-                                    md.setLongi(data.getString("longitude"));
-                                    md.setLati(data.getString("latitude"));
                                     md.setJmladuan(data.getString("jmladuan"));
                                     md.setJmlkomen(data.getString("jmlkomen"));
                                     mItems.add(md);
@@ -285,8 +283,6 @@ public class AduanSaya extends Fragment {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("thumb"));
                                     md.setStatus(data.getString("status"));
-                                    md.setLongi(data.getString("longitude"));
-                                    md.setLati(data.getString("latitude"));
                                     md.setJmladuan(data.getString("jmladuan"));
                                     md.setJmlkomen(data.getString("jmlkomen"));
                                     mItems.add(md);

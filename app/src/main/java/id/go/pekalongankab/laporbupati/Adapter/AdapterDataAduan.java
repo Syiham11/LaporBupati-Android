@@ -98,7 +98,9 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
         });
 
-        if (md.getStatus().equals("diverifikasi")){
+        if (md.getStatus().equals("masuk")){
+            holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_grey);
+        }else if (md.getStatus().equals("diverifikasi")){
             holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_blue);
         }else if(md.getStatus().equals("didisposisikan")){
             holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_yellow);
@@ -112,8 +114,16 @@ public class AdapterDataAduan extends RecyclerView.Adapter<RecyclerView.ViewHold
             holderDataAduan.btninfo.setImageResource(R.drawable.ic_info_red);
         }
 
-        holderDataAduan.jmlkomen.setText(md.getJmlkomen());
-        holderDataAduan.jmladuan.setText(md.getJmladuan());
+        if (md.getJmlkomen().equals("null")){
+            holderDataAduan.jmlkomen.setText("0");
+        }else{
+            holderDataAduan.jmlkomen.setText(md.getJmlkomen());
+        }
+        if (md.getAduan().equals("null")){
+            holderDataAduan.jmladuan.setText("0");
+        }else{
+            holderDataAduan.jmladuan.setText(md.getJmladuan());
+        }
 
         holderDataAduan.btninfo.setOnClickListener(new View.OnClickListener() {
             @Override

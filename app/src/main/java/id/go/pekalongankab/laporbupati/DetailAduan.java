@@ -2,8 +2,10 @@ package id.go.pekalongankab.laporbupati;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -23,11 +25,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.NetworkError;
@@ -37,6 +41,7 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -52,9 +57,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
 import id.go.pekalongankab.laporbupati.Adapter.AdapterDataKomentar;
 import id.go.pekalongankab.laporbupati.Model.ModelDataAduan;
 import id.go.pekalongankab.laporbupati.Model.ModelDataKomentar;
@@ -74,9 +82,10 @@ public class DetailAduan extends AppCompatActivity {
     ProgressBar loadkomem;
     LinearLayout loaderror;
     SwipeRefreshLayout swLayout;
-    String id_aduan;
+    String id_aduan, id_user;
     Button btnCobaLagi;
     Bundle bundle;
+    RelativeLayout kolomkomen;
 
 
     Uri fileUri;
@@ -95,6 +104,7 @@ public class DetailAduan extends AppCompatActivity {
     private static final String TAG_MESSAGE = "message";
 
     String tag_json_obj = "json_obj_req";
+    SpotsDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +118,9 @@ public class DetailAduan extends AppCompatActivity {
         loadkomem = (ProgressBar) findViewById(R.id.loadingkomen);
         loaderror = (LinearLayout) findViewById(R.id.loaderror);
         btnCobaLagi = (Button) findViewById(R.id.btnCobalagi);
+        kolomkomen = (RelativeLayout) findViewById(R.id.kolomkomentar);
+
+        loading = new SpotsDialog(DetailAduan.this, "Sedang mengirim...");
 
         mRecyclerview = (RecyclerView)findViewById(R.id.recycleKomentar);
         mItems = new ArrayList<>();
@@ -118,6 +131,9 @@ public class DetailAduan extends AppCompatActivity {
         mRecyclerview.setNestedScrollingEnabled(false);
 
         id_aduan = bundle.getString("id");
+
+        SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
+        id_user = pref.getString("id_user", "");
 
         fotoUser = (ImageView) findViewById(R.id.foto_user);
         fotoAduan = (ImageView) findViewById(R.id.foto_aduan);
@@ -138,11 +154,20 @@ public class DetailAduan extends AppCompatActivity {
         komentar = (EditText) findViewById(R.id.komentar);
 
         namaUser.setText(bundle.getString("nama"));
-        level.setText(bundle.getString("level"));
         tanggal.setText(bundle.getString("tanggal"));
         isiAduan.setText(bundle.getString("aduan"));
         kategori.setText(bundle.getString("kategori"));
-        jmlkomen.setText(bundle.getString("jmlkomen"));
+
+        if (bundle.getString("jmlkomen").equals("null")){
+            jmlkomen.setText("0");
+        }else{
+            jmlkomen.setText(bundle.getString("jmlkomen"));
+        }
+        if (bundle.getString("level").equals("null")){
+            level.setText("0");
+        }else{
+            level.setText(bundle.getString("level"));
+        }
 
         Glide.with(getApplicationContext()).load(ServerAPI.URL_FOTO_USER_THUMB+bundle.getString("foto_user"))
                 .thumbnail(0.5f)
@@ -179,11 +204,18 @@ public class DetailAduan extends AppCompatActivity {
             public void onClick(View v) {
                 if (komentar.getText().toString().isEmpty()){
                     komentar.setError("Tidak dapat mengirimkan komentar kosong!");
+                }else if(fotoKomen.getVisibility() == View.GONE){
+                    komen();
+                }else if(fotoKomen.getVisibility() == View.VISIBLE){
+                    fotokomen();
                 }
             }
         });
 
-        if (bundle.getString("status").equals("diverifikasi")){
+        if (bundle.getString("status").equals("masuk")){
+            btnKategori.setImageResource(R.drawable.ic_info_grey);
+            status.setText("Terkirim");
+        }else if (bundle.getString("status").equals("diverifikasi")){
             btnKategori.setImageResource(R.drawable.ic_info_blue);
             status.setText(bundle.getString("status"));
         }else if(bundle.getString("status").equals("didisposisikan")){
@@ -195,6 +227,7 @@ public class DetailAduan extends AppCompatActivity {
         }else if(bundle.getString("status").equals("selesai")){
             btnKategori.setImageResource(R.drawable.ic_info_green);
             status.setText(bundle.getString("status"));
+            kolomkomen.setVisibility(View.GONE);
         }else if(bundle.getString("status").equals("bukan kewenangan")){
             btnKategori.setImageResource(R.drawable.ic_info_red);
             status.setText(bundle.getString("status"));
@@ -231,7 +264,7 @@ public class DetailAduan extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_lokasi, menu);
+        //getMenuInflater().inflate(R.menu.menu_lokasi, menu);
         return true;
     }
 
@@ -244,7 +277,7 @@ public class DetailAduan extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menuLokasi) {
-            snackBar("Lokasi tidak ditemukan!", R.color.Error);
+            //snackBar("Lokasi tidak ditemukan!", R.color.Error);
             return true;
         }
 
@@ -297,6 +330,7 @@ public class DetailAduan extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        mItems.clear();
                         loadkomem.setVisibility(View.GONE);
                         Log.d("volley", "response : "+response.toString());
                         for (int i = 0; i< response.length(); i++){
@@ -458,15 +492,134 @@ public class DetailAduan extends AppCompatActivity {
         return encodedImage;
     }
 
-    private void kirimKomenText(){
+    //mengirim komentar dengan foto
+    private void fotokomen() {
+        //menampilkan progress dialog
+        loading.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerAPI.URL_TAMBAH_KOMENTAR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e(TAG, "Response: " + response.toString());
 
+                        try {
+                            JSONObject data = new JSONObject(response);
+                            String status = data.getString("status");
+
+                            if (status.equals("1")) {
+                                Log.e("v Add", data.toString());
+                                snackBar("Komentar berhasil ditambahkan", R.color.colorPrimary);
+                                komentar.setText("");
+                                komentar.setFocusable(false);
+                                fotoKomen.setVisibility(View.GONE);
+                                btnHapusFoto.setVisibility(View.GONE);
+                            } else {
+                                snackBar("Komentar gagal ditambahkan", R.color.Error);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        //menghilangkan progress dialog
+                        loading.hide();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //menghilangkan progress dialog
+                        loading.dismiss();
+                        //menampilkan toast
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                        }
+                        //Toast.makeText(TulisAduan.this, error.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        //Log.e(TAG, error.getMessage().toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                //membuat parameters
+                Map<String, String> params = new HashMap<String, String>();
+                SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
+                final String id_user = pref.getString("id_user", "");
+
+                //menambah parameter yang di kirim ke web servis
+                params.put("foto", getStringImage(decoded));
+                params.put("komentar", komentar.getText().toString());
+                params.put("id_aduan", id_aduan);
+                params.put("id_user", id_user);
+
+                //kembali ke parameters
+                Log.e(TAG, "" + params);
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_json_obj);
     }
 
-    private void kirimKomenTextFoto(){
+    //mengirim komentar tanpa foto
+    private void komen() {
+        //menampilkan progress dialog
+        loading.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerAPI.URL_TAMBAH_KOMENTAR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e(TAG, "Response: " + response.toString());
 
-    }
+                        try {
+                            JSONObject data = new JSONObject(response);
+                            String status = data.getString("status");
 
-    private void kirimKomenFoto(){
+                            if (status.equals("1")) {
+                                Log.e("v Add", data.toString());
+                                snackBar("Komentar berhasil ditambahkan", R.color.colorPrimary);
+                                komentar.setText("");
+                                komentar.setFocusable(false);
+                            } else {
+                                snackBar("Komentar gagal ditambahkan", R.color.Error);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
+                        //menghilangkan progress dialog
+                        loading.hide();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //menghilangkan progress dialog
+                        loading.dismiss();
+                        //menampilkan toast
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                        }
+                        //Toast.makeText(TulisAduan.this, error.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        //Log.e(TAG, error.getMessage().toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                //membuat parameters
+                Map<String, String> params = new HashMap<String, String>();
+                SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
+                final String id_user = pref.getString("id_user", "");
+
+                //menambah parameter yang di kirim ke web servis
+                params.put("komentar", komentar.getText().toString());
+                params.put("id_aduan", id_aduan);
+                params.put("id_user", id_user);
+
+                //kembali ke parameters
+                Log.e(TAG, "" + params);
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_json_obj);
     }
 }

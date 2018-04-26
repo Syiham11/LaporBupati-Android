@@ -15,6 +15,7 @@ public class ServerAPI {
     public static final String URL_TAMBAH_ADUAN = "http://"+IP+"/laporbupati/api/tambahaduan";
     public static final String URL_CARI_ADUAN = "http://"+IP+"/laporbupati/api/cariaduan/";
     public static final String URL_KOMENTAR = "http://"+IP+"/laporbupati/api/loadkomentar/";
+    public static final String URL_TAMBAH_KOMENTAR = "http://"+IP+"/laporbupati/api/tambahkomentaruser/";
     public static final String URL_PEMBERITAHUAN = "http://"+IP+"/laporbupati/api/loadnotif/";
 
 
@@ -22,6 +23,7 @@ public class ServerAPI {
     public static final String URL_FOTO_USER = "http://"+IP+"/laporbupati/files/user/source/";
     public static final String URL_FOTO_USER_THUMB = "http://"+IP+"/laporbupati/files/user/thumb/";
     public static final String URL_FOTO_ADUAN = "http://"+IP+"/laporbupati/files/aduan/source/";
+    public static final String URL_FOTO_KOMEN = "http://"+IP+"/laporbupati/files/komentar/source/";
 
     public static int perLoadAduan = 10;
     public static int perLoadOpd = 10;

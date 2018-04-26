@@ -171,8 +171,6 @@ public class Aduan extends Fragment {
                                 md.setFoto_aduan(data.getString("lampiran"));
                                 md.setFoto_user(data.getString("thumb"));
                                 md.setStatus(data.getString("status"));
-                                md.setLongi(data.getString("longitude"));
-                                md.setLati(data.getString("latitude"));
                                 md.setJmladuan(data.getString("jmladuan"));
                                 md.setJmlkomen(data.getString("jmlkomen"));
                                 mItems.add(md);
@@ -230,8 +228,6 @@ public class Aduan extends Fragment {
                                     md.setFoto_aduan(data.getString("lampiran"));
                                     md.setFoto_user(data.getString("thumb"));
                                     md.setStatus(data.getString("status"));
-                                    md.setLongi(data.getString("longitude"));
-                                    md.setLati(data.getString("latitude"));
                                     md.setJmladuan(data.getString("jmladuan"));
                                     md.setJmlkomen(data.getString("jmlkomen"));
                                     mItems.add(md);
@@ -292,8 +288,6 @@ public class Aduan extends Fragment {
                                 md.setFoto_aduan(data.getString("lampiran"));
                                 md.setFoto_user(data.getString("thumb"));
                                 md.setStatus(data.getString("status"));
-                                md.setLongi(data.getString("longitude"));
-                                md.setLati(data.getString("latitude"));
                                 md.setJmladuan(data.getString("jmladuan"));
                                 md.setJmlkomen(data.getString("jmlkomen"));
                                 mItems.add(md);
