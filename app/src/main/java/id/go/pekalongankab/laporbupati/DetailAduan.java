@@ -81,11 +81,11 @@ public class DetailAduan extends AppCompatActivity {
     List<ModelDataKomentar> mItems;
     ProgressBar loadkomem;
     LinearLayout loaderror;
-    SwipeRefreshLayout swLayout;
     String id_aduan, id_user;
     Button btnCobaLagi;
     Bundle bundle;
     RelativeLayout kolomkomen;
+    int rowdata;
 
 
     Uri fileUri;
@@ -152,6 +152,7 @@ public class DetailAduan extends AppCompatActivity {
         jmlkomen = (TextView) findViewById(R.id.jmlkomentar);
 
         komentar = (EditText) findViewById(R.id.komentar);
+        rowdata = 0;
 
         namaUser.setText(bundle.getString("nama"));
         tanggal.setText(bundle.getString("tanggal"));
@@ -264,7 +265,7 @@ public class DetailAduan extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_lokasi, menu);
+        getMenuInflater().inflate(R.menu.menu_refresh, menu);
         return true;
     }
 
@@ -276,8 +277,8 @@ public class DetailAduan extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menuLokasi) {
-            //snackBar("Lokasi tidak ditemukan!", R.color.Error);
+        if (id == R.id.menuRefresh) {
+            refresh();
             return true;
         }
 
@@ -330,6 +331,7 @@ public class DetailAduan extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        rowdata = response.length();
                         mItems.clear();
                         loadkomem.setVisibility(View.GONE);
                         Log.d("volley", "response : "+response.toString());
@@ -356,6 +358,90 @@ public class DetailAduan extends AppCompatActivity {
                         Log.d("volley", "error : "+error.getMessage());
                         loadkomem.setVisibility(View.GONE);
                         loaderror.setVisibility(View.VISIBLE);
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                        }
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(requestData);
+    }
+
+    private void reloadNewKomentar(){
+        loaderror.setVisibility(View.GONE);
+        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_KOMENTAR+id_aduan, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        loadkomem.setVisibility(View.GONE);
+                        Log.d("volley", "response : "+response.toString());
+                        for (int i = mItems.size(); i< response.length(); i++){
+                            try {
+                                JSONObject data = response.getJSONObject(i);
+                                ModelDataKomentar md = new ModelDataKomentar();
+                                md.setId_komentar(data.getString("id_komentar"));
+                                md.setKomentar(data.getString("komentar"));
+                                md.setFoto(data.getString("foto"));
+                                md.setRole(data.getString("role"));
+                                md.setTanggal(data.getString("dibuat"));
+                                mItems.add(md);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "error : "+error.getMessage());
+                        loadkomem.setVisibility(View.GONE);
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
+                        }
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(requestData);
+    }
+
+    private void refresh(){
+        //loadkomem.setVisibility(View.VISIBLE);
+        //loaderror.setVisibility(View.GONE);
+        final SpotsDialog re = new SpotsDialog(this, "Memperbarui komentar...");
+        re.show();
+        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_KOMENTAR+id_aduan, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        rowdata = response.length();
+                        mItems.clear();
+                        re.hide();
+                        loadkomem.setVisibility(View.GONE);
+                        Log.d("volley", "response : "+response.toString());
+                        for (int i = 0; i< response.length(); i++){
+                            try {
+                                JSONObject data = response.getJSONObject(i);
+                                ModelDataKomentar md = new ModelDataKomentar();
+                                md.setId_komentar(data.getString("id_komentar"));
+                                md.setKomentar(data.getString("komentar"));
+                                md.setFoto(data.getString("foto"));
+                                md.setRole(data.getString("role"));
+                                md.setTanggal(data.getString("dibuat"));
+                                mItems.add(md);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "error : "+error.getMessage());
+                        //loadkomem.setVisibility(View.GONE);
+                        //loaderror.setVisibility(View.VISIBLE);
+                        re.hide();
                         if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
                             snackBar("Tidak dapat terhubung ke server! periksa koneksi internet!", R.color.Error);
                         }
@@ -466,7 +552,7 @@ public class DetailAduan extends AppCompatActivity {
                     Log.e("CAMERA", fileUri.getPath());
 
                     bitmap = BitmapFactory.decodeFile(fileUri.getPath());
-                    setToImageView(getResizedBitmap(bitmap, 512));
+                    setToImageView(getResizedBitmap(bitmap, 256));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -474,7 +560,7 @@ public class DetailAduan extends AppCompatActivity {
                 try {
                     // mengambil gambar dari Gallery
                     bitmap = MediaStore.Images.Media.getBitmap(DetailAduan.this.getContentResolver(), data.getData());
-                    setToImageView(getResizedBitmap(bitmap, 512));
+                    setToImageView(getResizedBitmap(bitmap, 256));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -508,9 +594,9 @@ public class DetailAduan extends AppCompatActivity {
 
                             if (status.equals("1")) {
                                 Log.e("v Add", data.toString());
+                                reloadNewKomentar();
                                 snackBar("Komentar berhasil ditambahkan", R.color.colorPrimary);
                                 komentar.setText("");
-                                komentar.setFocusable(false);
                                 fotoKomen.setVisibility(View.GONE);
                                 btnHapusFoto.setVisibility(View.GONE);
                             } else {
@@ -575,9 +661,9 @@ public class DetailAduan extends AppCompatActivity {
 
                             if (status.equals("1")) {
                                 Log.e("v Add", data.toString());
+                                reloadNewKomentar();
                                 snackBar("Komentar berhasil ditambahkan", R.color.colorPrimary);
                                 komentar.setText("");
-                                komentar.setFocusable(false);
                             } else {
                                 snackBar("Komentar gagal ditambahkan", R.color.Error);
                             }

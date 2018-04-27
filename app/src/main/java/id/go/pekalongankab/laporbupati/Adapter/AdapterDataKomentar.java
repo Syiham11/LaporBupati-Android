@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -54,48 +55,64 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
     public void onBindViewHolder(final HolderDataKomentar holder, final int position) {
         final ModelDataKomentar md = mItems.get(position);
         HolderDataKomentar holderDataKomentar = (HolderDataKomentar) holder;
-        holderDataKomentar.komentar.setText(md.getKomentar());
-        holderDataKomentar.tglkomentar.setText("-- "+tanggal.tanggal(md.getTanggal())+" --");
 
-        if (md.getFoto().isEmpty()){
-            holderDataKomentar.fotoKomen.setVisibility(View.GONE);
-        }else{
-            holderDataKomentar.fotoKomen.setVisibility(View.VISIBLE);
-            Glide.with(context).load(ServerAPI.URL_FOTO_KOMEN+md.getFoto())
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .error(R.drawable.ic_no_image_male_white)
-                    .fitCenter()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(holderDataKomentar.fotoKomen);
-        }
-
-        holderDataKomentar.fotoKomen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, LihatFoto.class);
-                i.putExtra("source", "komentar");
-                i.putExtra("foto_komen", md.getFoto());
-                context.startActivity(i);
-            }
-        });
 
         if (md.getRole().equals("1")){
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT
-            );
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            layoutParams.setMargins(0,0,100,0);
-            holderDataKomentar.role.setLayoutParams(layoutParams);
+            holderDataKomentar.role1.setVisibility(View.VISIBLE);
+            holderDataKomentar.role2.setVisibility(View.GONE);
+            holderDataKomentar.komentar1.setText(md.getKomentar());
+            holderDataKomentar.tglkomentar1.setText(tanggal.tanggal(md.getTanggal()));
+
+            if (md.getFoto().isEmpty()){
+                holderDataKomentar.fotoKomen1.setVisibility(View.GONE);
+            }else{
+                holderDataKomentar.fotoKomen1.setVisibility(View.VISIBLE);
+                Glide.with(context).load(ServerAPI.URL_FOTO_KOMEN+md.getFoto())
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .error(R.drawable.ic_no_image_male_white)
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(holderDataKomentar.fotoKomen1);
+            }
+
+            holderDataKomentar.fotoKomen1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, LihatFoto.class);
+                    i.putExtra("source", "komentar");
+                    i.putExtra("foto_komen", md.getFoto());
+                    context.startActivity(i);
+                }
+            });
         }else{
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT
-            );
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            layoutParams.setMargins(100,0,0,0);
-            holderDataKomentar.cardKomen.setCardBackgroundColor(Color.parseColor("#DC1CAF9A"));
-            holderDataKomentar.komentar.setTextColor(Color.parseColor("#ffffff"));
-            holderDataKomentar.role.setLayoutParams(layoutParams);
+            holderDataKomentar.role1.setVisibility(View.GONE);
+            holderDataKomentar.role2.setVisibility(View.VISIBLE);
+            holderDataKomentar.komentar2.setText(md.getKomentar());
+            holderDataKomentar.tglkomentar2.setText(tanggal.tanggal(md.getTanggal()));
+
+            if (md.getFoto().isEmpty()){
+                holderDataKomentar.fotoKomen2.setVisibility(View.GONE);
+            }else{
+                holderDataKomentar.fotoKomen2.setVisibility(View.VISIBLE);
+                Glide.with(context).load(ServerAPI.URL_FOTO_KOMEN+md.getFoto())
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .error(R.drawable.ic_no_image_male_white)
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(holderDataKomentar.fotoKomen2);
+            }
+
+            holderDataKomentar.fotoKomen2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, LihatFoto.class);
+                    i.putExtra("source", "komentar");
+                    i.putExtra("foto_komen", md.getFoto());
+                    context.startActivity(i);
+                }
+            });
         }
 
     }
@@ -108,20 +125,22 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
 
 
     class HolderDataKomentar extends RecyclerView.ViewHolder {
-        TextView komentar, tglkomentar;
-        ImageView fotoKomen;
-        CardView cardKomen;
-        RelativeLayout role;
+        TextView komentar1, tglkomentar1, komentar2, tglkomentar2;
+        ImageView fotoKomen1, fotoKomen2;
+        LinearLayout role1, role2;
         ModelDataKomentar md;
 
         public HolderDataKomentar(View view){
             super(view);
 
-            komentar = (TextView) view.findViewById(R.id.komentar);
-            tglkomentar = (TextView) view.findViewById(R.id.tanggalkomen);
-            fotoKomen = (ImageView) view.findViewById(R.id.fotoKomen);
-            cardKomen = (CardView) view.findViewById(R.id.cardkomentar);
-            role = (RelativeLayout) view.findViewById(R.id.relAlign);
+            komentar1 = (TextView) view.findViewById(R.id.komentar1);
+            tglkomentar1 = (TextView) view.findViewById(R.id.tanggal1);
+            fotoKomen1 = (ImageView) view.findViewById(R.id.foto_komen1);
+            komentar2 = (TextView) view.findViewById(R.id.komentar2);
+            tglkomentar2 = (TextView) view.findViewById(R.id.tanggal2);
+            fotoKomen2 = (ImageView) view.findViewById(R.id.foto_komen2);
+            role1 = (LinearLayout) view.findViewById(R.id.role1);
+            role2 = (LinearLayout) view.findViewById(R.id.role2);
 
             /*view.setOnClickListener(new View.OnClickListener() {
                 @Override

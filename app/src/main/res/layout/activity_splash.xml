@@ -7,55 +7,63 @@
     tools:context="id.go.pekalongankab.laporbupati.Splash"
     android:background="@color/colorPrimary">
 
-        <LinearLayout
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_name"
-                    android:textSize="18sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:textColor="@color/white"/>
                 <ImageView
                     android:id="@+id/logo"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_logo_white"/>
+                <TextView
+                    android:layout_below="@+id/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/app_name"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <RelativeLayout
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true">
 
                 <ImageView
                     android:id="@+id/logokab"
-                    android:layout_width="100dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="100dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_logo_kab"/>
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_below="@+id/logokab">
+                    android:layout_toRightOf="@+id/logokab">
                         <TextView
                             android:id="@+id/kabupaten"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kabupaten Pekalongan"
-                            android:textSize="24sp"
-                            android:textAlignment="center"
+                            android:text="Kabupaten"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pekalongan"
+                            android:layout_below="@+id/kabupaten"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/white"/>
                 </RelativeLayout>
