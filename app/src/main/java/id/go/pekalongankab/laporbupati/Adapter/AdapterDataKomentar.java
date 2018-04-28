@@ -63,6 +63,26 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
             holderDataKomentar.komentar1.setText(md.getKomentar());
             holderDataKomentar.tglkomentar1.setText(tanggal.tanggal(md.getTanggal()));
 
+            if (md.getId_admin() != "null"){
+                holderDataKomentar.nama_pengirim1.setText("Admin Lapor Bupati");
+                Glide.with(context).load(R.mipmap.ic_launcher)
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .error(R.drawable.ic_no_image_male_white)
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(holderDataKomentar.foto_pengirim1);
+            }else if(md.getId_opd() != "null"){
+                holderDataKomentar.nama_pengirim1.setText(md.getSingkatan());
+                Glide.with(context).load(ServerAPI.URL_FOTO_OPD_THUMB+md.getThumb_opd())
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .error(R.drawable.ic_no_image_male_white)
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(holderDataKomentar.foto_pengirim1);
+            }
+
             if (md.getFoto().isEmpty()){
                 holderDataKomentar.fotoKomen1.setVisibility(View.GONE);
             }else{
@@ -90,6 +110,15 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
             holderDataKomentar.role2.setVisibility(View.VISIBLE);
             holderDataKomentar.komentar2.setText(md.getKomentar());
             holderDataKomentar.tglkomentar2.setText(tanggal.tanggal(md.getTanggal()));
+            holderDataKomentar.nama_pengirim2.setText(md.getNama_user());
+
+            Glide.with(context).load(ServerAPI.URL_FOTO_USER_THUMB+md.getThumb_user())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .error(R.drawable.ic_no_image_male_white)
+                    .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderDataKomentar.foto_pengirim2);
 
             if (md.getFoto().isEmpty()){
                 holderDataKomentar.fotoKomen2.setVisibility(View.GONE);
@@ -125,9 +154,9 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
 
 
     class HolderDataKomentar extends RecyclerView.ViewHolder {
-        TextView komentar1, tglkomentar1, komentar2, tglkomentar2;
-        ImageView fotoKomen1, fotoKomen2;
-        LinearLayout role1, role2;
+        TextView komentar1, tglkomentar1, nama_pengirim1, komentar2, tglkomentar2, nama_pengirim2;
+        ImageView fotoKomen1, foto_pengirim1, fotoKomen2, foto_pengirim2;
+        RelativeLayout role1, role2;
         ModelDataKomentar md;
 
         public HolderDataKomentar(View view){
@@ -135,12 +164,17 @@ public class AdapterDataKomentar extends RecyclerView.Adapter<AdapterDataKomenta
 
             komentar1 = (TextView) view.findViewById(R.id.komentar1);
             tglkomentar1 = (TextView) view.findViewById(R.id.tanggal1);
+            nama_pengirim1 = (TextView) view.findViewById(R.id.nama_pengirim1);
             fotoKomen1 = (ImageView) view.findViewById(R.id.foto_komen1);
+            foto_pengirim1 = (ImageView) view.findViewById(R.id.foto_pengirim1);
+
             komentar2 = (TextView) view.findViewById(R.id.komentar2);
             tglkomentar2 = (TextView) view.findViewById(R.id.tanggal2);
+            nama_pengirim2 = (TextView) view.findViewById(R.id.nama_pengirim2);
             fotoKomen2 = (ImageView) view.findViewById(R.id.foto_komen2);
-            role1 = (LinearLayout) view.findViewById(R.id.role1);
-            role2 = (LinearLayout) view.findViewById(R.id.role2);
+            foto_pengirim2 = (ImageView) view.findViewById(R.id.foto_pengirim2);
+            role1 = (RelativeLayout) view.findViewById(R.id.role1);
+            role2 = (RelativeLayout) view.findViewById(R.id.role2);
 
             /*view.setOnClickListener(new View.OnClickListener() {
                 @Override

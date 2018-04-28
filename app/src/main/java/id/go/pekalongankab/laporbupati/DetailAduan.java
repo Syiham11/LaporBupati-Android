@@ -344,6 +344,14 @@ public class DetailAduan extends AppCompatActivity {
                                 md.setFoto(data.getString("foto"));
                                 md.setRole(data.getString("role"));
                                 md.setTanggal(data.getString("dibuat"));
+                                md.setId_user(data.getString("id_user"));
+                                md.setNama_user(data.getString("nama_user"));
+                                md.setThumb_user(data.getString("thumb_user"));
+                                md.setId_opd(data.getString("id_opd"));
+                                md.setSingkatan(data.getString("singkatan"));
+                                md.setThumb_opd(data.getString("thumb_opd"));
+                                md.setId_admin(data.getString("id_admin"));
+                                md.setThumb_admin(data.getString("thumb_admin"));
                                 mItems.add(md);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -383,6 +391,14 @@ public class DetailAduan extends AppCompatActivity {
                                 md.setFoto(data.getString("foto"));
                                 md.setRole(data.getString("role"));
                                 md.setTanggal(data.getString("dibuat"));
+                                md.setId_user(data.getString("id_user"));
+                                md.setNama_user(data.getString("nama_user"));
+                                md.setThumb_user(data.getString("thumb_user"));
+                                md.setId_opd(data.getString("id_opd"));
+                                md.setSingkatan(data.getString("singkatan"));
+                                md.setThumb_opd(data.getString("thumb_opd"));
+                                md.setId_admin(data.getString("id_admin"));
+                                md.setThumb_admin(data.getString("thumb_admin"));
                                 mItems.add(md);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -427,6 +443,14 @@ public class DetailAduan extends AppCompatActivity {
                                 md.setFoto(data.getString("foto"));
                                 md.setRole(data.getString("role"));
                                 md.setTanggal(data.getString("dibuat"));
+                                md.setId_user(data.getString("id_user"));
+                                md.setNama_user(data.getString("nama_user"));
+                                md.setThumb_user(data.getString("thumb_user"));
+                                md.setId_opd(data.getString("id_opd"));
+                                md.setSingkatan(data.getString("singkatan"));
+                                md.setThumb_opd(data.getString("thumb_opd"));
+                                md.setId_admin(data.getString("id_admin"));
+                                md.setThumb_admin(data.getString("thumb_admin"));
                                 mItems.add(md);
                             } catch (JSONException e) {
                                 e.printStackTrace();
