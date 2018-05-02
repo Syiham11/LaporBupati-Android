@@ -86,6 +86,7 @@ public class DetailAduan extends AppCompatActivity {
     Bundle bundle;
     RelativeLayout kolomkomen;
     int rowdata;
+    SwipeRefreshLayout swLayout;
 
 
     Uri fileUri;
@@ -104,7 +105,7 @@ public class DetailAduan extends AppCompatActivity {
     private static final String TAG_MESSAGE = "message";
 
     String tag_json_obj = "json_obj_req";
-    SpotsDialog loading;
+    SpotsDialog loading, re;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,7 @@ public class DetailAduan extends AppCompatActivity {
         kolomkomen = (RelativeLayout) findViewById(R.id.kolomkomentar);
 
         loading = new SpotsDialog(DetailAduan.this, "Sedang mengirim...");
+        re = new SpotsDialog(DetailAduan.this, "Memperbarui...");
 
         mRecyclerview = (RecyclerView)findViewById(R.id.recycleKomentar);
         mItems = new ArrayList<>();
@@ -153,6 +155,18 @@ public class DetailAduan extends AppCompatActivity {
 
         komentar = (EditText) findViewById(R.id.komentar);
         rowdata = 0;
+
+        swLayout = (SwipeRefreshLayout) findViewById(R.id.swLayout);
+        swLayout.setColorSchemeResources(R.color.Error, R.color.Info, R.color.Warning);
+        swLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swLayout.setRefreshing(false);
+                re.show();
+                refresh();
+                refreshAduan();
+            }
+        });
 
         namaUser.setText(bundle.getString("nama"));
         tanggal.setText(bundle.getString("tanggal"));
@@ -258,14 +272,14 @@ public class DetailAduan extends AppCompatActivity {
                 selectImage();
             }
         });
-
+        refreshAduan();
         loadKomentar();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_refresh, menu);
+        //getMenuInflater().inflate(R.menu.menu_refresh, menu);
         return true;
     }
 
@@ -277,10 +291,12 @@ public class DetailAduan extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menuRefresh) {
+        /*if (id == R.id.menuRefresh) {
+            re.show();
+            refreshAduan();
             refresh();
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -322,6 +338,56 @@ public class DetailAduan extends AppCompatActivity {
         }else{
             finish();
         }
+    }
+
+    private void refreshAduan(){
+        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_DETAIL_ADUAN+id_aduan, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("volley", "response : "+response.toString());
+                        try {
+                            re.hide();
+                            JSONObject data = response.getJSONObject(0);
+                            status.setText(data.getString("status"));
+                            level.setText(data.getString("jmladuan"));
+                            jmlkomen.setText(data.getString("jmlkomen"));
+
+                            if (status.getText().equals("masuk")){
+                                btnKategori.setImageResource(R.drawable.ic_info_grey);
+                                status.setText("Terkirim");
+                            }else if (status.getText().equals("diverifikasi")){
+                                btnKategori.setImageResource(R.drawable.ic_info_blue);
+                            }else if(status.getText().equals("didisposisikan")){
+                                btnKategori.setImageResource(R.drawable.ic_info_yellow);
+                            }else if(status.getText().equals("penanganan")){
+                                btnKategori.setImageResource(R.drawable.ic_info_orange);
+                            }else if(status.getText().equals("selesai")){
+                                btnKategori.setImageResource(R.drawable.ic_info_green);
+                                kolomkomen.setVisibility(View.GONE);
+                            }else if(status.getText().equals("bukan kewenangan")){
+                                btnKategori.setImageResource(R.drawable.ic_info_red);
+                                kolomkomen.setVisibility(View.GONE);
+                            }else if(status.getText().equals("sampah")){
+                                btnKategori.setImageResource(R.drawable.ic_info_red);
+                                kolomkomen.setVisibility(View.GONE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "error : "+error.getMessage());
+                        if ( error instanceof TimeoutError || error instanceof NoConnectionError ||error instanceof NetworkError) {
+                            //snackBar(R.string.error_koneksi, R.color.Error);
+                        }
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(requestData);
     }
 
     private void loadKomentar(){
@@ -423,8 +489,6 @@ public class DetailAduan extends AppCompatActivity {
     private void refresh(){
         //loadkomem.setVisibility(View.VISIBLE);
         //loaderror.setVisibility(View.GONE);
-        final SpotsDialog re = new SpotsDialog(this, "Memperbarui komentar...");
-        re.show();
         JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_KOMENTAR+id_aduan, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -621,6 +685,7 @@ public class DetailAduan extends AppCompatActivity {
                                 reloadNewKomentar();
                                 snackBar("Komentar berhasil ditambahkan", R.color.colorPrimary);
                                 komentar.setText("");
+                                refreshAduan();
                                 fotoKomen.setVisibility(View.GONE);
                                 btnHapusFoto.setVisibility(View.GONE);
                             } else {
@@ -688,6 +753,7 @@ public class DetailAduan extends AppCompatActivity {
                                 reloadNewKomentar();
                                 snackBar("Komentar berhasil ditambahkan", R.color.colorPrimary);
                                 komentar.setText("");
+                                refreshAduan();
                             } else {
                                 snackBar("Komentar gagal ditambahkan", R.color.Error);
                             }

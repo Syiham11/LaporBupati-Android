@@ -6,7 +6,7 @@
             android:id="@+id/nav_aduan"
             android:icon="@drawable/ic_aduan"
             android:checked="true"
-            android:title="Aduan" />
+            android:title="Timeline" />
         <item
             android:id="@+id/nav_aduan_saya"
             android:icon="@drawable/ic_aduan_saya"
@@ -14,7 +14,7 @@
         <item
             android:id="@+id/nav_opd"
             android:icon="@drawable/ic_opd"
-            android:title="Data OPD" />
+            android:title="Informasi OPD" />
 
         <item
             android:id="@+id/nav_masukan"

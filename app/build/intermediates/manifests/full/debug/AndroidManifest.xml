@@ -46,7 +46,7 @@
         <activity
             android:name="id.go.pekalongankab.laporbupati.Login"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name="id.go.pekalongankab.laporbupati.DetailOpd"
             android:screenOrientation="portrait" />
