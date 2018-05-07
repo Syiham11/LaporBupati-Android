@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity
         final String nama_user = pref.getString("nama", "");
         final String email = pref.getString("email", "");
         final String foto = pref.getString("foto", "");
+        final String jmladuan = pref.getString("jmladuan", "");
 
         txnama.setText(nama_user);
         txemail.setText(email);
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity
                 Intent i = new Intent(MainActivity.this, Profil.class);
                 i.putExtra("nama_user", nama_user);
                 i.putExtra("id_user", id_user);
+                i.putExtra("jmladuan", jmladuan);
                 startActivity(i);
             }
         });
@@ -323,6 +325,7 @@ public class MainActivity extends AppCompatActivity
         editor.putString("nama","");
         editor.putString("email","");
         editor.putString("foto","");
+        editor.putString("jmladuan","");
         editor.putInt("login", 0);
         editor.clear();
         editor.commit();

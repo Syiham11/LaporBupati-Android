@@ -39,11 +39,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tooltip.Tooltip;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,6 +75,7 @@ public class TulisAduan extends AppCompatActivity {
     int PICK_IMAGE_REQUEST = 1;
     public final int SELECT_FILE = 1;
     CheckBox ckRahasia;
+    int aktif;
 
     SpotsDialog loading;
 
@@ -249,6 +252,7 @@ public class TulisAduan extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menuKirim) {
+            checkAktif();
             if (isi_aduan.getText().toString().isEmpty()){
                 isi_aduan.setFocusable(true);
                 isi_aduan.setError("Aduan tidak boleh kosong!");
@@ -270,7 +274,16 @@ public class TulisAduan extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    uploadImage();
+                                    if (checkAktif() == 0){
+                                        new AlertDialog.Builder(TulisAduan.this)
+                                                .setTitle("Perhatian")
+                                                .setMessage("Aduan tidak dapat diproses! akun Anda telah diblokir")
+                                                .setCancelable(false)
+                                                .setNegativeButton("Ok", null)
+                                                .show();
+                                    }else{
+                                        uploadImage();
+                                    }
                                 }
                             })
                             .setNegativeButton("Tidak", null)
@@ -284,7 +297,16 @@ public class TulisAduan extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    uploadAduan();
+                                    if (checkAktif() == 0){
+                                        new AlertDialog.Builder(TulisAduan.this)
+                                                .setTitle("Perhatian")
+                                                .setMessage("Aduan tidak dapat diproses! akun Anda telah diblokir")
+                                                .setCancelable(false)
+                                                .setNegativeButton("Ok", null)
+                                                .show();
+                                    }else{
+                                        uploadAduan();
+                                    }
                                 }
                             })
                             .setNegativeButton("Tidak", null)
@@ -296,7 +318,16 @@ public class TulisAduan extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    uploadImage();
+                                    if (checkAktif() == 0){
+                                        new AlertDialog.Builder(TulisAduan.this)
+                                                .setTitle("Perhatian")
+                                                .setMessage("Aduan tidak dapat diproses! akun Anda telah diblokir")
+                                                .setCancelable(false)
+                                                .setNegativeButton("Ok", null)
+                                                .show();
+                                    }else{
+                                        uploadImage();
+                                    }
                                 }
                             })
                             .setNegativeButton("Tidak", null)
@@ -498,6 +529,33 @@ public class TulisAduan extends AppCompatActivity {
         };
 
         AppController.getInstance().addToRequestQueue(stringRequest, tag_json_obj);
+    }
+
+    //check aktif user
+    private int checkAktif(){
+        SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
+        final String id_user = pref.getString("id_user", "");
+        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_CHECK_AKTIF+id_user, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("volley", "response : "+response.toString());
+                        try {
+                            JSONObject data = response.getJSONObject(0);
+                            aktif = data.getInt("aktif");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "error : "+error.getMessage());
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(requestData);
+        return aktif;
     }
 
     //mengirim aduan tanpa foto

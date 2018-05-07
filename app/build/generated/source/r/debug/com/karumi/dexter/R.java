@@ -842,12 +842,12 @@ public final class R {
         public static final int touch_outside = 0x7f090124;
         public static final int transition_current_scene = 0x7f090125;
         public static final int transition_scene_layoutid_cache = 0x7f090126;
-        public static final int up = 0x7f090144;
-        public static final int useLogo = 0x7f090145;
-        public static final int view_offset_helper = 0x7f090146;
-        public static final int visible = 0x7f090147;
-        public static final int withText = 0x7f09014a;
-        public static final int wrap_content = 0x7f09014c;
+        public static final int up = 0x7f090143;
+        public static final int useLogo = 0x7f090144;
+        public static final int view_offset_helper = 0x7f090145;
+        public static final int visible = 0x7f090146;
+        public static final int withText = 0x7f090149;
+        public static final int wrap_content = 0x7f09014b;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f0a0000;

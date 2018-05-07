@@ -85,7 +85,7 @@ public class DetailAduan extends AppCompatActivity {
     Button btnCobaLagi;
     Bundle bundle;
     RelativeLayout kolomkomen;
-    int rowdata;
+    int rowdata, aktif;
     SwipeRefreshLayout swLayout;
 
 
@@ -168,6 +168,8 @@ public class DetailAduan extends AppCompatActivity {
             }
         });
 
+        checkAktif();
+
         namaUser.setText(bundle.getString("nama"));
         tanggal.setText(bundle.getString("tanggal"));
         isiAduan.setText(bundle.getString("aduan"));
@@ -220,9 +222,29 @@ public class DetailAduan extends AppCompatActivity {
                 if (komentar.getText().toString().isEmpty()){
                     komentar.setError("Tidak dapat mengirimkan komentar kosong!");
                 }else if(fotoKomen.getVisibility() == View.GONE){
-                    komen();
+                    if (checkAktif() == 0){
+                        new AlertDialog.Builder(DetailAduan.this)
+                                .setTitle("Perhatian")
+                                .setMessage("Komentar tidak dapat diproses! akun Anda telah diblokir")
+                                .setCancelable(false)
+                                .setNegativeButton("Ok", null)
+                                .show();
+                    }else{
+
+                        komen();
+                    }
                 }else if(fotoKomen.getVisibility() == View.VISIBLE){
-                    fotokomen();
+                    if (checkAktif() == 0){
+                        new AlertDialog.Builder(DetailAduan.this)
+                                .setTitle("Perhatian")
+                                .setMessage("Komentar tidak dapat diproses! akun Anda telah diblokir")
+                                .setCancelable(false)
+                                .setNegativeButton("Ok", null)
+                                .show();
+                    }else{
+
+                        fotokomen();
+                    }
                 }
             }
         });
@@ -388,6 +410,33 @@ public class DetailAduan extends AppCompatActivity {
                     }
                 });
         AppController.getInstance().addToRequestQueue(requestData);
+    }
+
+    //check aktif user
+    private int checkAktif(){
+        SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
+        final String id_user = pref.getString("id_user", "");
+        JsonArrayRequest requestData = new JsonArrayRequest(Request.Method.POST, ServerAPI.URL_CHECK_AKTIF+id_user, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("volley", "response : "+response.toString());
+                        try {
+                            JSONObject data = response.getJSONObject(0);
+                            aktif = data.getInt("aktif");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "error : "+error.getMessage());
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(requestData);
+        return aktif;
     }
 
     private void loadKomentar(){

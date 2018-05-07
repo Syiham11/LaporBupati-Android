@@ -655,10 +655,10 @@ public final class R {
         public static final int title_template = 0x7f090120;
         public static final int top = 0x7f090122;
         public static final int topPanel = 0x7f090123;
-        public static final int up = 0x7f090144;
-        public static final int useLogo = 0x7f090145;
-        public static final int withText = 0x7f09014a;
-        public static final int wrap_content = 0x7f09014c;
+        public static final int up = 0x7f090143;
+        public static final int useLogo = 0x7f090144;
+        public static final int withText = 0x7f090149;
+        public static final int wrap_content = 0x7f09014b;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f0a0000;

@@ -214,6 +214,7 @@ public class Login extends Activity {
                         String dibuat = data.getString("dibuat");
                         String email = data.getString("email");
                         String foto = data.getString("foto");
+                        String jmladuan = data.getString("jmladuan");
 
                         // buat session user yang sudah login yang menyimpan nama,apikey,alamat dan email
                         SharedPreferences.Editor editor = pref.edit();
@@ -230,6 +231,7 @@ public class Login extends Activity {
                         editor.putString("nama",nama_user);
                         editor.putString("email",email);
                         editor.putString("foto",foto);
+                        editor.putString("jmladuan",jmladuan);
                         editor.putInt("login", 1);
                         editor.commit();
 

@@ -29,7 +29,7 @@ import id.go.pekalongankab.laporbupati.Util.ServerAPI;
 public class Profil extends AppCompatActivity {
 
     ImageView imgprofil, bg;
-    TextView txno_ktp, txjk, txtmp_lahir, txno_telp, txalamat, txbio, txdibuat, txnama, txemail ;
+    TextView txno_ktp, txjk, txtmp_lahir, txno_telp, txalamat, txbio, txdibuat, txnama, txemail, txjmladuan;
     String tlahir;
     Date date = new Date();
 
@@ -54,6 +54,7 @@ public class Profil extends AppCompatActivity {
         txbio = (TextView)findViewById(R.id.tvbio);
         txnama = (TextView)findViewById(R.id.tvnamaUser);
         txemail = (TextView)findViewById(R.id.tvEmail);
+        txjmladuan = (TextView)findViewById(R.id.tvAduan);
         bg = (ImageView) findViewById(R.id.bg);
 
         SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
@@ -70,6 +71,7 @@ public class Profil extends AppCompatActivity {
         final String nama = pref.getString("nama","");
         final String email = pref.getString("email","");
         final String foto = pref.getString("foto","");
+        final String jmladuan = pref.getString("jmladuan","");
 
 
 
@@ -96,7 +98,7 @@ public class Profil extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        txjmladuan.setText(jmladuan);
         txnama.setText(nama);
         txno_ktp.setText(no_ktp);
 
