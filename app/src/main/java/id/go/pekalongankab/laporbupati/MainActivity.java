@@ -264,26 +264,14 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameLayout, petunjuk);
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_update) {
-            dialog = new SpotsDialog(MainActivity.this, "Memeriksa pembaruan...");
-            dialog.show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    dialog.hide();
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("Pembaruan")
-                            .setMessage("Anda sudah menggunakan Lapor Bupati versi terbaru.")
-                            .setCancelable(false)
-                            .setNegativeButton("Ok", null)
-                            .show();
-                }
-            }, 2000);
         }else if (id == R.id.nav_tentang) {
             new AlertDialog.Builder(this)
                     .setTitle("Lapor Bupati")
                     .setIcon(R.mipmap.ic_launcher)
-                    .setMessage("versi "+versi+"\n\n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing. A arcu cursus vitae congue mauris. Mollis aliquam ut porttitor leo a diam sollicitudin. Quis commodo odio aenean sed adipiscing diam donec.")
+                    .setMessage("versi "+versi+"\n\n" +
+                            "Lapor Bupati merupakan sistem informasi pengaduan masyarakat berbasis android dan web yang digunakan sebagai sarana penyampaian laporan, keluhan, maupun aspirasi masyarakat Kabupaten Pekalongan.\n" +
+                            "\n" +
+                            "Lapor Bupati melibatkan partisipasi publik dan bersifat dua arah sehingga dapat tercipta komunikasia antara masyarakat dengan penyelenggara. Masyarakat dapat menyampaikan pengaduan yang nantinya akan ditindaklanjuti oleh Organisasi Perangkat Daerah (OPD) terkait. Lapor Bupati dikembangkan dalam rangka peningkatan kualitas pelayanan publik di Kabupaten Pekalongan.")
                     .setCancelable(false)
                     .setNegativeButton("OK", null)
                     .show();

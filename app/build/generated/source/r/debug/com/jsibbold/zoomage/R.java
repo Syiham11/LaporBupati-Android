@@ -602,9 +602,9 @@ public final class R {
         public static final int line3 = 0x7f090093;
         public static final int listMode = 0x7f09009b;
         public static final int list_item = 0x7f09009c;
-        public static final int media_actions = 0x7f0900a9;
-        public static final int middle = 0x7f0900b0;
-        public static final int multiply = 0x7f0900b3;
+        public static final int media_actions = 0x7f0900aa;
+        public static final int middle = 0x7f0900b1;
+        public static final int multiply = 0x7f0900b4;
         public static final int never = 0x7f0900c2;
         public static final int none = 0x7f0900c4;
         public static final int normal = 0x7f0900c5;

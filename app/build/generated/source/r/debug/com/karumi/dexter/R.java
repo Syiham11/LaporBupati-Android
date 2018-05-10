@@ -771,10 +771,10 @@ public final class R {
         public static final int listMode = 0x7f09009b;
         public static final int list_item = 0x7f09009c;
         public static final int masked = 0x7f0900a7;
-        public static final int media_actions = 0x7f0900a9;
-        public static final int middle = 0x7f0900b0;
-        public static final int mini = 0x7f0900b1;
-        public static final int multiply = 0x7f0900b3;
+        public static final int media_actions = 0x7f0900aa;
+        public static final int middle = 0x7f0900b1;
+        public static final int mini = 0x7f0900b2;
+        public static final int multiply = 0x7f0900b4;
         public static final int navigation_header_container = 0x7f0900c1;
         public static final int never = 0x7f0900c2;
         public static final int none = 0x7f0900c4;

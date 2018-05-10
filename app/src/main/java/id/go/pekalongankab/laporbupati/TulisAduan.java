@@ -631,7 +631,7 @@ public class TulisAduan extends AppCompatActivity {
 
     private void alerter(){
         new AlertDialog.Builder(this)
-                .setTitle("Laporan berhasil dikirim")
+                .setTitle("Aduan berhasil dikirim")
                 .setMessage("Aduan akan diperiksa oleh admin sebelum ditampilkan ke publik")
                 .setCancelable(false)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {

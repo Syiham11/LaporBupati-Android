@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "id.go.pekalongankab.halobupati"
+        applicationId "id.go.pekalongankab.laporbupati"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1

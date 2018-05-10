@@ -21,6 +21,7 @@
             android:textAlignment="center"/>
 
         <EditText
+            android:id="@+id/email"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
             android:background="@drawable/bg_aduan"/>
 
         <EditText
+            android:id="@+id/masukan"
             android:layout_width="match_parent"
             android:hint="Masukan dan saran anda"
             android:layout_marginTop="10dp"
@@ -40,6 +42,7 @@
             android:layout_height="wrap_content" />
 
         <Button
+            android:id="@+id/btnKirim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_button_error"

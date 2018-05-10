@@ -46,8 +46,8 @@ public final class R {
         public static final int SRC_OVER = 0x7f090008;
         public static final int bold = 0x7f09002b;
         public static final int italic = 0x7f090085;
-        public static final int material_target_prompt_view = 0x7f0900a8;
-        public static final int monospace = 0x7f0900b2;
+        public static final int material_target_prompt_view = 0x7f0900a9;
+        public static final int monospace = 0x7f0900b3;
         public static final int normal = 0x7f0900c5;
         public static final int sans = 0x7f0900e4;
         public static final int serif = 0x7f0900f6;
