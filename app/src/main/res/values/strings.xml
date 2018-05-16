@@ -27,8 +27,8 @@
     <string name="info_batas_akhir">Anda mencapai batas akhir halaman</string>
     <string name="error_koneksi">Tidak dapat terhubung ke server! periksa koneksi internet!</string>
     <string name="aduan_kosong">Anda tidak memiliki aduan yang diverifikasi oleh admin</string>
-    <string name="error_sandi">"Nomor telepon/email dan kata sandi salah! Harap periksa kembali"</string>
-    <string name="belum_aktif">"Akun anda belum diaktifkan! silahkan periksa email anda untuk mengaktifkan"</string>
+    <string name="error_sandi">"Email dan kata sandi salah! Harap periksa kembali"</string>
+    <string name="belum_aktif">"Akun anda telah dinonaktifkan karena melakukan pelanggaran"</string>
     <string name="error_empty_email">"Harap isi Nomor telepon/email anda!"</string>
     <string name="error_empty_pass">"Harap isi password anda!"</string>
     <string name="aduan_rahasia">"Aduan rahasia berfungsi untuk melindungi identitas anda karena aduan yang sensitif. Aduan rahasia tidak ditampilkan ke publik tapi bisa dilihat di menu aduan saya."</string>

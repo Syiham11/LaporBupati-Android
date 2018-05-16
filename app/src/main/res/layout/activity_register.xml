@@ -50,6 +50,7 @@
             android:background="@drawable/bg_rounded"
             android:hint="Nama Lengkap"
             android:layout_marginTop="5dp"
+            android:maxLength="50"
             android:textColorHighlight="@color/colorAccent"
             android:textColor="@color/white"
             android:textColorHint="@color/lgrey"
@@ -68,6 +69,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/lgrey"
             android:inputType="phone"
+            android:maxLength="15"
             android:padding="14dp" />
 
 
@@ -83,6 +85,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/lgrey"
             android:inputType="textEmailAddress"
+            android:maxLength="50"
             android:padding="14dp" />
 
         <android.support.design.widget.TextInputLayout
